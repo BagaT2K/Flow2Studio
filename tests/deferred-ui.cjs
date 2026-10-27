@@ -1,0 +1,71 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {JSDOM}=require(process.env.FLOW2_JSDOM||'jsdom');const root=path.resolve(__dirname,'../resources');
+const device={id:1,key:'same-rf',model:'68',connection:'2.4 ГГц',vendor:true,pid:1};
+const caps={protocol:12,layers:6,macros:16,macroBytes:3156,brightness:75,effect:0,profileSupported:true,profile:{rf:true,bluetooth:false,indicatorBrightness:191,timeout:60,touchWake:true,syncBreathing:true,mainBrightness:75,firmwareVersion:'3.11',quietReleaseSupported:true,advancedSupported:true,usbBatteryRefreshSupported:true,animationsSupported:true,animationMode:0,bootEntryPreserved:true,syncBrightness:false,lowBatteryThreshold:0}};
+let offline=false,jobs=[],messages=[],requests=0,failAction=null;
+const dom=new JSDOM(fs.readFileSync(path.join(root,'index.html'),'utf8'),{runScripts:'outside-only',url:'file://'+path.join(root,'index.html')});const w=dom.window,$=id=>w.document.getElementById(id);w.setInterval=()=>0;
+w.webkit={messageHandlers:{flow:{postMessage(m){messages.push(m);requests++;setTimeout(()=>{let result,error=null;switch(m.action){
+case'preferences':result={theme:'dark',batteryStyle:'keyboardPercent',autoCharge:true,keycaps:{}};break;
+case'scan':result={devices:[device]};break;case'select':result=device;break;
+case'initializeLayers':result={initialized:true,changedLayers:[]};break;
+case'cachedState':result={caps:JSON.parse(JSON.stringify(caps)),jobs:JSON.parse(JSON.stringify(jobs))};break;
+case'preparationStatus':result={available:true,canPrepare:false};break;
+case'status':if(offline)error='Нет ответа';else result={valid:true,percent:81,power:true};break;
+case'capabilities':if(offline)error='Клавиатура не ответила';else result=JSON.parse(JSON.stringify(caps));break;
+case'readLayer':result={layer:0,keys:Array(75).fill(4)};break;
+case'lighting':case'profile':case'advanced':
+ if(m.action===failAction){error='Тест: ответ не подтверждён';break;}
+ if(offline){jobs=jobs.filter(j=>j.action!==m.action);jobs.push({action:m.action,args:{...m.args,persist:true}});result={...m.args,queued:true};w.flowReceive({id:0,result:{deferred:{device:1,count:jobs.length}}});}
+ else {result=m.action==='lighting'?m.args:{...caps.profile,...m.args};if(m.action!=='lighting')Object.assign(caps.profile,m.args);}
+ break;
+case'clearDeferred':jobs=[];result={cleared:true};w.flowReceive({id:0,result:{deferred:{device:1,count:0}}});break;
+default:error='Unexpected '+m.action;
+}w.flowReceive({id:m.id,result,error});requests--;},1);}}}};
+const delay=ms=>new Promise(r=>setTimeout(r,ms));async function settle(ms=100){await delay(ms);while(requests)await delay(10);}
+(async()=>{
+for(const file of ['layout68.js','layouts.js','factory-layers.js','session-keys.js','macro-recorder.js','app.js'])w.eval(fs.readFileSync(path.join(root,file),'utf8'));await settle();w.document.querySelector('.device').click();await settle();
+assert(!$('chargingIcon').hasAttribute('hidden'));assert(!$('chargingBolt').hasAttribute('hidden'));assert.equal($('chargingIcon').tagName.toLowerCase(),'svg');assert.equal($('batteryValue').textContent,'81%');assert(!$('indicatorRFRow').hidden);assert($('indicatorBTRow').hidden);
+for(const id of ['touchWakeStatus','indicatorStatus']){assert($(id).textContent.includes('прочитаны'));assert($(id).parentElement.querySelector('.live-dot'));}
+const untouchedIndicator=$('indicatorStatus').textContent;$('touchWake').checked=false;$('touchWake').dispatchEvent(new w.Event('change'));assert($('touchWakeStatus').textContent.includes('Применяем'));assert(messages.some(m=>m.action==='profile'&&m.args.touchWake===false&&m.args.persist));assert.equal($('indicatorStatus').textContent,untouchedIndicator);await settle();assert($('touchWakeStatus').textContent.includes('проверено и сохранено'));assert.equal($('indicatorStatus').textContent,untouchedIndicator);assert.deepEqual(Array.from(messages.filter(m=>m.action==='profile').at(-1).args.statusModules),['touchWakeStatus']);
+$('syncBrightness').checked=true;$('syncBrightness').dispatchEvent(new w.Event('change'));await settle();assert($('indicatorBrightness').disabled);assert($('indicatorManual').classList.contains('collapsed'));assert($('indicatorStatus').textContent.includes('проверено и сохранено'));assert(messages.some(m=>m.action==='advanced'&&m.args.syncBrightness));
+$('syncBrightness').checked=false;$('syncBrightness').dispatchEvent(new w.Event('change'));await settle();assert(!$('indicatorBrightness').disabled);
+$('lowBatteryThreshold').value='20';$('lowBatteryThreshold').dispatchEvent(new w.Event('change'));await settle();assert.equal(caps.profile.lowBatteryThreshold,20);
+assert.equal(w.document.querySelectorAll('#lightingStatus').length,1);assert($('lightingStatus').parentElement.classList.contains('live-setting'));assert($('lightingStatus').parentElement.querySelector('.live-dot'));assert(!w.document.body.textContent.includes('Применяется сразу · во сне сохраняется до связи'));
+offline=true;$('brightness').value='29';$('brightness').dispatchEvent(new w.Event('change'));await settle();assert($('lightingStatus').textContent.includes('Сохранено в Studio'));assert(!$('deferredNotice').hidden);assert(!$('brightness').disabled);
+$('brightness').value='51';$('brightness').dispatchEvent(new w.Event('change'));await settle();assert.equal(jobs.filter(j=>j.action==='lighting').length,1);assert.equal(jobs.find(j=>j.action==='lighting').args.brightness,51);
+$('indicatorRF').checked=false;$('indicatorRF').dispatchEvent(new w.Event('change'));await settle();assert.equal($('profileStatus'),null);assert(!$('deferredNotice').hidden);assert(!$('touchWake').disabled);
+// Re-select while asleep: restore verified capabilities and overlay pending desired values.
+w.document.querySelector('.device').click();await settle();assert(!$('brightness').disabled);assert.equal($('brightness').value,'51');assert(!$('indicatorRF').checked);assert(!$('deferredNotice').hidden);assert.equal($('layer').options.length,4);
+w.flowReceive({id:0,result:{deferred:{device:999,count:0}}});assert(!$('deferredNotice').hidden);
+offline=false;w.flowReceive({id:0,result:{deferredApplied:{device:1,action:'lighting',args:{brightness:51},value:{brightness:51,effect:0},superseded:false}}});jobs=[];w.flowReceive({id:0,result:{deferred:{device:1,count:0}}});assert($('deferredNotice').hidden);assert($('lightingStatus').textContent.includes('применены'));
+w.flowReceive({id:0,result:{battery:{valid:true,percent:81,power:false}}});assert($('chargingIcon').hasAttribute('hidden'));assert.equal($('chargingIcon').querySelector('rect'),null);assert.equal($('batteryValue').textContent,'81%');
+device.connection='Bluetooth';w.document.querySelector('.device').click();await settle();assert($('indicatorRFRow').hidden);assert(!$('indicatorBTRow').hidden);
+device.connection='USB';w.document.querySelector('.device').click();await settle();assert($('indicatorRFRow').hidden);assert($('indicatorBTRow').hidden);assert.equal($('indicatorModeNote'),null);
+// Panel and indicator statuses cover offline persistence, replay, failure and stale replies.
+offline=true;$('touchWake').checked=true;$('touchWake').dispatchEvent(new w.Event('change'));await settle();const profileJob=jobs.find(j=>j.action==='profile');assert(profileJob);assert($('touchWakeStatus').textContent.includes('Сохранено в Studio'));assert.equal($('touchWakeStatus').parentElement.dataset.phase,'waiting');
+$('lowBatteryThreshold').value='25';$('lowBatteryThreshold').dispatchEvent(new w.Event('change'));await settle();const advancedJob=jobs.find(j=>j.action==='advanced');assert($('indicatorStatus').textContent.includes('Сохранено в Studio'));
+const waitingTouch=$('touchWakeStatus').textContent;w.flowReceive({id:0,result:{deferredError:{device:1,action:'advanced',args:advancedJob.args,message:'Ошибка индикатора'}}});assert.equal($('touchWakeStatus').textContent,waitingTouch);assert.equal($('indicatorStatus').parentElement.dataset.phase,'error');$('lowBatteryThreshold').dispatchEvent(new w.Event('change'));await settle();
+w.flowReceive({id:0,result:{deferredApplied:{device:999,action:'profile',args:profileJob.args,value:profileJob.args,superseded:false}}});assert($('touchWakeStatus').textContent.includes('Сохранено в Studio'));
+w.flowReceive({id:0,result:{deferredApplied:{device:1,action:'profile',args:profileJob.args,value:profileJob.args,superseded:true}}});assert($('touchWakeStatus').textContent.includes('применены и проверены'));assert($('indicatorStatus').textContent.includes('Сохранено в Studio'));
+w.flowReceive({id:0,result:{deferredApplied:{device:1,action:'advanced',args:advancedJob.args,value:advancedJob.args,superseded:false}}});assert($('indicatorStatus').textContent.includes('применены и проверены'));
+offline=false;failAction='advanced';$('lowBatteryThreshold').value='30';$('lowBatteryThreshold').dispatchEvent(new w.Event('change'));await settle();assert.equal($('indicatorStatus').parentElement.dataset.phase,'error');assert($('indicatorStatus').textContent.includes('Не удалось подтвердить'));assert($('touchWakeStatus').textContent.includes('применены и проверены'));
+failAction='profile';$('touchWake').checked=false;$('touchWake').dispatchEvent(new w.Event('change'));await settle();assert.equal($('touchWakeStatus').parentElement.dataset.phase,'error');assert($('touchWakeStatus').textContent.includes('Не удалось подтвердить'));
+failAction=null;$('touchWake').checked=true;$('touchWake').dispatchEvent(new w.Event('change'));await settle();assert.equal($('touchWakeStatus').parentElement.dataset.phase,'saved');assert($('touchWakeStatus').textContent.includes('проверено и сохранено'));
+// Status ownership is isolated for normal indicator controls and timeout.
+const panelBefore=$('touchWakeStatus').textContent,panelRevision=$('touchWakeStatus').dataset.revision;
+$('indicatorBrightness').value='84';$('indicatorBrightness').dispatchEvent(new w.Event('change'));assert.equal($('touchWakeStatus').textContent,panelBefore);await settle();assert.equal($('touchWakeStatus').dataset.revision,panelRevision);assert.deepEqual(Array.from(messages.filter(m=>m.action==='profile').at(-1).args.statusModules),['indicatorStatus']);
+for(const id of ['indicatorRF','indicatorBT','syncBreathing']){$(id).checked=!$(id).checked;$(id).dispatchEvent(new w.Event('change'));await settle();assert.equal($('touchWakeStatus').dataset.revision,panelRevision);}
+const indicatorBefore=$('indicatorStatus').textContent,indicatorRevision=$('indicatorStatus').dataset.revision;
+$('touchWake').checked=false;$('touchWake').dispatchEvent(new w.Event('change'));await settle();assert.equal($('indicatorStatus').textContent,indicatorBefore);assert.equal($('indicatorStatus').dataset.revision,indicatorRevision);
+const panelAfter=$('touchWakeStatus').dataset.revision;
+$('idleTimeout').value='120';$('idleTimeout').dispatchEvent(new w.Event('change'));$('applyTimeout').click();await settle();assert.equal($('touchWakeStatus').dataset.revision,panelAfter);assert.equal($('indicatorStatus').dataset.revision,indicatorRevision);assert.equal(messages.filter(m=>m.action==='profile').at(-1).args.statusModules.length,0);
+// Both genuinely edited modules survive coalescing and reconnect while asleep.
+jobs=[];offline=true;$('touchWake').checked=true;$('touchWake').dispatchEvent(new w.Event('change'));await settle();const waitingPanelRevision=$('touchWakeStatus').dataset.revision;
+$('indicatorBrightness').value='110';$('indicatorBrightness').dispatchEvent(new w.Event('change'));await settle();assert.equal($('touchWakeStatus').dataset.revision,waitingPanelRevision);const combined=jobs.find(j=>j.action==='profile');assert.deepEqual(Array.from(combined.args.statusModules).sort(),['indicatorStatus','touchWakeStatus']);
+w.document.querySelector('.device').click();await settle();assert($('touchWakeStatus').textContent.includes('Сохранено в Studio'));assert($('indicatorStatus').textContent.includes('Сохранено в Studio'));
+w.flowReceive({id:0,result:{deferredApplied:{device:1,action:'profile',args:combined.args,value:combined.args,superseded:false}}});assert($('touchWakeStatus').textContent.includes('применены и проверены'));assert($('indicatorStatus').textContent.includes('применены и проверены'));
+// A subsequent indicator-only offline edit restores only its own pending status.
+jobs=[];$('indicatorBrightness').value='125';$('indicatorBrightness').dispatchEvent(new w.Event('change'));await settle();const indicatorOnly=jobs.find(j=>j.action==='profile');assert.deepEqual(Array.from(indicatorOnly.args.statusModules),['indicatorStatus']);w.document.querySelector('.device').click();await settle();assert($('indicatorStatus').textContent.includes('Сохранено в Studio'));assert(!$('touchWakeStatus').textContent.includes('Сохранено в Studio'));
+const neutralPanel=$('touchWakeStatus').textContent;w.flowReceive({id:0,result:{deferredApplied:{device:1,action:'profile',args:indicatorOnly.args,value:indicatorOnly.args,superseded:false}}});assert.equal($('touchWakeStatus').textContent,neutralPanel);assert($('indicatorStatus').textContent.includes('применены и проверены'));
+console.log(JSON.stringify({status:'passed',native_hardware_tested:false,tests:['Panel/indicator status isolation on toggle, brightness, RF/BT, breathing, advanced and timeout','Coalesced offline module ownership survives reconnect; indicator-only replay leaves panel untouched','Panel toggle sends persisted change immediately; panel/indicator dots show applied, queued and failed outcomes','Deferred profile and advanced replies update their own panels; foreign device ignored','Offline edits show saved-in-Studio rather than applied; latest brightness wins','Cached verified capabilities and pending values restore while asleep; layer selector retained','Deferred completion and device isolation; controls remain available','Outline SVG charging state updates without refresh or emoji','Only current wireless indicator switch is shown; USB charging behavior explained','Brightness sync hides/disables manual slider and sends new firmware option','Low-battery threshold sent independently; old profile fields retained']},null,2));dom.window.close();
+})().catch(e=>{console.error(e.stack);dom.window.close();process.exitCode=1;});

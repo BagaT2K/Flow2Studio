@@ -1,0 +1,6 @@
+The firmware images contain third-party code. The project's MIT license does
+not relicense that code or grant rights held by Lofree or upstream contributors.
+The original project additions are licensed under MIT where the author
+has the right to license them. Redistribution terms for the underlying images
+have not been established; publication of this source package does not establish
+permission to redistribute those images.

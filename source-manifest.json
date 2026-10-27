@@ -1,0 +1,658 @@
+{
+  "format": 1,
+  "applicationVersion": "0.9.6",
+  "license": "MIT for original project code; third-party components retain their own terms",
+  "purpose": "Build input inventory; not a signature or proof of executable equivalence",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 35,
+      "sha256": "e8388b573d828cc4b2ba266bdc24e4c13200d33c89ef5a2e67a134984743758e"
+    },
+    {
+      "path": "Build-DMG.command",
+      "bytes": 3307,
+      "sha256": "d0727d238e22d95ac379916261749f8d2e63213aa91e5f199e5effba26ae09c9"
+    },
+    {
+      "path": "Build-and-Run.command",
+      "bytes": 1465,
+      "sha256": "58ef31f1de276693b9c399cef912062e2b97d92c2ceaa8e85de9abd55f6eff7b"
+    },
+    {
+      "path": "Flow2Studio.icns",
+      "bytes": 52993,
+      "sha256": "0290e79a21fe5986d419944bde418fe3de776b750c92377146c18a852dd9444d"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1064,
+      "sha256": "fe597dce78bd72762d9414a2b3dba264bcb28aa0562f0b9e39e5985ccd2c72dc"
+    },
+    {
+      "path": "README.md",
+      "bytes": 347,
+      "sha256": "f29755c8bb6ea9732ec64d6335313ff57a471a35f32c0ceccf09335784609d18"
+    },
+    {
+      "path": "firmware-bundle/NOTICE",
+      "bytes": 429,
+      "sha256": "8c97fba6771fc15ce9a13e1bb76adc2f2d63017ef959612a78b49288e12380ec"
+    },
+    {
+      "path": "firmware-bundle/OEM14-SOURCE.md",
+      "bytes": 1211,
+      "sha256": "d9ddf734dc14114c0d086527968e945be1069bf60cab8f48c855be4b4bd6e8a6"
+    },
+    {
+      "path": "firmware-bundle/factory-100-usb14.bin",
+      "bytes": 262144,
+      "sha256": "234363d6cea596cacde7564b0da9bb01944548a4c39a321587b6a235541ea4cc"
+    },
+    {
+      "path": "firmware-bundle/factory-68-usb14.bin",
+      "bytes": 262144,
+      "sha256": "ec015ca222c69453823064751a4634f7ddd1a9981efb7e57b14ee4ad05a9b952"
+    },
+    {
+      "path": "firmware-bundle/factory-84-usb14.bin",
+      "bytes": 262144,
+      "sha256": "055a948fce8e27308b145484e2d3f166f09d1bd4ab7e48267235cbb21c70f196"
+    },
+    {
+      "path": "firmware-bundle/model-100-v14.json",
+      "bytes": 1196,
+      "sha256": "dc3974673ec40eba96b07d714f0de25f151cc54f3b0bd5165ef30c6f23c4d12c"
+    },
+    {
+      "path": "firmware-bundle/model-68-v14.json",
+      "bytes": 1289,
+      "sha256": "1c734c003ff6454c6f8756d2e028d972499e1b271853786960d70f79a4411fc2"
+    },
+    {
+      "path": "firmware-bundle/model-84-v14.json",
+      "bytes": 1187,
+      "sha256": "655a00784a383dc521f73d341a5161f5e5691c61ef6e090b2e0275f1507c343a"
+    },
+    {
+      "path": "firmware-bundle/studio-v14-100.bin",
+      "bytes": 262144,
+      "sha256": "4ad8f0852e325c4faf5f7a9280d274ae6197c0a5d3404e0235581c253a2342d8"
+    },
+    {
+      "path": "firmware-bundle/studio-v14-68.bin",
+      "bytes": 262144,
+      "sha256": "f7564ec9822857f8aa9d3285d00fb57bd5289a67a02a8e09f7336f1ad5d5c11d"
+    },
+    {
+      "path": "firmware-bundle/studio-v14-84.bin",
+      "bytes": 262144,
+      "sha256": "081377a54f108a0a538d2a84aa7bcba5fd0cee8541c2fc71727cd8cbc9bb1ea0"
+    },
+    {
+      "path": "firmware/build.py",
+      "bytes": 2832,
+      "sha256": "4be022382fb5cf4cb8487200ebb475d12ceb3e59837a9eaa7e4c98b3fb04c838"
+    },
+    {
+      "path": "firmware/patches-100.json",
+      "bytes": 39157,
+      "sha256": "ea5f2627ba78207cdc8921d6064ad7cc9c607390431d998020730923e0b848ca"
+    },
+    {
+      "path": "firmware/patches-68.json",
+      "bytes": 39157,
+      "sha256": "8686b7b9de880a5640dfdb3ce8fc8189ffda231c77739ea12cb13a221ba59188"
+    },
+    {
+      "path": "firmware/patches-84.json",
+      "bytes": 39157,
+      "sha256": "dee0d1181de8acf460ca0e07d55e5c46ebaaaef7264c2628858adcb58b3bc8ff"
+    },
+    {
+      "path": "firmware/source-pins.json",
+      "bytes": 790,
+      "sha256": "fe30c9e20b395d731f09a82eadd8007010928ac3f1368529c02af972f62b461e"
+    },
+    {
+      "path": "localization/accents.tsv",
+      "bytes": 2149,
+      "sha256": "957d647273ad1e2742ffe5256d058e35dff3325d73fbbcf435b54e6d2a528b0a"
+    },
+    {
+      "path": "localization/build.py",
+      "bytes": 1425,
+      "sha256": "e4b77fce8f50dda2f7fc3231fa4b240e751cc3b532e4610fa71c9ae34c73b61f"
+    },
+    {
+      "path": "localization/dialogs.tsv",
+      "bytes": 21218,
+      "sha256": "72e6c385c967d683071a0d152344e1ea13454d95fb13b424d3fbde86d1a6ff2e"
+    },
+    {
+      "path": "localization/errors.tsv",
+      "bytes": 69131,
+      "sha256": "c1c28a025c14cbc671874816718ddbd2f788b6012fa7bd2895deb1140365dd89"
+    },
+    {
+      "path": "localization/ui.tsv",
+      "bytes": 90626,
+      "sha256": "e3328e890767f88e1dffc0962a38adeb0fcf932f85000111497650f92ec0efca"
+    },
+    {
+      "path": "localization/updates.tsv",
+      "bytes": 2284,
+      "sha256": "e8f7a9e7f9414532cdce178c6ae1a5fb5527d6bee905f6463c81dc8a27fefeea"
+    },
+    {
+      "path": "mac/FlowBLEBattery.h",
+      "bytes": 355,
+      "sha256": "10dd22b8375d21741ced12a1b504564365bc1669d8685ab5be7e24a374f9119f"
+    },
+    {
+      "path": "mac/FlowBLEBattery.m",
+      "bytes": 7535,
+      "sha256": "626f11d20d0d810b3fe395989669f71a823515580c9f12788a7545128682010f"
+    },
+    {
+      "path": "mac/FlowBLESerial.h",
+      "bytes": 299,
+      "sha256": "e5674b3672bbded245e6e2c510da5bb30384d52128cbfda204709c0d11cf2435"
+    },
+    {
+      "path": "mac/FlowBLESerial.m",
+      "bytes": 13976,
+      "sha256": "4f7581711d2310749d733ee8e08c8728f8d7e4e1bb677beb5b07fd991c1858a6"
+    },
+    {
+      "path": "mac/FlowBackupFile.h",
+      "bytes": 1303,
+      "sha256": "27bf27991eba14bb142e4fb08bdbc2a6607adbb3a13caf7ec5d271a356e44d6e"
+    },
+    {
+      "path": "mac/FlowBluetooth.h",
+      "bytes": 2211,
+      "sha256": "ef91e30ea5b73a82951fbf2e5b55cd2f014319786b011b4cfd3e046dc9f186e1"
+    },
+    {
+      "path": "mac/FlowControl.h",
+      "bytes": 2058,
+      "sha256": "18c3296d2c0937c4f14c73973ef77f6a2c3d3b624fd1a1a26904d6fce1af7cd0"
+    },
+    {
+      "path": "mac/FlowDFUWire.h",
+      "bytes": 1202,
+      "sha256": "b565d1a384f0c7ce539f0ba85fa7dbebde0d76c5b33df6b4bef38a0830e39efa"
+    },
+    {
+      "path": "mac/FlowDeferredStore.h",
+      "bytes": 517,
+      "sha256": "117411d94ebfaa0df9296f8f32c8f230fa08a16731b4314638857d3bdc4ac746"
+    },
+    {
+      "path": "mac/FlowDeferredStore.m",
+      "bytes": 5490,
+      "sha256": "b27179b1f5feb9f8fb08c960a32593c1ae5f54570713c974335ce59c970baad4"
+    },
+    {
+      "path": "mac/FlowEditing.h",
+      "bytes": 891,
+      "sha256": "0f5158f88386ccb771c1658ee2f41b3d63a097019dcadd269bd9d0a7c3cb0665"
+    },
+    {
+      "path": "mac/FlowEditingEvent.h",
+      "bytes": 303,
+      "sha256": "0ad12b721c6e45c1e4b6599a819a33573ceed092b7608f4c5ed48675d6324bdd"
+    },
+    {
+      "path": "mac/FlowEditingPolicy.h",
+      "bytes": 1778,
+      "sha256": "601e26274925910f4d3658346c37cc96a6ac4282fb53555e5f7070a6cc52991d"
+    },
+    {
+      "path": "mac/FlowFactory.h",
+      "bytes": 2260,
+      "sha256": "a234596f9880e657c7e3939228d6dae5349b833678452712cee6bc859d228df9"
+    },
+    {
+      "path": "mac/FlowFirmware.h",
+      "bytes": 356,
+      "sha256": "de0b9b42f0a4dfbc5ff64e2d921478cdfe6b9c886bce50a180e74285e1f52816"
+    },
+    {
+      "path": "mac/FlowFirmware.m",
+      "bytes": 39469,
+      "sha256": "8da9ecec3fa0d06f52bbba636c7f57b59c101c502ce1bce977a08a4ff5fd88f7"
+    },
+    {
+      "path": "mac/FlowFirmwareConsent.h",
+      "bytes": 905,
+      "sha256": "f5625d8cfde1d62f7d65dd445f9213592b6d74664e7c42e796f1e36c28ddb24f"
+    },
+    {
+      "path": "mac/FlowFirmwareMigration.h",
+      "bytes": 1495,
+      "sha256": "2ef0313f7e8af7c3ee7ce117f92adae3047ad9eba3d19611578eabeeed7092a3"
+    },
+    {
+      "path": "mac/FlowFirmwareModel.h",
+      "bytes": 607,
+      "sha256": "2ed7c73b9716b23a20c611b775b03aa13e16c81723e41bbf6d6d91d3eae96661"
+    },
+    {
+      "path": "mac/FlowFlashCore.h",
+      "bytes": 4935,
+      "sha256": "65895315e050317b819dcdaf0b8622ae6af4dbb832d1a3796ceaca30dd96f4bb"
+    },
+    {
+      "path": "mac/FlowHIDResponse.h",
+      "bytes": 1885,
+      "sha256": "940fbb19392dd6dad75127cca53181e140291d61952c2aba510453571b2b145c"
+    },
+    {
+      "path": "mac/FlowKeymapCore.h",
+      "bytes": 1416,
+      "sha256": "a676fdd7b49a6eec7fb1b3c0a9d91ab29215f88ac997d8a3077df92cc8e874c3"
+    },
+    {
+      "path": "mac/FlowLayerIO.h",
+      "bytes": 1021,
+      "sha256": "968721b46c00467c1810378b873ceb467bd5de869f177629dfe593f3a2e049b8"
+    },
+    {
+      "path": "mac/FlowLocalization.h",
+      "bytes": 162,
+      "sha256": "a374950426be90b7d39bfee679144f46768180bfcd9e3e201c4e9e24cfc8bf58"
+    },
+    {
+      "path": "mac/FlowLocalization.m",
+      "bytes": 2254,
+      "sha256": "9891f36ceaf654674b5adbe0d57546603a6d85abc7e5ef54b237b08f5635f46e"
+    },
+    {
+      "path": "mac/FlowMacroKeys.h",
+      "bytes": 1120,
+      "sha256": "27689dafbd27fe54780ceb3a19c4b33c94ebe4ade5c9804433134fedb4741e4f"
+    },
+    {
+      "path": "mac/FlowMacroRecorder.h",
+      "bytes": 481,
+      "sha256": "3df23ac2f59cfd1852aa22c774179eff7a333ad5cc341f534c4e399913ae73a3"
+    },
+    {
+      "path": "mac/FlowMacroRecorder.m",
+      "bytes": 3765,
+      "sha256": "113b5c51ffa23f254ae26c4aaef14693a6b4e58c2cfef1ff0e9569523cf58d64"
+    },
+    {
+      "path": "mac/FlowModels.h",
+      "bytes": 9466,
+      "sha256": "d04368ca1b77a8f3e8932986e45c0891b75cf6f03b658bf9908ebb318cef19a5"
+    },
+    {
+      "path": "mac/FlowPackets.h",
+      "bytes": 1081,
+      "sha256": "d94fc518882c9e3b9dd067a46264b70a30b1a25695638cf1045513a0e7cd1b8a"
+    },
+    {
+      "path": "mac/FlowPreferences.h",
+      "bytes": 2535,
+      "sha256": "66e1013c3f8343960531e78250652211b71ce1d5218242c434b3d5aa77baa34f"
+    },
+    {
+      "path": "mac/FlowProtocol.h",
+      "bytes": 1042,
+      "sha256": "61ba3de8e49be6b8e861b22a085c36c48c2c2930af4b516450ee1e733758f989"
+    },
+    {
+      "path": "mac/FlowSerialProtocol.h",
+      "bytes": 1522,
+      "sha256": "e55ed62427669bec6ab892d9d8bf76f1d73b592c1df2f2c72d98914e6b26b30f"
+    },
+    {
+      "path": "mac/FlowTransport.h",
+      "bytes": 361,
+      "sha256": "af80aa6350f7d674cb976b7025f1e2435b3e007f0856604f10c17a2dab6bb211"
+    },
+    {
+      "path": "mac/FlowTransport.m",
+      "bytes": 46603,
+      "sha256": "7d9007ebca4d150af76489f251185fd1605340e235cd7873b572051c36eae9ad"
+    },
+    {
+      "path": "mac/FlowUSBBattery.h",
+      "bytes": 1681,
+      "sha256": "fdf883b1c84609a1759ff29269f05ea1a426e95cd77df7fba42de44b9bd23ed8"
+    },
+    {
+      "path": "mac/FlowUpdates.h",
+      "bytes": 217,
+      "sha256": "9ad7711d70ffd8403ee31d4e394424faf2a312d8dc45665051263a778f3e70e0"
+    },
+    {
+      "path": "mac/FlowUpdates.m",
+      "bytes": 5324,
+      "sha256": "d364c2bf840d028a0f29bc26c7087cc60d9af09e8a451d5d94d6b7f5b512d925"
+    },
+    {
+      "path": "mac/FlowV14Registry.h",
+      "bytes": 411,
+      "sha256": "776cf3456f8451bfd55e05d785a2ae7680e60c1321eea6d7098edcdef07e35d2"
+    },
+    {
+      "path": "mac/FlowWake.h",
+      "bytes": 1745,
+      "sha256": "e820615599691ffda467f7369b7d28d53fb93947d664aecdea1aaced34ae9c79"
+    },
+    {
+      "path": "mac/FlowWindow.h",
+      "bytes": 954,
+      "sha256": "eb878f1b61447a43f07b0e300f69d3ba7cc2fbc5c512ea3513eca47a726bf92d"
+    },
+    {
+      "path": "mac/Studio.m",
+      "bytes": 49098,
+      "sha256": "e577f82e575c3a6dc7b7643d2b9f810818c807ab00786bacfbd0826a37b50f1d"
+    },
+    {
+      "path": "resources/app.js",
+      "bytes": 84063,
+      "sha256": "40447fa71f899d78a9b40ec21fc4e7c53e6436bb4e73a2a5a74ac62756c08a78"
+    },
+    {
+      "path": "resources/assets/kofi-button.png",
+      "bytes": 4054,
+      "sha256": "b771f1a66151e2dfae4e45ad4d01e6de19c871b7722d1ee14154ccf392b689ce"
+    },
+    {
+      "path": "resources/assets/support-banner.jpg",
+      "bytes": 207504,
+      "sha256": "478cb036d3ba807fe92879005a9b1256efb4df5d0ddf1c052821f4017fd91d59"
+    },
+    {
+      "path": "resources/assets/support-qr.png",
+      "bytes": 20805,
+      "sha256": "00e4fe5f4e0622d46eaed41d23c185a259975a8733bad86b182195624ed78ece"
+    },
+    {
+      "path": "resources/factory-layers.js",
+      "bytes": 1274,
+      "sha256": "18ca3c069d0d2a79f958deb1dd0b52884030817ef6d3c6ac7fa3c750e374a038"
+    },
+    {
+      "path": "resources/factory-models.js",
+      "bytes": 4458,
+      "sha256": "46ce96de2813dd492191b2e5007bd756a39bebde62a89c0385522484160328a5"
+    },
+    {
+      "path": "resources/index.html",
+      "bytes": 25817,
+      "sha256": "89b4fc6a86dc05bcfb427f5631847dce66d40c85c0bef165ce806ebe50179b23"
+    },
+    {
+      "path": "resources/layout68.js",
+      "bytes": 3903,
+      "sha256": "9be50bf533e40669e6bbe8173e7d58af689d87c2f222922e7fb43fab52d1449e"
+    },
+    {
+      "path": "resources/layouts.js",
+      "bytes": 11493,
+      "sha256": "6d0b51067bdd90c4fc205d311f97ced1c46cf49ce21307852a40262c3079ffbb"
+    },
+    {
+      "path": "resources/locales.js",
+      "bytes": 259459,
+      "sha256": "f0432abdebce8f2a7eedf2f3f0984b8aa8d401d6e6ba1c4d3b0c5f4e4b248c56"
+    },
+    {
+      "path": "resources/locales.json",
+      "bytes": 259439,
+      "sha256": "a95b244ef1d842f643b2ad0dabee82181dcbc2cc04aa241ff0bb13d4bbd6af4a"
+    },
+    {
+      "path": "resources/localization.js",
+      "bytes": 4731,
+      "sha256": "da06a3105eb4d8f02e97d7c3e65475bebf0874518bacfe6325860b287e29c419"
+    },
+    {
+      "path": "resources/macro-recorder.js",
+      "bytes": 2080,
+      "sha256": "6ff29caa51577401ffeb0a01ed71d73a1269364185af9dc881be809a8ff6a64a"
+    },
+    {
+      "path": "resources/session-keys.js",
+      "bytes": 490,
+      "sha256": "35ec9182fe6cf85884dd1387e99af4c508640c0314ae761c4043b43d6e3231d3"
+    },
+    {
+      "path": "resources/style.css",
+      "bytes": 29608,
+      "sha256": "1273b9365ae1d3f32130cb7ab1ad724987ff90e94e2349fda35648f3cbe50290"
+    },
+    {
+      "path": "resources/update-config.json",
+      "bytes": 70,
+      "sha256": "8bbb2e2ed8f281a937b6bc8fdaa53efb8033e29d6c0959bc0070ec0e0db30a7c"
+    },
+    {
+      "path": "resources/updates.js",
+      "bytes": 1039,
+      "sha256": "da4a0a5bc64bef58a731ceae8a29d429e937b007a8065d2a9ba9d74c600b3096"
+    },
+    {
+      "path": "scripts/build-app.sh",
+      "bytes": 3709,
+      "sha256": "2e2f082270c58a97eac047fbd00894ff6fe205620da1dadfcfdb2f2395ce184e"
+    },
+    {
+      "path": "scripts/check.sh",
+      "bytes": 2358,
+      "sha256": "9fbfe89a47de08ebbfc7565de5b4e3d900410ba5a8c6375b34098163a089792f"
+    },
+    {
+      "path": "scripts/dmg-background.m",
+      "bytes": 1888,
+      "sha256": "bf99ad22360020839278991d6d7718e2a6c7012692a20ac8a2c359b872328990"
+    },
+    {
+      "path": "scripts/source-manifest.py",
+      "bytes": 3251,
+      "sha256": "f7fc7370f127b201ba54df529652329d67be5e2ee2344bf1ff47d8b9f674ebcc"
+    },
+    {
+      "path": "scripts/unmount-dmg.py",
+      "bytes": 675,
+      "sha256": "40752c9c78e53b879ca0f557486a56729beb1053eab0c890f0d64a55ab9f2f66"
+    },
+    {
+      "path": "scripts/vendor/NOTICE.md",
+      "bytes": 347,
+      "sha256": "784c9be08e17d93d5d78ee21ecf28cca2919c9053f34020cdcb511ab53015f94"
+    },
+    {
+      "path": "scripts/vendor/ds_store-1.3.1.dist-info/LICENSE",
+      "bytes": 1061,
+      "sha256": "7d0f4e9418ac55d7e6e03d4aead4cce9ecafe9ea533cf7fb89574193adcf9016"
+    },
+    {
+      "path": "scripts/vendor/ds_store/__init__.py",
+      "bytes": 118,
+      "sha256": "e0b60d38e26a87fa69d414e26f8328015cd5cf9914b0cc7c49c9f4db7206b930"
+    },
+    {
+      "path": "scripts/vendor/ds_store/__main__.py",
+      "bytes": 2811,
+      "sha256": "e09e5088d8427dfe52b180e6ef57c4a7f9cb72ebe170dfe6be0c099e2410aeac"
+    },
+    {
+      "path": "scripts/vendor/ds_store/buddy.py",
+      "bytes": 13895,
+      "sha256": "400dce49d495b63c18071708a940392a6c2e0d31bb3bba9185913945e8f76b71"
+    },
+    {
+      "path": "scripts/vendor/ds_store/store.py",
+      "bytes": 44215,
+      "sha256": "763c3c9a1df17651c477c6d1e0c692d755d0a67888211ea920d2438d9da81b39"
+    },
+    {
+      "path": "scripts/vendor/mac_alias-LICENSE",
+      "bytes": 1100,
+      "sha256": "b2eede0626e8dc9fa6f108c896345dbb193282156537c2025d8f5daedc4e58fe"
+    },
+    {
+      "path": "scripts/vendor/mac_alias/__init__.py",
+      "bytes": 1134,
+      "sha256": "afa28ff9b7d2b30dabf312195a640bf55eb262bfafd76cac06b3671747a33b7a"
+    },
+    {
+      "path": "scripts/vendor/mac_alias/alias.py",
+      "bytes": 24395,
+      "sha256": "8726c6bac20dcf363c2e292a490fe1ec8d20aec10c0a62ee1947e0af026ee370"
+    },
+    {
+      "path": "scripts/vendor/mac_alias/bookmark.py",
+      "bytes": 25053,
+      "sha256": "fa8b10e8f329fd0a9428463b2c72536a27ee172f20a3c2cfd8a466b82b87187b"
+    },
+    {
+      "path": "scripts/vendor/mac_alias/osx.py",
+      "bytes": 33243,
+      "sha256": "660cd416919534f0eac0ab0b27fd873116417f30ca4c36472024fd30fe051307"
+    },
+    {
+      "path": "scripts/vendor/mac_alias/utils.py",
+      "bytes": 449,
+      "sha256": "1897238be748d0351a2bd1674d35846acbdf7f9cc9bdfe402de2bbc3861cfeaf"
+    },
+    {
+      "path": "scripts/write-dmg-layout.py",
+      "bytes": 3697,
+      "sha256": "fa6ba1c7d90fdbf1597cac3e39e6685c364422cebdbbd63fe632fee48f125bf0"
+    },
+    {
+      "path": "tests/backup-file.c",
+      "bytes": 1649,
+      "sha256": "c1d0b4fc893c2366e64da91dca17a365e5697e6f986dacb0e8caafb9946979a6"
+    },
+    {
+      "path": "tests/control-release.c",
+      "bytes": 1114,
+      "sha256": "03c539073824077bc0880a08a90248e1b0bf9d45bda299345d6c704931efd2c8"
+    },
+    {
+      "path": "tests/deferred-ui.cjs",
+      "bytes": 14693,
+      "sha256": "f93d25521f74ab3e4a77d346683fa276092db978506d3a968d37710c88a0833e"
+    },
+    {
+      "path": "tests/dmg-layout.py",
+      "bytes": 2106,
+      "sha256": "f222b0c4f0bcde088018467b4f7d2d9361c7b52b391d3aa984b0c3ae6d903bd8"
+    },
+    {
+      "path": "tests/editing-policy.c",
+      "bytes": 3473,
+      "sha256": "f3aeef77948f693ed2b6db2aaf277cc199c2c9512d7acce6d34552d83fbfce7f"
+    },
+    {
+      "path": "tests/editor-recorder-ui.cjs",
+      "bytes": 10808,
+      "sha256": "58909641c414ef36815026d8353e69f4dd33ce2cd42dbe3ab7e3b698a971272a"
+    },
+    {
+      "path": "tests/firmware-migration.c",
+      "bytes": 4989,
+      "sha256": "a09574c7d939df15270d3f6b52af0d568ae5a134bb34390e999addd12183c143"
+    },
+    {
+      "path": "tests/keymap.c",
+      "bytes": 2979,
+      "sha256": "b57814fc43c36a9293904c15ec7e95271127bc88c08c590bdabd5f4115d8ad3d"
+    },
+    {
+      "path": "tests/layer-ui.cjs",
+      "bytes": 7109,
+      "sha256": "1188c18733543f4f1ac562e60a89cd69933bfd79b120194b846758afa37cad1b"
+    },
+    {
+      "path": "tests/localization-catalog.py",
+      "bytes": 2410,
+      "sha256": "44276f7b1e3d4fd14eb06692832497a51910c9e48b820eae85d295b8f81a3b04"
+    },
+    {
+      "path": "tests/localization-ui.cjs",
+      "bytes": 6774,
+      "sha256": "d935a643265f392e408a48a9e630bc21820e4c09f9123a0dbd159cbc00968fe8"
+    },
+    {
+      "path": "tests/models-v14.c",
+      "bytes": 3720,
+      "sha256": "5bef0e46fcd2e00842d227da9f36fc1869706249be1622b3824b85222b477e8d"
+    },
+    {
+      "path": "tests/native-deferred.m",
+      "bytes": 4218,
+      "sha256": "005ab2e2f0ea29aea49252fb1aaef1a8b62040baca63e80dad9bddd8a45c17e0"
+    },
+    {
+      "path": "tests/native-events.m",
+      "bytes": 1175,
+      "sha256": "512035ca97bfd21dc50167e601d1988a5de0e782b1961390757e1eb96c921b47"
+    },
+    {
+      "path": "tests/native-localization.m",
+      "bytes": 1256,
+      "sha256": "18ec0e45427bd223325ae8008e815bdfed511ec377e805aa4a235ebb75f64259"
+    },
+    {
+      "path": "tests/native-preferences.m",
+      "bytes": 2010,
+      "sha256": "f023ccf02d2275358c70c5753d97ef5bf75236dc1d97226fcc3f4bb8c37eaea6"
+    },
+    {
+      "path": "tests/native-updates.m",
+      "bytes": 730,
+      "sha256": "0c61002e37f5fe307f21823f7ccb1922b627e2d369271dcd921ddca4216709a6"
+    },
+    {
+      "path": "tests/native-window.m",
+      "bytes": 1149,
+      "sha256": "b0a3a054977f4f193f32572ed9ac91b23973e99b49de59fd023f8df9f4951359"
+    },
+    {
+      "path": "tests/package.py",
+      "bytes": 2497,
+      "sha256": "1c07ccc24f39c6f01c34346916bcf10bb75095ced28d0b1f2467930b3b111047"
+    },
+    {
+      "path": "tests/setup.cjs",
+      "bytes": 13590,
+      "sha256": "1949c1076c99a6b66e94f5f9b954c0f5f8a22672cb1e9369c8b007d4fc5aad1a"
+    },
+    {
+      "path": "tests/source-snapshot.py",
+      "bytes": 2209,
+      "sha256": "e62d023cf3a40e7a116c3e877cf959496f0e15e7cddbd1733f989e0e43326a56"
+    },
+    {
+      "path": "tests/ui.cjs",
+      "bytes": 22866,
+      "sha256": "59abb1beb7b4434635e0b0768a4956a045d552c9ec3e8945a0f46cac526019af"
+    },
+    {
+      "path": "tests/updates-ui.cjs",
+      "bytes": 2318,
+      "sha256": "42db3dd54dfe37569aeb8c41c1172860e90d7548d19f207630cfbc939fb051b5"
+    },
+    {
+      "path": "tests/usb-battery.c",
+      "bytes": 2791,
+      "sha256": "4d6ace5a81adb576ac689efeafad789f3127a615dd44f3ff969d71475a2ccde4"
+    },
+    {
+      "path": "tests/v14-ui.cjs",
+      "bytes": 7277,
+      "sha256": "fa763fa3dc7d3d905dfedbfd233c14b908845399f21f7be47be79e3245566d3a"
+    }
+  ]
+}

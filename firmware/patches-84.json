@@ -1,0 +1,821 @@
+[
+  {
+    "offset": 75520,
+    "assembly": "    push {r4,r5,r6,lr}\n    cmp r1,#32\n    bne fallback\n    mov r4,r0\n    mov r5,r1\n    ldrb r2,[r0]\n    cmp r2,#0x16\n    bne fallback\n    ldrb r2,[r0,#1]\n    cmp r2,#0x4c\n    bne fallback\n    ldrb r2,[r0,#2]\n    cmp r2,#0x46\n    bne fallback\n    ldrb r2,[r0,#3]\n    cmp r2,#0x43\n    bne fallback\n    ldrb r2,[r0,#4]\n    cmp r2,#3\n    bne fallback\n    mov r0,r4\n    bl 0x8013a80\n    cmp r0,#0\n    bne occupied\n    movs r6,#0\n    ldrb r2,[r4,#5]\n    cmp r2,#1\n    beq respond\n    cmp r2,#3\n    beq defaults\n    cmp r2,#7\n    beq config_write\n    cmp r2,#4\n    bhs extra\n    cmp r2,#2\n    bne invalid\n config_write:\n    ldrb r2,[r4,#6]\n    cmp r2,#15\n    bhi invalid\n    ldrb r0,[r4,#8]\n    ldrb r3,[r4,#9]\n    orr r0,r3,r0,lsl #8\n    movw r3,#3600\n    cmp r0,r3\n    bhi invalid\n    lsl r0,r0,#10\n    and r3,r2,#3\n    orr r0,r0,r3\n    tst r2,#4\n    it eq\n    orreq r0,r0,#0x400000\n    tst r2,#8\n    it eq\n    orreq r0,r0,#0x800000\n    ldrb r3,[r4,#7]\n    orr r0,r0,r3,lsl #2\n    movw r3,#0\n    movt r3,#0xb400\n    orr r6,r0,r3\n    b save\n extra:\n    mov r0,r4\n    bl 0x8012a00\n    mov r6,r0\n    b respond\n defaults:\n    bl 0x8013300\n    ldr r6,=0xb400f2ff\n save:\n    movs r0,#0x13\n    bl 0x80071f4\n    cmp r0,#0\n    beq save_ok\n    cmn r0,#1\n    beq save_ok\n    lsr r3,r0,#26\n    cmp r3,#0x2d\n    bne occupied\n save_ok:\n    ldr r3,=0x2000255b\n    ldrb r2,[r4,#5]\n    cmp r2,#7\n    beq preview_save\n    eor r2,r6,#1\n    str r2,[r3]\n    movs r0,#0x13\n    mov r1,r6\n    bl 0x80072c0\n    b saved\n preview_save:\n    str r6,[r3]\n saved:\n    movs r6,#0\n respond:\n    bl 0x80128c0\n    and r2,r0,#3\n    tst r0,#0x400000\n    it eq\n    orreq r2,r2,#4\n    tst r0,#0x800000\n    it eq\n    orreq r2,r2,#8\n    strb r2,[r4,#6]\n    ubfx r2,r0,#2,#8\n    strb r2,[r4,#7]\n    ubfx r2,r0,#10,#12\n    strb r2,[r4,#9]\n    lsr r2,r2,#8\n    strb r2,[r4,#8]\n    movs r2,#255\n    strb r2,[r4,#10]\n    movs r2,#3\n    strb r2,[r4,#11]\n    ldr r2,=0x31533246\n    str r2,[r4,#16]\n    ldr r2,=0x14090054\n    str r2,[r4,#20]\n    bl 0x8012b80\n    strb r0,[r4,#24]\n    bl 0x8013080\n    strb r0,[r4,#25]\n    strb r1,[r4,#26]\n    bl 0x8014400\n    strb r0,[r4,#28]\n    movs r2,#0x81\n    strb r2,[r4,#4]\n    strb r6,[r4,#5]\n    mov r0,r4\n    mov r1,r5\n    bl 0x80029ac\n    movs r0,#1\n    pop {r4,r5,r6,pc}\n invalid:\n    movs r6,#1\n    b respond\n occupied:\n    movs r6,#2\n    b respond\n fallback:\n    pop.w {r4,r5,r6,lr}\n    b.w 0x8012500\n    .align 2\n    .ltorg\n",
+    "size": 396
+  },
+  {
+    "offset": 75968,
+    "assembly": "    push {r3,lr}\n    movs r0,#0x13\n    bl 0x80071f4\n    lsr r3,r0,#26\n    cmp r3,#0x2d\n    bne config_default\n    ubfx r3,r0,#10,#12\n    movw r2,#3600\n    cmp r3,r2\n    bls config_return\n config_default:\n    ldr r0,=0xb400f2ff\n config_return:\n    pop {r3,pc}\n    .align 2\n    .ltorg\n",
+    "size": 40
+  },
+  {
+    "offset": 78848,
+    "assembly": "    ldr r3,=0x20002432\n    ldrb r3,[r3]\n    cbnz r3,factory\n    bl 0x80023fc\n    uxtb r0,r0\n    cbz r0,factory\n    cmp r0,#6\n    bhi factory\n    mov r6,r0\n    ldr r3,=0x20002420\n    ldrb r3,[r3]\n    cbnz r3,factory\n    ldr r3,=0x200022c5\n    ldrb r3,[r3]\n    cmp r3,#1\n    bhi off\n    cmp r6,#6\n    bne warning_check\n    bl 0x8012f00\n    cmp r0,#2\n    bhs off\n warning_check:\n    bl 0x8013280\n    cmp r0,#0\n    bne red\n    bl 0x8013080\n    cmp r1,#0\n    beq read_profile\n    ldr r3,=0x200044f2\n    ldrb r3,[r3]\n    tst r3,#1\n    beq off\n    lsrs r3,r3,#3\n    beq off\n    cmp r3,#4\n    bhi off\n read_profile:\n    bl 0x80128c0\n    cmp r6,#6\n    bne normaltooth\n    tst r0,#1\n    b check_flag\n normaltooth:\n    tst r0,#2\n check_flag:\n    beq off\n    ubfx r0,r0,#2,#8\n    bl 0x8013200\n    mov r5,r0\n    bl 0x80128c0\n    tst r0,#0x800000\n    bne steady\n    ldr r3,=0x200044f2\n    ldrb r3,[r3]\n    tst r3,#1\n    beq steady\n    tst r3,#2\n    beq steady\n    bl 0x8012d80\n    cbz r0,steady\n    push {r0,r1,r3,lr}\n    bl 0x8014480\n    mov r2,r0\n    pop.w {r0,r1,r3,lr}\n    mul r2,r2,r5\n    udiv r2,r2,r0\n    cmp r2,r5\n    it hi\n    movhi r2,r5\n    b normal\n steady:\n    mov r2,r5\n    b normal\n red:\n    movs r2,#0\n    movs r1,#0\n    ldr r0,=0x20004608\n    bl 0x800b054\n    movs r2,#255\n    movs r1,#0\n    ldr r0,=0x20004624\n    bl 0x800b054\n    b.w 0x80041ec\n off:\n    movs r2,#0\n normal:\n    movs r1,#0\n    ldr r0,=0x20004608\n    bl 0x800b054\n    movs r2,#0\n    movs r1,#0\n    ldr r0,=0x20004624\n    bl 0x800b054\n    b.w 0x80041ec\n factory:\n    ldr r3,=0x20002432\n    ldrb r3,[r3]\n    b.w 0x80041e0\n    .align 2\n    .ltorg\n",
+    "size": 320
+  },
+  {
+    "offset": 76032,
+    "assembly": "    push {r0,r1,r2,r4,r5,r6,r7,lr}\n    bl 0x8012f00\n    cmp r0,#1\n    beq awake\n    cmp r0,#2\n    beq awake\n    bl 0x80128c0\n    ubfx r7,r0,#10,#12\n    movw r3,#1000\n    mul r7,r7,r3\n    b.w 0x80026de\n awake:\n    movs r7,#0\n    b.w 0x80026de\n",
+    "size": 44
+  },
+  {
+    "offset": 76096,
+    "assembly": "    push {r0,r1,r2,lr}\n    bl 0x80128c0\n    tst r0,#0x400000\n    mov.w r0,#0\n    it ne\n    movne r0,#10\n    bl 0x800309c\n    pop {r0,r1,r2,pc}\n",
+    "size": 24
+  },
+  {
+    "offset": 76160,
+    "assembly": "    push {r0,r1,r2,lr}\n    bl 0x80128c0\n    tst r0,#0x400000\n    pop.w {r0,r1,r2,lr}\n    beq wake\n    cmp r0,#0\n    beq skip\n wake:\n    movs r3,#0\n    b.w 0x8004f0a\n skip:\n    b.w 0x8004f56\n",
+    "size": 34
+  },
+  {
+    "offset": 83456,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    bl 0x8013700\n    mov r4,r0\n    cmp r0,#0\n    beq done\n    bl 0x8012d80\n    mov r5,r0\n    ldr r7,=0x200022d2\n    ldrh r6,[r7]\n    mov r0,r4\n    mov r1,r6\n    movs r2,#0\n    bl 0x8014000\n    mul r0,r0,r5\n    lsr r0,r0,#18\n    ldrh r1,[r7,#6]\n    uxtb r1,r1\n    orr r0,r1,r0,lsl #8\n    strh r0,[r7,#6]\n    mov r0,r4\n    mov r1,r6\n    movs r2,#1\n    bl 0x8014000\n    mul r0,r0,r5\n    lsr r0,r0,#18\n    strh r0,[r7,#2]\n    mov r0,r4\n    mov r1,r6\n    movs r2,#2\n    bl 0x8014000\n    mul r0,r0,r5\n    lsr r0,r0,#18\n    ldrh r1,[r7,#2]\n    orr r0,r1,r0,lsl #8\n    strh r0,[r7,#2]\n done:\n    pop {r3,r4,r5,r6,r7,pc}\n    .align 2\n    .ltorg\n",
+    "size": 104
+  },
+  {
+    "offset": 81920,
+    "assembly": "    cmp r0,#5\n    beq fill\n    cmp r0,#2\n    bne direction_done\n    rsb r2,r2,#2\n direction_done:\n    lsr r3,r1,#10\n    ubfx r1,r1,#0,#10\n    cmp r0,#4\n    beq flow\n    cmp r0,#3\n    bne pulse_slot\n    cmp r3,#3\n    it eq\n    moveq r3,#1\n pulse_slot:\n    cmp r2,r3\n    bne zero\n    cmp r1,#512\n    it hi\n    rsbhi r1,r1,#1024\n    lsl r0,r1,#1\n    b smooth\n flow:\n    cmp r2,r3\n    beq outgoing\n    adds r3,#1\n    cmp r3,#3\n    it eq\n    moveq r3,#0\n    cmp r2,r3\n    bne zero\n    mov r0,r1\n    b smooth\n outgoing:\n    rsb r0,r1,#1024\n    b smooth\n fill:\n    lsr r3,r1,#10\n    ubfx r1,r1,#0,#10\n    cmp r3,#3\n    bhs drain\n    cmp r2,r3\n    blo full\n    bhi zero\n    mov r0,r1\n    b smooth\n drain:\n    subs r3,#3\n    cmp r2,r3\n    blo zero\n    bhi full\n    rsb r0,r1,#1024\n    b smooth\n full:\n    movw r0,#1024\n    bx lr\n smooth:\n    mul r1,r0,r0\n    lsl r0,r0,#1\n    rsb r0,r0,#3072\n    mul r0,r0,r1\n    lsr r0,r0,#20\n    bx lr\n zero:\n    movs r0,#0\n    bx lr\n",
+    "size": 182
+  },
+  {
+    "offset": 82176,
+    "assembly": "    push {r0,r1,r2,r3,r4,r5,r6,lr}\n    ldr r0,=0x2000255f\n    ldr r0,[r0]\n    uxtb r1,r0\n    cmp r1,#100\n    bhi original\n    ubfx r1,r0,#8,#7\n    cmp r1,#100\n    bhi original\n    lsr r0,r0,#16\n    movw r1,#0x4684\n    subs r0,r0,r1\n    cmp r0,#19\n    bhi original\n    lsr r5,r0,#2\n    adds r5,#1\n    ldr r0,=0x200022c5\n    ldrb r0,[r0]\n    cmp r0,#1\n    bhi dark\n    ldr r0,=0x20002464\n    ldrb r0,[r0]\n    cmp r0,#0\n    bne dark\n    ldr r0,=0x200044f2\n    ldrb r0,[r0]\n    tst r0,#1\n    beq dark\n    ldr r6,=0x200022d8\n    ldrh r1,[r6]\n    uxtb r4,r1\n    adds r4,#1\n    uxtb r4,r4\n    bic r1,r1,#255\n    orr r1,r1,r4\n    strh r1,[r6]\n    cmp r4,#0\n    bne frame\n    bl 0x8014400\n    ubfx r1,r0,#4,#2\n    movs r0,#1\n    lsl r1,r0,r1\n    ldr r6,=0x200022d2\n    ldrh r0,[r6]\n    adds r0,r0,r1\n    movw r1,#3072\n    cmp r5,#3\n    it eq\n    moveq r1,#4096\n    cmp r5,#5\n    it eq\n    moveq r1,#6144\n    cmp r0,r1\n    it hs\n    subhs r0,r0,r1\n    strh r0,[r6]\n    bl 0x8014600\n frame:\n    mov r0,r4\n    bl 0x8014300\n    pop {r0,r1,r2,r3,r4,r5,r6,pc}\n dark:\n    bl 0x8002d16\n    pop {r0,r1,r2,r3,r4,r5,r6,pc}\n original:\n    pop.w {r0,r1,r2,r3,r4,r5,r6,lr}\n    b.w 0x8013b00\n    .align 2\n    .ltorg\n",
+    "size": 204
+  },
+  {
+    "offset": 82688,
+    "assembly": "    push {r0,r1,r2,r3,r4,r5,r6,lr}\n    mov r4,r0\n    ldr r5,=0x200022d4\n    ldrh r6,[r5]\n    ldrh r0,[r5,#4]\n    lsr r0,r0,#8\n    ldr r2,=0x40000018\n    movs r3,#64\n    bl apply\n    uxtb r0,r6\n    ldr r2,=0x40000018\n    movs r3,#128\n    bl apply\n    lsr r0,r6,#8\n    ldr r2,=0x40000818\n    movw r3,#256\n    bl apply\n    pop {r0,r1,r2,r3,r4,r5,r6,pc}\n apply:\n    tst r4,#256\n    bne force\n    cmp r4,#0\n    beq force\n    cmp r4,r0\n    bne skip\n    lsl r3,r3,#16\n    str r3,[r2]\n    bx lr\n force:\n    uxtb r1,r4\n    cmp r1,r0\n    it hs\n    lslhs r3,r3,#16\n    str r3,[r2]\n skip:\n    bx lr\n    .align 2\n    .ltorg\n",
+    "size": 104
+  },
+  {
+    "offset": 82944,
+    "assembly": "    push {r4,lr}\n    bl 0x8013000\n    lsr r0,r0,#16\n    movw r1,#0x4680\n    subs r0,r0,r1\n    cmp r0,#23\n    bhi defaults\n    and r1,r0,#3\n    lsr r0,r0,#2\n    orr r0,r0,r1,lsl #4\n    pop {r4,pc}\n defaults:\n    movs r0,#16\n    pop {r4,pc}\n",
+    "size": 40
+  },
+  {
+    "offset": 83072,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    ldr r7,=0x200022d4\n    bl 0x8013d00\n    cmp r0,#0\n    bne original\n    bl 0x8013700\n    mov r4,r0\n    cmp r0,#0\n    beq original\n    movs r5,#0\n    movs r6,#0\n loop:\n    mov r0,r4\n    sub r1,r7,#2\n    ldrh r1,[r1]\n    mov r2,r6\n    bl 0x8014000\n    adds r5,r5,r0\n    adds r6,#1\n    cmp r6,#3\n    blo loop\n    bl 0x8012d80\n    mul r0,r0,r5\n    movw r1,#3072\n    udiv r0,r0,r1\n    pop {r3,r4,r5,r6,r7,pc}\n original:\n    ldrh r0,[r7]\n    pop {r3,r4,r5,r6,r7,pc}\n    .align 2\n    .ltorg\n",
+    "size": 80
+  },
+  {
+    "offset": 83200,
+    "assembly": "    push {r0,r1,r2,r3,r4,lr}\n    bl 0x8013700\n    cmp r0,#0\n    beq original\n    ldr r0,=0x200022c5\n    ldrb r0,[r0]\n    cmp r0,#1\n    bhi dark\n    ldr r0,=0x20002464\n    ldrb r0,[r0]\n    cmp r0,#0\n    bne dark\n    ldr r0,=0x200044f2\n    ldrb r0,[r0]\n    tst r0,#1\n    beq dark\n    ldr r0,=0x200022d8\n    ldrh r0,[r0]\n    and r0,r0,#255\n    orr r0,r0,#256\n    bl 0x8014300\n    pop {r0,r1,r2,r3,r4,pc}\n dark:\n    bl 0x8002d16\n    pop {r0,r1,r2,r3,r4,pc}\n original:\n    pop.w {r0,r1,r2,r3,r4,lr}\n    mov.w r3,#0x40000000\n    b.w 0x8002d04\n    .align 2\n    .ltorg\n",
+    "size": 96
+  },
+  {
+    "offset": 81408,
+    "assembly": "    push {r3,r4,r5,lr}\n    movs r4,#0\n    bl 0x8002564\n    cmp r0,#1\n    beq critical\n    orr r4,r4,#1\n critical:\n    ldr r1,=0x20002420\n    ldrb r0,[r1]\n    cmp r0,#2\n    bls service\n    orr r4,r4,#2\n service:\n    ldr r1,=0x20002432\n    ldrb r0,[r1]\n    cmp r0,#0\n    beq sleep\n    orr r4,r4,#4\n sleep:\n    ldr r1,=0x200022c5\n    ldrb r0,[r1]\n    cmp r0,#1\n    bls power\n    orr r4,r4,#8\n power:\n    ldr r1,=0x20002464\n    ldrb r0,[r1]\n    cmp r0,#0\n    beq enabled\n    orr r4,r4,#16\n enabled:\n    ldr r1,=0x200044f2\n    ldrb r0,[r1]\n    tst r0,#1\n    bne peak\n    orr r4,r4,#32\n peak:\n    bl 0x8012d80\n    cmp r0,#256\n    bhi fine\n    orr r4,r4,#64\n fine:\n    bl 0x8013000\n    cmp r0,#0\n    bne done\n    orr r4,r4,#128\n done:\n    mov r0,r4\n    pop {r3,r4,r5,pc}\n    .align 2\n    .ltorg\n",
+    "size": 144
+  },
+  {
+    "offset": 80384,
+    "assembly": "    push {r4,lr}\n    bl 0x8013e00\n    cmp r0,#0\n    ite eq\n    moveq r0,#1\n    movne r0,#0\n    pop {r4,pc}\n",
+    "size": 16
+  },
+  {
+    "offset": 81216,
+    "assembly": "    push {r3,r4,r5,lr}\n    ldrb r5,[r0,#6]\n    cmp r5,#1\n    bhi invalid\n    cmp r5,#0\n    beq stop\n    bl 0x8013a00\n    cmp r0,#0\n    beq invalid\n    ldr r4,=0x20002563\n    bl 0x8013d00\n    cmp r0,#0\n    bne occupied\n    ldr r5,=0x2000255f\n    ldr r0,[r5]\n    bl 0x8013000\n    cmp r0,#0\n    beq invalid\n    lsr r1,r0,#16\n    movw r2,#0x4653\n    cmp r1,r2\n    bne extended\n    movt r0,#0x4660\n    b mark\n extended:\n    movw r2,#0x4680\n    subs r2,r1,r2\n    cmp r2,#23\n    bhi old_extended\n    orr r0,r0,#0x1000000\n    b mark\n old_extended:\n    orr r0,r0,#0x80000\n mark:\n    str r0,[r5]\n    movs r1,#0\n    str r1,[r4]\n    bl 0x8002d16\n    b success\n stop:\n    bl 0x8013c80\n success:\n    movs r0,#0\n    pop {r3,r4,r5,pc}\n invalid:\n    movs r0,#1\n    pop {r3,r4,r5,pc}\n occupied:\n    movs r0,#2\n    pop {r3,r4,r5,pc}\n    .align 2\n    .ltorg\n",
+    "size": 136
+  },
+  {
+    "offset": 81152,
+    "assembly": "    ldr r0,=0x2000255f\n    ldr r0,[r0]\n    lsr r0,r0,#16\n    movw r1,#0x4780\n    subs r1,r0,r1\n    cmp r1,#23\n    bls active\n    movw r1,#0x465c\n    subs r0,r0,r1\n    cmp r0,#4\n    ite ls\n    movls r0,#1\n    movhi r0,#0\n    bx lr\n active:\n    movs r0,#1\n    bx lr\n    .align 2\n    .ltorg\n",
+    "size": 44
+  },
+  {
+    "offset": 80512,
+    "assembly": "    push {r4,lr}\n    mov r4,r0\n    bl 0x8013e00\n    strb r0,[r4,#27]\n    ldr r1,=0x200022c5\n    ldrb r0,[r1]\n    strb r0,[r4,#30]\n    ldr r1,=0x20002464\n    ldrb r0,[r1]\n    strb r0,[r4,#31]\n    movs r0,#0\n    strb r0,[r4,#29]\n    bl 0x8013d00\n    cmp r0,#0\n    beq done\n    ldr r1,=0x20002563\n    ldr r1,[r1]\n    movs r0,#0\n    ubfx r1,r1,#8,#8\n    adds r1,#1\n    strb r1,[r4,#29]\n    ldrb r1,[r4,#5]\n    cmp r1,#1\n    beq done\n    cmp r1,#12\n    beq done\n    movs r0,#2\n done:\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 80
+  },
+  {
+    "offset": 80640,
+    "assembly": "    push {r0,r1,r2,r3,r4,lr}\n    ldr r4,=0x20002563\n    bl 0x8013d00\n    cmp r0,#0\n    beq done\n    ldr r0,=0x200022d8\n    ldrh r0,[r0]\n    uxtb r0,r0\n    cmp r0,#255\n    bne done\n    bl 0x8013a00\n    cmp r0,#0\n    beq finish\n    ldr r0,[r4]\n    adds r0,#1\n    str r0,[r4]\n    cmp r0,#768\n    bhs finish\n    bl 0x8012d80\n    movw r1,#11908\n    cmp r0,r1\n    it hi\n    movhi r0,r1\n    ldr r1,=0x200022d4\n    strh r0,[r1]\n    b done\n finish:\n    bl 0x8013c80\n done:\n    pop.w {r0,r1,r2,r3,r4,lr}\n    ldr r2,=0x200022d8\n    push {r4,lr}\n    b.w 0x8002e38\n    .align 2\n    .ltorg\n",
+    "size": 104
+  },
+  {
+    "offset": 80896,
+    "assembly": "    push {r0,r1,r2,r3,r4,lr}\n    bl 0x8013d00\n    cmp r0,#0\n    beq normal\n    ldr r0,=0x20002563\n    ldr r0,[r0]\n    lsr r4,r0,#8\n    cmp r4,#2\n    bhi normal\n    bl 0x8002d16\n    ldr r0,=0x40000018\n    movs r1,#64\n    cmp r4,#0\n    beq send\n    movs r1,#128\n    cmp r4,#1\n    beq send\n    ldr r0,=0x40000818\n    movw r1,#256\n send:\n    str r1,[r0]\n    pop {r0,r1,r2,r3,r4,pc}\n normal:\n    pop.w {r0,r1,r2,r3,r4,lr}\n    b.w 0x8012d00\n    .align 2\n    .ltorg\n",
+    "size": 80
+  },
+  {
+    "offset": 81024,
+    "assembly": "    push {r3,r4,r5,lr}\n    ldr r4,=0x20002563\n    bl 0x8013d00\n    cmp r0,#0\n    beq done\n    bl 0x8013000\n    ldr r1,=0x2000255f\n    str r0,[r1]\n    movs r0,#0\n    str r0,[r4]\n    bl 0x8013a00\n    cmp r0,#0\n    beq dark\n    bl 0x8012d80\n    ldr r1,=0x200022d4\n    strh r0,[r1]\n    ldr r1,=0x200022d0\n    ldrb r1,[r1]\n    cmp r1,#0\n    beq prepare\n    bl 0x8002db4\n prepare:\n    bl 0x8014600\n    b done\n dark:\n    movs r0,#0\n    ldr r1,=0x200022d4\n    strh r0,[r1]\n    bl 0x8002d16\n done:\n    pop {r3,r4,r5,pc}\n    .align 2\n    .ltorg\n",
+    "size": 100
+  },
+  {
+    "offset": 79616,
+    "assembly": "    push {r4,lr}\n    bl 0x8013000\n    lsr r0,r0,#16\n    movw r1,#0x4680\n    subs r0,r0,r1\n    cmp r0,#23\n    bhi none\n    lsr r0,r0,#2\n    pop {r4,pc}\n none:\n    movs r0,#0\n    pop {r4,pc}\n",
+    "size": 32
+  },
+  {
+    "offset": 79680,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    mov r4,r0\n    ldrb r5,[r4,#6]\n    cmp r5,#5\n    bhi invalid\n    ldrb r6,[r4,#7]\n    cmp r6,#3\n    bhi invalid\n    orr r5,r6,r5,lsl #2\n    ldr r7,=0x2000255f\n    ldr r0,[r7]\n    cmp r0,#0\n    beq defaults\n    cmn r0,#1\n    beq defaults\n    bl 0x8013000\n    cmp r0,#0\n    beq occupied\n    mov r6,r0\n    lsr r1,r0,#16\n    movw r2,#0x4653\n    cmp r1,r2\n    it eq\n    uxtbeq r6,r6\n    uxth r6,r6\n    b update\n defaults:\n    bl 0x8012b80\n    mov r6,r0\n update:\n    movw r0,#0x4680\n    orr r0,r0,r5\n    orr r6,r6,r0,lsl #16\n    str r6,[r7]\n    ldr r1,=0x200022d2\n    movs r0,#0\n    strh r0,[r1]\n    cmp r5,#4\n    blo ordinary\n    bl 0x8014600\n    b success\n ordinary:\n    bl 0x8012d80\n    ldr r1,=0x200022d4\n    strh r0,[r1]\n success:\n    movs r0,#0\n    pop {r3,r4,r5,r6,r7,pc}\n invalid:\n    movs r0,#1\n    pop {r3,r4,r5,r6,r7,pc}\n occupied:\n    movs r0,#2\n    pop {r3,r4,r5,r6,r7,pc}\n    .align 2\n    .ltorg\n",
+    "size": 148
+  },
+  {
+    "offset": 80128,
+    "assembly": "    push {r4,lr}\n    bl 0x8013d00\n    cmp r0,#0\n    bne skip\n    bl 0x8013700\n    cmp r0,#0\n    bne spatial\n    pop.w {r4,lr}\n    push {r4,lr}\n    bl 0x8007964\n    b.w 0x8002dba\n spatial:\n    bl 0x8014600\n skip:\n    pop {r4,pc}\n",
+    "size": 42
+  },
+  {
+    "offset": 79360,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    cmp r1,#32\n    bne fallback\n    ldrb r2,[r0]\n    cmp r2,#0x15\n    bne fallback\n    ldrb r2,[r0,#1]\n    cmp r2,#0x4c\n    bne fallback\n    ldrb r2,[r0,#2]\n    cmp r2,#0x46\n    bne fallback\n    ldrb r2,[r0,#3]\n    cmp r2,#0x42\n    bne fallback\n    ldrb r6,[r0,#4]\n    cmp r6,#1\n    beq read\n    cmp r6,#2\n    bne fallback\n read:\n    mov r4,r0\n    mov r5,r1\n    movs r7,#0\n    cmp r6,#1\n    beq respond\n    bl 0x8002564\n    cmp r0,#1\n    bne not_wired\n    movs r0,#0x53\n    bl 0x800d26c\n    cmp r0,#0\n    beq queue_full\n    movs r7,#1\n    b respond\n not_wired:\n    movs r7,#2\n    b respond\n queue_full:\n    movs r7,#3\n respond:\n    orr r6,r6,#0x80\n    strb r6,[r4,#4]\n    strb r7,[r4,#27]\n    ldr r3,=0x200011d0\n    ldrb r2,[r3]\n    strb r2,[r4,#6]\n    movs r6,#0\n    cmp r2,#100\n    bhi power\n    movs r6,#1\n power:\n    ldr r3,=0x40000810\n    ldr r3,[r3]\n    tst r3,#0x8000\n    beq full\n    orr r6,r6,#2\n full:\n    ldr r3,=0x40000c10\n    ldr r3,[r3]\n    tst r3,#4\n    beq state\n    orr r6,r6,#4\n state:\n    strb r6,[r4,#5]\n    ldr r3,=0x20002420\n    ldrb r2,[r3]\n    strb r2,[r4,#7]\n    mov r0,r4\n    mov r1,r5\n    bl 0x80029ac\n    movs r0,#1\n    pop {r3,r4,r5,r6,r7,pc}\n fallback:\n    pop.w {r3,r4,r5,r6,r7,lr}\n    push {r4,r5,r6,lr}\n    ldrb r3,[r0]\n    b.w 0x8005364\n    .align 2\n    .ltorg\n",
+    "size": 208
+  },
+  {
+    "offset": 81664,
+    "assembly": "    ldr r1,=0x2000255f\n    ldr r0,[r1]\n    lsr r1,r0,#16\n    movw r2,#0x4780\n    subs r1,r1,r2\n    cmp r1,#23\n    bhi old_test\n    bic r0,r0,#0x1000000\n old_test:\n    lsr r1,r0,#16\n    movw r2,#0x4660\n    cmp r1,r2\n    bne extended_test\n    movt r0,#0x4653\n    b normalized\n extended_test:\n    bic r1,r1,#3\n    movw r2,#0x465c\n    cmp r1,r2\n    bne normalized\n    bic r0,r0,#0x80000\n normalized:\n    uxtb r1,r0\n    cmp r1,#100\n    bhi invalid\n    bic r1,r0,#255\n    ldr r2,=0x46534c00\n    cmp r1,r2\n    beq done\n    lsr r1,r0,#16\n    movw r2,#0x4680\n    subs r2,r1,r2\n    cmp r2,#23\n    bls settings\n    bic r1,r1,#3\n    movw r2,#0x4654\n    cmp r1,r2\n    bne invalid\n settings:\n    ubfx r1,r0,#8,#7\n    cmp r1,#100\n    bls done\n invalid:\n    movs r0,#0\n done:\n    bx lr\n    .align 2\n    .ltorg\n",
+    "size": 136
+  },
+  {
+    "offset": 77952,
+    "assembly": "    push {r4,lr}\n    bl 0x8013000\n    lsr r1,r0,#16\n    movw r2,#0x4680\n    subs r2,r1,r2\n    cmp r2,#23\n    bls settings\n    bic r1,r1,#3\n    movw r2,#0x4654\n    cmp r1,r2\n    bne defaults\n settings:\n    ubfx r1,r0,#15,#1\n    ubfx r0,r0,#8,#7\n    pop {r4,pc}\n defaults:\n    movs r0,#0\n    movs r1,#0\n    pop {r4,pc}\n",
+    "size": 52
+  },
+  {
+    "offset": 78080,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    mov r4,r0\n    ldrb r5,[r4,#5]\n    cmp r5,#12\n    beq zone_test\n    cmp r5,#11\n    beq animation\n    cmp r5,#9\n    blo invalid\n    cmp r5,#10\n    bhi invalid\n    ldrb r6,[r4,#7]\n    cmp r6,#100\n    bhi invalid\n    ldrb r0,[r4,#6]\n    cmp r0,#1\n    bhi invalid\n    orr r6,r6,r0,lsl #7\n    ldr r1,=0x2000255f\n    ldr r0,[r1]\n    cmp r0,#0\n    beq update\n    cmn r0,#1\n    beq update\n    bl 0x8013000\n    cmp r0,#0\n    beq occupied\n update:\n    movw r7,#0x4681\n    bl 0x8013000\n    lsr r1,r0,#16\n    movw r2,#0x4680\n    subs r2,r1,r2\n    cmp r2,#23\n    it ls\n    movls r7,r1\n    bl 0x8012b80\n    orr r6,r0,r6,lsl #8\n    orr r6,r6,r7,lsl #16\n    ldr r3,=0x2000255f\n    cmp r5,#10\n    bne preview\n    eor r0,r6,#1\n    str r0,[r3]\n    movs r0,#0x17\n    mov r1,r6\n    bl 0x80072c0\n preview:\n    ldr r3,=0x2000255f\n    str r6,[r3]\n    movs r0,#0\n    pop {r3,r4,r5,r6,r7,pc}\n zone_test:\n    mov r0,r4\n    bl 0x8013d40\n    pop {r3,r4,r5,r6,r7,pc}\n animation:\n    mov r0,r4\n    bl 0x8013740\n    pop {r3,r4,r5,r6,r7,pc}\n invalid:\n    movs r0,#1\n    pop {r3,r4,r5,r6,r7,pc}\n occupied:\n    movs r0,#2\n    pop {r3,r4,r5,r6,r7,pc}\n    .align 2\n    .ltorg\n",
+    "size": 180
+  },
+  {
+    "offset": 78336,
+    "assembly": "    push {r4,lr}\n    mov r4,r0\n    bl 0x8013080\n    cmp r1,#0\n    beq original\n    bl 0x8012d80\n    movs r4,#255\n    mul r0,r0,r4\n    movw r1,#64770\n    udiv r0,r0,r1\n    pop {r4,pc}\n original:\n    mov r0,r4\n    pop {r4,pc}\n",
+    "size": 38
+  },
+  {
+    "offset": 78464,
+    "assembly": "    push {r4,lr}\n    bl 0x8013080\n    cmp r0,#0\n    beq no\n    ldr r1,=0x40000810\n    ldr r1,[r1]\n    tst r1,#0x8000\n    bne no\n    ldr r1,=0x200011d0\n    ldrb r1,[r1]\n    cmp r1,#100\n    bhi no\n    cmp r1,r0\n    bhi no\n    movs r0,#1\n    pop {r4,pc}\n no:\n    movs r0,#0\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 56
+  },
+  {
+    "offset": 78592,
+    "assembly": "    push {r4,lr}\n    bl 0x8013000\n    lsr r1,r0,#16\n    movw r2,#0x4680\n    subs r2,r1,r2\n    cmp r2,#23\n    bls reset\n    bic r1,r1,#3\n    movw r2,#0x4654\n    cmp r1,r2\n    bne done\n reset:\n    uxtb r1,r0\n    ldr r0,=0x46534c00\n    orr r1,r1,r0\n    ldr r3,=0x2000255f\n    eor r0,r1,#1\n    str r0,[r3]\n    movs r0,#0x17\n    bl 0x80072c0\n    bl 0x8012d80\n    ldr r1,=0x200022d4\n    strh r0,[r1]\n done:\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 80
+  },
+  {
+    "offset": 76288,
+    "assembly": "    push {r3,r4,r5,r6,r7,lr}\n    mov r4,r0\n    ldrb r5,[r4,#5]\n    cmp r5,#9\n    bhs advanced\n    cmp r5,#8\n    beq editing\n    cmp r5,#6\n    beq lease\n    cmp r5,#4\n    blo invalid\n    cmp r5,#5\n    bhi invalid\n    ldrb r6,[r4,#7]\n    cmp r6,#100\n    bhi invalid\n    ldr r7,=0x2000255f\n    ldr r0,[r7]\n    cmp r0,#0\n    beq legacy\n    cmn r0,#1\n    beq legacy\n    bl 0x8013000\n    cmp r0,#0\n    beq occupied\n    bic r0,r0,#255\n    orr r6,r6,r0\n    b update\n legacy:\n    ldr r0,=0x46534c00\n    orr r6,r6,r0\n update:\n    cmp r5,#5\n    bne preview\n    eor r0,r6,#1\n    str r0,[r7]\n    movs r0,#0x17\n    mov r1,r6\n    bl 0x80072c0\n preview:\n    str r6,[r7]\n    uxtb r0,r6\n    cmp r0,#0\n    it ne\n    movne r0,#4\n    bl 0x8007a84\n    ldr r0,=0x200044f2\n    ldrb r0,[r0]\n    tst r0,#2\n    beq success\n    bl 0x8002db4\n    b success\n lease:\n    ldrb r0,[r4,#6]\n    cmp r0,#1\n    bhi invalid\n    cbz r0,clear\n    ldr r1,=0x20002420\n    ldrb r1,[r1]\n    cbnz r1,lease_time\n    ldr r1,=0x20002432\n    ldrb r1,[r1]\n    cbnz r1,lease_time\n    ldr r1,=0x200022c5\n    ldrb r1,[r1]\n    cbnz r1,lease_time\n    ldr r1,=0x20002464\n    ldrb r0,[r1]\n    cbz r0,lease_time\n    movs r0,#0\n    strb r0,[r1]\n    movs r0,#3\n    bl 0x8002680\n lease_time:\n    bl 0x8009180\n    movw r1,#15000\n    adds r0,r0,r1\n    bic r0,r0,#0x80000000\n    cmp r0,#0\n    it eq\n    mvneq r0,#0x80000000\n clear:\n    ldr r1,=0x20002563\n    str r0,[r1]\n success:\n    movs r0,#0\n    pop {r3,r4,r5,r6,r7,pc}\n advanced:\n    mov r0,r4\n    bl 0x8013100\n    pop {r3,r4,r5,r6,r7,pc}\n editing:\n    mov r0,r4\n    bl 0x8012e00\n    pop {r3,r4,r5,r6,r7,pc}\n invalid:\n    movs r0,#1\n    pop {r3,r4,r5,r6,r7,pc}\n occupied:\n    movs r0,#2\n    pop {r3,r4,r5,r6,r7,pc}\n    .align 2\n    .ltorg\n",
+    "size": 296
+  },
+  {
+    "offset": 76672,
+    "assembly": "    push {r4,lr}\n    bl 0x8013000\n    cmp r0,#0\n    beq fallback\n    uxtb r0,r0\n    b done\n fallback:\n    ldr r1,=0x200044f2\n    ldrb r0,[r1]\n    lsrs r0,r0,#3\n    movs r1,#25\n    muls r0,r1,r0\n done:\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 36
+  },
+  {
+    "offset": 77696,
+    "assembly": "    push {r4,lr}\n    mov r4,r0\n    bl 0x80023fc\n    uxtb r0,r0\n    cmp r0,#6\n    bne scale\n    bl 0x8012f00\n    cmp r0,#2\n    blo scale\n    movs r0,#0\n    pop {r4,pc}\n scale:\n    bl 0x8013000\n    cmp r0,#0\n    beq original\n    uxtb r0,r0\n    mul r0,r0,r4\n    movs r1,#100\n    udiv r0,r0,r1\n    pop {r4,pc}\n original:\n    mov r0,r4\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 60
+  },
+  {
+    "offset": 77568,
+    "assembly": "    push {r4,lr}\n    ldr r1,=0x20002420\n    ldrb r0,[r1]\n    ldrb r2,[r1,#18]\n    orrs r0,r2\n    bne none\n    ldr r1,=0x20002563\n    ldr r4,[r1]\n    cbz r4,none\n    cmp r4,#0x80000000\n    bne live\n    pop.w {r4,lr}\n    b.w 0x8012dc0\n live:\n    bl 0x8009180\n    subs r0,r4,r0\n    bic r0,r0,#0x80000000\n    movw r1,#15000\n    cmp r0,r1\n    bhi none\n    cmp r0,#0\n    beq none\n    lsrs r0,r4,#31\n    adds r0,r0,#1\n    pop {r4,pc}\n none:\n    movs r0,#0\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 84
+  },
+  {
+    "offset": 77312,
+    "assembly": "    push {r4,lr}\n    ldrb r4,[r0,#6]\n    cmp r4,#2\n    bhi invalid\n    movs r0,#0\n    cbz r4,release\n    bl 0x8009180\n    movw r1,#15000\n    adds r0,r0,r1\n    bic r0,r0,#0x80000000\n    cmp r0,#0\n    it eq\n    mvneq r0,#0x80000000\n    cmp r4,#2\n    it eq\n    orreq r0,r0,#0x80000000\n clear:\n    ldr r1,=0x20002563\n    str r0,[r1]\n    ldr r1,=0x20002420\n    ldrb r0,[r1]\n    ldrb r2,[r1,#18]\n    orrs r0,r2\n    bne success\n    bl 0x80023fc\n    uxtb r0,r0\n    cmp r0,#6\n    bne success\n    ldr r0,=0x200044f2\n    ldrb r0,[r0]\n    lsrs r0,r0,#3\n    cmp r0,#4\n    bhi success\n    bl 0x8002d30\n    b success\n release:\n    ldr r1,=0x20002563\n    ldr r0,[r1]\n    movs r2,#0\n    cmp r0,#0\n    it mi\n    movmi r2,#0x80000000\n    str r2,[r1]\n success:\n    movs r0,#0\n    pop {r4,pc}\n invalid:\n    movs r0,#1\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 136
+  },
+  {
+    "offset": 76928,
+    "assembly": "    push {r4,lr}\n    ldr r1,=0x2000255f\n    movs r0,#0\n    str r0,[r1,#4]\n    bl 0x8007898\n    b.w 0x80078ca\n    .align 2\n    .ltorg\n",
+    "size": 20
+  },
+  {
+    "offset": 77056,
+    "assembly": "    push {r0,r1,r2,r3,r4,lr}\n    ldr r0,=0x20002563\n    ldr r0,[r0]\n    cmp r0,#0\n    bpl normal\n    bl 0x80023fc\n    uxtb r0,r0\n    cmp r0,#6\n    bne normal\n    bl 0x8012f00\n    cmp r0,#2\n    blo normal\n    pop.w {r0,r1,r2,r3,r4,lr}\n    b.w 0x8002d16\n normal:\n    pop.w {r0,r1,r2,r3,r4,lr}\n    b.w 0x8014500\n    .align 2\n    .ltorg\n",
+    "size": 56
+  },
+  {
+    "offset": 76800,
+    "assembly": "    push {r0,r1,r2,lr}\n    mov r0,r3\n    bl 0x8012f80\n    mov r3,r0\n    pop.w {r0,r1,r2,lr}\n    strh r3,[r2]\n    push {r0,r1,r2,r3,r4,lr}\n    bl 0x8014600\n    pop.w {r0,r1,r2,r3,r4,lr}\n    push {r0,r1,r2,lr}\n    bl 0x80023fc\n    uxtb r0,r0\n    cmp r0,#6\n    bne normal_level\n    bl 0x8012f00\n    cmp r0,#2\n    it hs\n    movhs r4,#0\n normal_level:\n    pop.w {r0,r1,r2,lr}\n    ldrb r3,[r5]\n    b.w 0x8002d5c\n",
+    "size": 60
+  },
+  {
+    "offset": 77120,
+    "assembly": "    push {r0,r1,r2,lr}\n    mov r0,r3\n    bl 0x8012f80\n    mov r3,r0\n    pop.w {r0,r1,r2,lr}\n    strh r3,[r2]\n    pop {r4,pc}\n",
+    "size": 18
+  },
+  {
+    "offset": 77184,
+    "assembly": "    push {r4,lr}\n    mov r4,r0\n    ldr r0,=0x200044f2\n    ldrb r0,[r0]\n    lsrs r0,r0,#3\n    cmp r0,#4\n    bhi zero\n    adr r1,peaks\n    ldrh r0,[r1,r0,lsl #1]\n    bl 0x8012f80\n    pop {r4,pc}\n zero:\n    movs r0,#0\n    pop {r4,pc}\n    .align 2\n peaks:\n    .hword 0,2847,11908,31250,64770\n    .align 2\n    .ltorg\n",
+    "size": 48
+  },
+  {
+    "offset": 77248,
+    "assembly": "    push {r4,lr}\n    ldr r1,=0x200022c5\n    ldrb r0,[r1]\n    cmp r0,#3\n    beq clear\n    bl 0x80128c0\n    ubfx r4,r0,#10,#12\n    cmp r4,#0\n    beq clear\n    movw r1,#1000\n    mul r4,r4,r1\n    bl 0x800693c\n    cmp r0,r4\n    blo clear\n    movs r0,#3\n    pop {r4,pc}\n clear:\n    ldr r1,=0x20002563\n    movs r0,#0\n    str r0,[r1]\n    pop {r4,pc}\n    .align 2\n    .ltorg\n",
+    "size": 64
+  },
+  {
+    "offset": 75264,
+    "assembly": "mov r1, r5",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75266,
+    "assembly": "mov r0, r4",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75268,
+    "assembly": "pop.w {r3, r4, r5, lr}",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75272,
+    "assembly": "push {r4, r5, r6, r7, lr}",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75274,
+    "assembly": "sub sp, #0x4c",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75276,
+    "assembly": "mov r4, r0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75278,
+    "assembly": "mov r5, r1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75280,
+    "assembly": "movs r6, #0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75282,
+    "assembly": "cmp r1, #0x1f",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75284,
+    "assembly": "beq 0x8012630",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75286,
+    "assembly": "cmp r1, #0x20",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75288,
+    "assembly": "beq 0x8012626",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75290,
+    "assembly": "cmp r1, #0x21",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75292,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75294,
+    "assembly": "ldrb r2, [r4]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75296,
+    "assembly": "cmp r2, #3",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75298,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75300,
+    "assembly": "b 0x801262c",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75302,
+    "assembly": "ldrb r2, [r4]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75304,
+    "assembly": "cmp r2, #3",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75306,
+    "assembly": "bne 0x8012630",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75308,
+    "assembly": "adds r4, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75310,
+    "assembly": "movs r6, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75312,
+    "assembly": "ldrb r2, [r4]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75314,
+    "assembly": "cmp r2, #0x15",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75316,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75318,
+    "assembly": "ldrb r2, [r4, #1]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75320,
+    "assembly": "cmp r2, #0x4c",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75322,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75324,
+    "assembly": "ldrb r2, [r4, #2]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75326,
+    "assembly": "cmp r2, #0x46",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75328,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75330,
+    "assembly": "ldrb r2, [r4, #3]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75332,
+    "assembly": "cmp r2, #0x42",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75334,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75336,
+    "assembly": "ldrb r2, [r4, #4]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75338,
+    "assembly": "cmp r2, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75340,
+    "assembly": "bne 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75342,
+    "assembly": "bl 0x80023fc",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75346,
+    "assembly": "uxtb r0, r0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75348,
+    "assembly": "cmp r0, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75350,
+    "assembly": "blo 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75352,
+    "assembly": "cmp r0, #5",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75354,
+    "assembly": "bhi 0x80126ba",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75356,
+    "assembly": "mov r0, sp",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75358,
+    "assembly": "movs r2, #0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75360,
+    "assembly": "ldrb r3, [r4, r2]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75362,
+    "assembly": "strb r3, [r0, r2]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75364,
+    "assembly": "adds r2, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75366,
+    "assembly": "cmp r2, #0x1f",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75368,
+    "assembly": "bne 0x8012660",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75370,
+    "assembly": "movs r3, #0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75372,
+    "assembly": "strb.w r3, [sp, #0x1f]",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75376,
+    "assembly": "strb.w r3, [sp, #0xc]",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75380,
+    "assembly": "strb.w r5, [sp, #0xd]",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75384,
+    "assembly": "strb.w r6, [sp, #0xe]",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75388,
+    "assembly": "movs r3, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75390,
+    "assembly": "strb.w r3, [sp, #0xf]",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75394,
+    "assembly": "mov r6, sp",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75396,
+    "assembly": "add r7, sp, #0x20",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75398,
+    "assembly": "mov r0, r6",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75400,
+    "assembly": "movs r1, #0x20",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75402,
+    "assembly": "bl 0x8005360",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75406,
+    "assembly": "movs r3, #0x1f",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75408,
+    "assembly": "strb r3, [r6, #0xc]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75410,
+    "assembly": "mov r0, r6",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75412,
+    "assembly": "movs r1, #0x1f",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75414,
+    "assembly": "bl 0x800db7c",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75418,
+    "assembly": "movs r3, #3",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75420,
+    "assembly": "strb r3, [r6, #0xc]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75422,
+    "assembly": "strb r3, [r7]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75424,
+    "assembly": "adds r0, r7, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75426,
+    "assembly": "movs r2, #0",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75428,
+    "assembly": "ldrb r3, [r6, r2]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75430,
+    "assembly": "strb r3, [r0, r2]",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75432,
+    "assembly": "adds r2, #1",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75434,
+    "assembly": "cmp r2, #0x1f",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75436,
+    "assembly": "bne 0x80126a4",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75438,
+    "assembly": "mov r0, r7",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75440,
+    "assembly": "movs r1, #0x20",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75442,
+    "assembly": "bl 0x800db7c",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75446,
+    "assembly": "add sp, #0x4c",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75448,
+    "assembly": "pop {r4, r5, r6, r7, pc}",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75450,
+    "assembly": "subs r4, r4, r6",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75452,
+    "assembly": "mov r0, r4",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75454,
+    "assembly": "mov r1, r5",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75456,
+    "assembly": "add sp, #0x4c",
+    "size": 2,
+    "direct": true
+  },
+  {
+    "offset": 75458,
+    "assembly": "pop.w {r4, r5, r6, r7, lr}",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 75462,
+    "assembly": "b.w 0x8008b12",
+    "size": 4,
+    "direct": true
+  },
+  {
+    "offset": 8694,
+    "assembly": "b.w 0x8012600",
+    "size": 4
+  },
+  {
+    "offset": 16860,
+    "assembly": "b.w 0x8012400",
+    "size": 4
+  },
+  {
+    "offset": 74752,
+    "assembly": "b.w 0x8013400",
+    "size": 4
+  },
+  {
+    "offset": 75008,
+    "assembly": "b.w 0x8013600",
+    "size": 4
+  },
+  {
+    "offset": 77824,
+    "assembly": "b.w 0x8013f00",
+    "size": 4
+  },
+  {
+    "offset": 21344,
+    "assembly": "b.w 0x8012700",
+    "size": 4
+  },
+  {
+    "offset": 9944,
+    "assembly": "b.w 0x8012900",
+    "size": 4
+  },
+  {
+    "offset": 20230,
+    "assembly": "b.w 0x8012980",
+    "size": 4
+  },
+  {
+    "offset": 11520,
+    "assembly": "b.w 0x8013c00",
+    "size": 4
+  },
+  {
+    "offset": 11828,
+    "assembly": "b.w 0x8014100",
+    "size": 4
+  },
+  {
+    "offset": 11608,
+    "assembly": "b.w 0x8012c00",
+    "size": 4
+  },
+  {
+    "offset": 11770,
+    "assembly": "b.w 0x8012d40",
+    "size": 4
+  },
+  {
+    "offset": 11700,
+    "assembly": "b.w 0x8013900; nop",
+    "size": 6
+  },
+  {
+    "offset": 30916,
+    "assembly": "b.w 0x8012c80; nop",
+    "size": 6
+  },
+  {
+    "offset": 14750,
+    "assembly": "bl 0x8012940; nop",
+    "size": 6
+  }
+]

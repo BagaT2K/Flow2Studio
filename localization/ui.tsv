@@ -1,0 +1,356 @@
+УСТРОЙСТВА|DEVICES|设备|デバイス|기기|DISPOSITIVOS|GERÄTE
+Обновить список|Refresh devices|刷新设备|デバイスを更新|기기 새로 고침|Actualizar dispositivos|Geräte aktualisieren
+О программе|About|关于|このアプリについて|정보|Acerca de|Über die App
+Настройки приложения|App settings|应用设置|アプリ設定|앱 설정|Ajustes de la aplicación|App-Einstellungen
+Сменить тему|Switch theme|切换主题|テーマを切り替え|테마 전환|Cambiar tema|Design wechseln
+Всё начинается|It all starts|一切从连接|すべては接続|모든 것은 연결에서|Todo empieza|Alles beginnt
+с подключения.|with a connection.|开始。|から始まります。|시작됩니다.|con una conexión.|mit einer Verbindung.
+Подключите Lofree Flow 2 кабелем, через приёмник|Connect your Lofree Flow 2 via USB, receiver|通过 USB、接收器|Lofree Flow 2 を USB、レシーバー、|USB, 수신기 또는 Bluetooth로|Conecta tu Lofree Flow 2 por USB, receptor|Verbinde deine Lofree Flow 2 per USB, Empfänger
+или Bluetooth. Здесь появится ваша клавиатура.|or Bluetooth. Your keyboard will appear here.|或蓝牙连接 Lofree Flow 2。键盘将在此显示。|Bluetooth で接続すると、ここに表示されます。|Lofree Flow 2를 연결하면 여기에 표시됩니다.|o Bluetooth. Tu teclado aparecerá aquí.|oder Bluetooth. Deine Tastatur erscheint hier.
+Проверить подключение|Check connection|检查连接|接続を確認|연결 확인|Comprobar conexión|Verbindung prüfen
+68 / 84 / 100 · Устройства появятся после обнаружения|68 / 84 / 100 · Detected devices appear here|68 / 84 / 100 · 检测到的设备将在此显示|68 / 84 / 100 · 検出したデバイスを表示|68 / 84 / 100 · 감지된 기기가 표시됩니다|68 / 84 / 100 · Aquí aparecen los dispositivos detectados|68 / 84 / 100 · Erkannte Geräte erscheinen hier
+Подключено питание|Power connected|已接通电源|電源接続中|전원 연결됨|Alimentación conectada|Stromversorgung angeschlossen
+Запрос заряда…|Reading battery…|正在读取电量…|バッテリーを読み取り中…|배터리 확인 중…|Leyendo batería…|Akkustand wird gelesen…
+Обновить ↻|Refresh ↻|刷新 ↻|更新 ↻|새로 고침 ↻|Actualizar ↻|Aktualisieren ↻
+Один раз подготовим клавиатуру.|Set up your keyboard once.|首次设置键盘。|最初にキーボードを設定します。|처음 한 번 키보드를 설정하세요.|Configura tu teclado una vez.|Richte deine Tastatur einmalig ein.
+Прошивка Studio не подтверждена · настройки заблокированы|Studio firmware unverified · settings locked|Studio 固件未验证 · 设置已锁定|Studio ファームウェア未確認 · 設定はロック中|Studio 펌웨어 미확인 · 설정 잠김|Firmware Studio sin verificar · ajustes bloqueados|Studio-Firmware unbestätigt · Einstellungen gesperrt
+Проверяем подключение…|Checking connection…|正在检查连接…|接続を確認中…|연결 확인 중…|Comprobando conexión…|Verbindung wird geprüft…
+Подключение по USB|USB connection|USB 连接|USB 接続|USB 연결|Conexión USB|USB-Verbindung
+Копия и подготовка|Back up and prepare|备份与准备|バックアップと準備|백업 및 준비|Copia y preparación|Sichern und vorbereiten
+Настройка как удобно|Make it yours|个性化设置|自分好みに設定|원하는 대로 설정|Configúralo a tu gusto|Nach Wunsch einstellen
+Подготовка клавиатуры|Keyboard setup|键盘设置|キーボードの設定|키보드 설정|Configuración del teclado|Tastatur einrichten
+Проверяем…|Checking…|正在检查…|確認中…|확인 중…|Comprobando…|Wird geprüft…
+Оставьте кабель подключённым до завершения. Клавиатура временно не будет печатать.|Keep USB connected until completion. Typing will be temporarily unavailable.|完成前请保持 USB 连接。键盘将暂时无法输入。|完了まで USB を接続したままにしてください。一時的に入力できなくなります。|완료될 때까지 USB를 연결해 두세요. 일시적으로 입력할 수 없습니다.|Mantén el USB conectado hasta terminar. El teclado dejará de escribir temporalmente.|Lass USB bis zum Abschluss angeschlossen. Die Tastatur kann vorübergehend nicht schreiben.
+Подготовить клавиатуру|Set up keyboard|设置键盘|キーボードを設定|키보드 설정|Preparar teclado|Tastatur einrichten
+Заводская прошивка|Install Stock Firmware|安装原厂固件|純正ファームウェアをインストール|순정 펌웨어 설치|Instalar firmware de fábrica|Original-Firmware installieren
+Установить Lofree 0.14|Install Lofree 0.14|安装 Lofree 0.14|Lofree 0.14 をインストール|Lofree 0.14 설치|Instalar Lofree 0.14|Lofree 0.14 installieren
+Восстановить из копии|Restore from Backup|从备份恢复|バックアップから復元|백업에서 복원|Restaurar desde copia|Aus Sicherung wiederherstellen
+Резервные копии ↗|Backups ↗|备份 ↗|バックアップ ↗|백업 ↗|Copias de seguridad ↗|Sicherungen ↗
+Возврат прошивки выполняется по USB, из проверенного образа. Перед записью обязательно сохраняется текущая копия.|Firmware is restored over USB from a verified image. The current firmware is backed up first.|固件通过 USB 从已验证的镜像恢复，写入前会备份当前固件。|検証済みイメージから USB 経由で復元します。書き込み前に現在のファームウェアをバックアップします。|검증된 이미지로 USB를 통해 복원합니다. 쓰기 전에 현재 펌웨어를 백업합니다.|El firmware se restaura por USB desde una imagen verificada. Antes se guarda una copia del actual.|Die Firmware wird per USB aus einem geprüften Abbild wiederhergestellt. Zuvor wird die aktuelle Firmware gesichert.
+Выделять изменённые клавиши|Highlight remapped keys|突出显示已改键|変更したキーを強調|변경한 키 강조|Resaltar teclas modificadas|Geänderte Tasten hervorheben
+Светлые|Light|浅色|ライト|밝게|Claras|Hell
+Тёмные|Dark|深色|ダーク|어둡게|Oscuras|Dunkel
+Обзор|Overview|概览|概要|개요|Resumen|Übersicht
+Подсветка|Lighting|背光|バックライト|백라이트|Iluminación|Beleuchtung
+Клавиши|Keys|按键|キー|키|Teclas|Tasten
+Макросы|Macros|宏|マクロ|매크로|Macros|Makros
+Отменить ожидающие изменения|Cancel pending changes|取消待应用的更改|保留中の変更を取り消す|대기 중인 변경 취소|Cancelar cambios pendientes|Ausstehende Änderungen verwerfen
+Отменить изменение|Undo change|撤销更改|変更を元に戻す|변경 실행 취소|Deshacer cambio|Änderung rückgängig
+Повторить изменение|Redo change|重做更改|変更をやり直す|변경 다시 실행|Rehacer cambio|Änderung wiederholen
+На связи.|Connected.|已连接。|接続中。|연결됨.|Conectado.|Verbunden.
+Нужный уровень света.|Light, just right.|恰到好处的亮度。|ちょうどよい明るさ。|딱 맞는 밝기.|La luz que necesitas.|Genau das richtige Licht.
+Белая подсветка. Точная настройка яркости от 0 до 100%.|White backlight. Precise brightness from 0 to 100%.|白色背光。亮度可在 0–100% 之间精确调节。|白色バックライト。明るさを 0～100% で細かく調整。|흰색 백라이트. 밝기를 0~100%로 정밀하게 조절하세요.|Luz blanca. Brillo preciso del 0 al 100 %.|Weiße Beleuchtung. Helligkeit präzise von 0 bis 100 % einstellen.
+Яркость|Brightness|亮度|明るさ|밝기|Brillo|Helligkeit
+Выключено|Off|关闭|オフ|꺼짐|Apagado|Aus
+Поведение|Effect|效果|エフェクト|효과|Efecto|Effekt
+Постоянное свечение|Steady|常亮|常時点灯|항상 켜짐|Luz fija|Dauerlicht
+Дыхание|Breathing|呼吸|ブリージング|숨쉬기|Respiración|Atmen
+Волна сверху вниз|Wave down|向下波浪|上から下へウェーブ|아래로 흐르는 물결|Onda descendente|Welle nach unten
+Волна снизу вверх|Wave up|向上波浪|下から上へウェーブ|위로 흐르는 물결|Onda ascendente|Welle nach oben
+Волна туда-обратно|Wave back and forth|往返波浪|往復ウェーブ|왕복 물결|Onda de ida y vuelta|Welle hin und zurück
+Плавный перелив|Smooth flow|平滑渐变|なめらかな流れ|부드러운 흐름|Transición suave|Sanfter Verlauf
+Водопад|Waterfall|瀑布|ウォーターフォール|폭포|Cascada|Wasserfall
+Скорость|Speed|速度|速度|속도|Velocidad|Geschwindigkeit
+Медленно|Slow|慢速|遅い|느리게|Lenta|Langsam
+Средне|Medium|中速|普通|보통|Media|Mittel
+Быстро|Fast|快速|速い|빠르게|Rápida|Schnell
+Очень быстро|Very fast|极快|とても速い|매우 빠르게|Muy rápida|Sehr schnell
+Сначала прочитаем текущие настройки.|Read current settings first.|先读取当前设置。|まず現在の設定を読み取ります。|먼저 현재 설정을 읽습니다.|Primero se leen los ajustes actuales.|Zuerst werden die aktuellen Einstellungen gelesen.
+Подсветка и сон|Lighting and sleep|背光与休眠|ライトとスリープ|백라이트 및 절전|Iluminación y reposo|Beleuchtung und Ruhezustand
+Через|After|延迟|待機時間|대기 시간|Después de|Nach
+30 секунд|30 seconds|30 秒|30 秒|30초|30 segundos|30 Sekunden
+1 минуту|1 minute|1 分钟|1 分|1분|1 minuto|1 Minute
+2 минуты|2 minutes|2 分钟|2 分|2분|2 minutos|2 Minuten
+5 минут|5 minutes|5 分钟|5 分|5분|5 minutos|5 Minuten
+10 минут|10 minutes|10 分钟|10 分|10분|10 minutos|10 Minuten
+30 минут|30 minutes|30 分钟|30 分|30분|30 minutos|30 Minuten
+1 час|1 hour|1 小时|1 時間|1시간|1 hora|1 Stunde
+Своё время|Custom|自定义|カスタム|직접 설정|Personalizado|Benutzerdefiniert
+Никогда|Never|永不|しない|사용 안 함|Nunca|Nie
+Секунды|Seconds|秒|秒|초|Segundos|Sekunden
+«Никогда» отключает этот таймер сна. Постоянная подсветка и активная панель быстрее расходуют батарею. Защита при низком заряде сохраняется.|“Never” disables this sleep timer. Continuous lighting and an active touch panel use more battery. Low-battery protection remains active.|“永不”会禁用此休眠计时器。持续背光和触控面板会加快耗电，低电量保护仍然有效。|「しない」はこのタイマーを無効にします。常時点灯とパネルの有効化で電池消費が増えます。低電力保護は維持されます。|“사용 안 함”은 절전 타이머를 끕니다. 조명과 터치 패널을 계속 켜 두면 배터리가 더 빨리 소모됩니다. 저전력 보호는 유지됩니다.|«Nunca» desactiva este temporizador. La iluminación continua y el panel activo gastan más batería. La protección por batería baja se mantiene.|„Nie“ deaktiviert diesen Timer. Dauerlicht und ein aktives Touchpanel verbrauchen mehr Akku. Der Schutz bei niedrigem Akkustand bleibt aktiv.
+Сохранить время|Save timeout|保存时间|時間を保存|시간 저장|Guardar tiempo|Zeit speichern
+Время ещё не прочитано.|Timeout not read yet.|尚未读取时间。|時間は未取得です。|시간을 아직 읽지 않았습니다.|Tiempo aún no leído.|Zeit noch nicht gelesen.
+Сон радиомодуля управляется его собственной прошивкой.|Radio sleep is managed by its own firmware.|无线模块的休眠由其自身固件管理。|無線モジュールのスリープは専用ファームウェアが管理します。|무선 모듈의 절전은 자체 펌웨어가 관리합니다.|El reposo del módulo de radio depende de su propio firmware.|Der Ruhezustand des Funkmoduls wird von dessen Firmware verwaltet.
+Пробуждение от панели|Touch panel wake|触控面板唤醒|パネルでスリープ解除|패널로 깨우기|Activación desde el panel|Aufwecken über das Touchpanel
+Будить клавиатуру движением по панели|Wake keyboard by swiping the panel|滑动面板唤醒键盘|パネルをなぞってキーボードを起こす|패널을 쓸어 키보드 깨우기|Activar el teclado deslizando el panel|Tastatur durch Wischen aufwecken
+При включении сенсор остаётся доступен для пробуждения — это может увеличить расход батареи.|When enabled, the sensor stays available for wake, which may increase battery use.|启用后，传感器保持可唤醒状态，可能增加耗电。|有効時はセンサーが待機するため、電池消費が増える場合があります。|사용하면 센서가 깨우기를 위해 대기하므로 배터리 사용량이 늘 수 있습니다.|Al activarlo, el sensor permanece disponible y puede consumir más batería.|Bei Aktivierung bleibt der Sensor zum Aufwecken bereit. Das kann mehr Akku verbrauchen.
+Индикатор состояния|Status indicator|状态指示灯|ステータスランプ|상태 표시등|Indicador de estado|Statusanzeige
+Индикатор включён|Indicator enabled|启用指示灯|ランプを有効にする|표시등 사용|Indicador activado|Anzeige aktiv
+Яркость как у клавиатуры|Match keyboard brightness|与键盘亮度同步|キーボードの明るさに合わせる|키보드 밝기에 맞추기|Igualar brillo del teclado|Tastaturhelligkeit übernehmen
+Яркость индикатора|Indicator brightness|指示灯亮度|ランプの明るさ|표시등 밝기|Brillo del indicador|Anzeigehelligkeit
+Повторять эффект подсветки|Follow lighting effect|跟随背光效果|ライトのエフェクトに合わせる|백라이트 효과 따르기|Seguir el efecto de luz|Beleuchtungseffekt übernehmen
+Красный индикатор при заряде|Red indicator below|红色指示灯电量阈值|赤色表示の残量しきい値|빨간 표시등 배터리 기준|Indicador rojo con batería|Rote Anzeige bei Akkustand
+Штатный порог|Factory threshold|默认阈值|標準しきい値|기본 기준|Umbral de fábrica|Werksschwelle
+Слой.|Layer.|层。|レイヤー。|레이어.|Capa.|Ebene.
+Выберите слой для редактирования.|Choose a layer to edit.|选择要编辑的层。|編集するレイヤーを選択してください。|편집할 레이어를 선택하세요.|Elige una capa para editar.|Wähle eine Ebene zum Bearbeiten.
+Редактировать слой|Edit layer|编辑层|レイヤーを編集|레이어 편집|Editar capa|Ebene bearbeiten
+Прочитать слой ↻|Read layer ↻|读取层 ↻|レイヤーを読み取る ↻|레이어 읽기 ↻|Leer capa ↻|Ebene lesen ↻
+Раскладка ещё не прочитана.|Layout not read yet.|尚未读取布局。|配列は未取得です。|배열을 아직 읽지 않았습니다.|Distribución aún no leída.|Belegung noch nicht gelesen.
+Сбросить этот слой|Reset this layer|重置此层|このレイヤーをリセット|이 레이어 초기화|Restablecer esta capa|Diese Ebene zurücksetzen
+Сбросить все слои|Reset all layers|重置所有层|全レイヤーをリセット|모든 레이어 초기화|Restablecer todas las capas|Alle Ebenen zurücksetzen
+Назначение клавиши.|Key assignment.|按键分配。|キーの割り当て。|키 할당.|Asignación de tecla.|Tastenzuweisung.
+Выберите клавишу на схеме.|Select a key on the layout.|在布局中选择按键。|配列上のキーを選択してください。|배열에서 키를 선택하세요.|Selecciona una tecla en el esquema.|Wähle eine Taste in der Darstellung.
+Новое назначение|New assignment|新分配|新しい割り当て|새 할당|Nueva asignación|Neue Zuweisung
+Выберите клавишу|Choose a key|选择按键|キーを選択|키 선택|Elige una tecla|Taste wählen
+Назначить|Assign|分配|割り当て|할당|Asignar|Zuweisen
+Назначение сохраняется в клавиатуре и проверяется чтением.|Assignments are saved to the keyboard and verified by readback.|分配会保存到键盘，并通过回读验证。|割り当てをキーボードに保存し、読み戻して検証します。|키보드에 할당을 저장한 뒤 다시 읽어 검증합니다.|La asignación se guarda en el teclado y se verifica al leerla.|Die Zuweisung wird in der Tastatur gespeichert und zurückgelesen.
+Сочетания Fn.|Fn shortcuts.|Fn 组合键。|Fn ショートカット。|Fn 단축키.|Atajos Fn.|Fn-Kombinationen.
+Fn-слой|Fn layer|Fn 层|Fn レイヤー|Fn 레이어|Capa Fn|Fn-Ebene
+Прочитать ↻|Read ↻|读取 ↻|読み取る ↻|읽기 ↻|Leer ↻|Lesen ↻
+Шаблон|Template|模板|テンプレート|템플릿|Plantilla|Vorlage
+Заводской Fn|Factory Fn|默认 Fn|標準 Fn|기본 Fn|Fn de fábrica|Fn ab Werk
+F1–F12 в верхнем ряду|F1–F12 on the top row|顶行 F1–F12|最上段を F1–F12 に|맨 윗줄에 F1–F12|F1–F12 en la fila superior|F1–F12 in der obersten Reihe
+Применить шаблон|Apply template|应用模板|テンプレートを適用|템플릿 적용|Aplicar plantilla|Vorlage anwenden
+Сбросить этот Fn-слой|Reset this Fn layer|重置此 Fn 层|この Fn レイヤーをリセット|이 Fn 레이어 초기화|Restablecer esta capa Fn|Diese Fn-Ebene zurücksetzen
+Выделены клавиши с отдельной Fn-функцией. Пустые позиции наследуют основной слой или отключены.|Keys with dedicated Fn actions are highlighted. Empty positions inherit the base layer or are disabled.|已突出显示具有独立 Fn 功能的按键。空白位置继承主层或已禁用。|専用 Fn 機能を持つキーを強調表示します。空欄は基本レイヤーを継承するか無効です。|별도 Fn 기능이 있는 키를 강조합니다. 빈 위치는 기본 레이어를 따르거나 비활성화됩니다.|Se resaltan las teclas con función Fn propia. Las vacías heredan la capa base o están desactivadas.|Tasten mit eigener Fn-Funktion sind hervorgehoben. Leere Positionen erben die Basisebene oder sind deaktiviert.
+Прочитать макросы ↻|Read macros ↻|读取宏 ↻|マクロを読み取る ↻|매크로 읽기 ↻|Leer macros ↻|Makros lesen ↻
+Макрос|Macro|宏|マクロ|매크로|Macro|Makro
+Записать нажатия|Record keystrokes|录制按键|キー入力を記録|키 입력 녹화|Grabar pulsaciones|Tastenanschläge aufzeichnen
+Остановить запись|Stop recording|停止录制|記録を停止|녹화 중지|Detener grabación|Aufzeichnung stoppen
+Отменить запись|Cancel recording|取消录制|記録を取り消す|녹화 취소|Cancelar grabación|Aufzeichnung verwerfen
+Записывать задержки|Record delays|记录延迟|待ち時間も記録|지연 시간 기록|Grabar pausas|Verzögerungen aufzeichnen
+Начните запись, нажмите нужные клавиши и сочетания, затем остановите. Сохранение в клавиатуру — отдельной кнопкой.|Start recording, press your keys and shortcuts, then stop. Save to the keyboard separately.|开始录制，按下所需按键与组合键后停止。请另行点击保存到键盘。|記録を開始してキーや組み合わせを押し、停止します。キーボードへの保存は別のボタンで行います。|녹화를 시작하고 필요한 키와 조합을 누른 뒤 중지하세요. 키보드 저장은 별도 버튼으로 합니다.|Inicia la grabación, pulsa teclas y combinaciones y deténla. Guarda en el teclado por separado.|Starte die Aufzeichnung, drücke Tasten und Kombinationen und stoppe sie. Speichere danach separat auf der Tastatur.
+Действия макроса|Macro actions|宏操作|マクロの操作|매크로 동작|Acciones de macro|Makroaktionen
+Пауза, мс|Delay, ms|延迟，毫秒|待ち時間（ミリ秒）|지연, ms|Pausa, ms|Pause, ms
+Добавить паузу|Add delay|添加延迟|待ち時間を追加|지연 추가|Añadir pausa|Pause hinzufügen
+Текстовый редактор|Text editor|文本编辑器|テキストエディター|텍스트 편집기|Editor de texto|Texteditor
+Действия, по одному на строке|One action per line|每行一个操作|1 行に 1 操作|한 줄에 동작 하나|Una acción por línea|Eine Aktion pro Zeile
+text — текст ASCII · tap — нажатие · down / up — удержать / отпустить · wait — задержка 1–60000 мс. Клавиши: A–Z, 0–9, ENTER, TAB, SPACE, ESC, LCTRL, LSHIFT, LALT, LGUI, F1–F12, UP, DOWN, LEFT, RIGHT. raw — точные байты существующего макроса.|text — ASCII text · tap — press · down / up — hold / release · wait — delay 1–60000 ms. Keys: A–Z, 0–9, ENTER, TAB, SPACE, ESC, LCTRL, LSHIFT, LALT, LGUI, F1–F12, UP, DOWN, LEFT, RIGHT. raw — exact bytes of an existing macro.|text — ASCII 文本 · tap — 点击 · down / up — 按住/释放 · wait — 延迟 1–60000 毫秒。按键：A–Z、0–9、ENTER、TAB、SPACE、ESC、LCTRL、LSHIFT、LALT、LGUI、F1–F12、UP、DOWN、LEFT、RIGHT。raw — 现有宏的原始字节。|text — ASCII 文字 · tap — 押す · down / up — 押す/離す · wait — 1～60000 ミリ秒待機。キー：A–Z、0–9、ENTER、TAB、SPACE、ESC、LCTRL、LSHIFT、LALT、LGUI、F1–F12、UP、DOWN、LEFT、RIGHT。raw — 既存マクロの生バイト列。|text — ASCII 텍스트 · tap — 누르기 · down / up — 누름/해제 · wait — 1~60000ms 지연. 키: A–Z, 0–9, ENTER, TAB, SPACE, ESC, LCTRL, LSHIFT, LALT, LGUI, F1–F12, UP, DOWN, LEFT, RIGHT. raw — 기존 매크로의 원시 바이트.|text — texto ASCII · tap — pulsar · down / up — mantener/soltar · wait — pausa de 1–60000 ms. Teclas: A–Z, 0–9, ENTER, TAB, SPACE, ESC, LCTRL, LSHIFT, LALT, LGUI, F1–F12, UP, DOWN, LEFT, RIGHT. raw — bytes exactos de un macro existente.|text — ASCII-Text · tap — drücken · down / up — halten/loslassen · wait — 1–60000 ms Pause. Tasten: A–Z, 0–9, ENTER, TAB, SPACE, ESC, LCTRL, LSHIFT, LALT, LGUI, F1–F12, UP, DOWN, LEFT, RIGHT. raw — Originalbytes eines vorhandenen Makros.
+Сохранить макрос ↗|Save macro ↗|保存宏 ↗|マクロを保存 ↗|매크로 저장 ↗|Guardar macro ↗|Makro speichern ↗
+Очистить редактор|Clear editor|清空编辑器|エディターをクリア|편집기 비우기|Vaciar editor|Editor leeren
+Сначала прочитайте макросы. Перед записью сохраняется резервная копия всей памяти.|Read macros first. All memory is backed up before writing.|请先读取宏。写入前会备份全部内存。|先にマクロを読み取ってください。書き込み前に全メモリをバックアップします。|먼저 매크로를 읽으세요. 쓰기 전에 전체 메모리를 백업합니다.|Lee los macros primero. Antes de escribir se guarda toda la memoria.|Lies zuerst die Makros. Vor dem Schreiben wird der gesamte Speicher gesichert.
+Настройки клавиатуры|Keyboard settings|键盘设置|キーボード設定|키보드 설정|Ajustes del teclado|Tastatureinstellungen
+Восстановить все заводские назначения, очистить макросы, вернуть яркость и постоянное свечение, сбросить доступный профиль индикатора и таймера. Сопряжения Bluetooth и прошивка сохраняются.|Restore factory key assignments, clear macros, reset brightness, steady lighting, indicator and timer settings. Bluetooth pairings and firmware are kept.|恢复默认按键分配，清除宏，并重置亮度、常亮、指示灯和计时器设置。蓝牙配对和固件保持不变。|キー割り当てを初期化し、マクロを消去、明るさ・常時点灯・ランプ・タイマーをリセットします。Bluetooth ペアリングとファームウェアは保持します。|키 할당을 초기화하고 매크로, 밝기, 고정 조명, 표시등과 타이머 설정을 초기화합니다. Bluetooth 페어링과 펌웨어는 유지됩니다.|Restaura las teclas de fábrica, borra macros y restablece brillo, luz fija, indicador y temporizador. Se conservan Bluetooth y firmware.|Setzt Tastenbelegungen, Makros, Helligkeit, Dauerlicht, Anzeige und Timer zurück. Bluetooth-Kopplungen und Firmware bleiben erhalten.
+Проверить связь|Check connection|检查连接|接続を確認|연결 확인|Comprobar conexión|Verbindung prüfen
+Сбросить все настройки|Reset all settings|重置所有设置|すべての設定をリセット|모든 설정 초기화|Restablecer todos los ajustes|Alle Einstellungen zurücksetzen
+При глубоком сне радиомодуля запрос с Mac может не дойти — тогда нужна физическая клавиша. Сброс потребует подтверждения.|In deep radio sleep, the Mac request may not reach the keyboard; press a physical key. Reset requires confirmation.|无线模块深度休眠时可能无法接收 Mac 请求；请按下实体按键。重置需要确认。|無線の深いスリープ中は Mac の要求が届かない場合があります。実際のキーを押してください。リセットには確認が必要です。|무선 모듈의 깊은 절전에서는 Mac 요청이 도달하지 않을 수 있습니다. 실제 키를 누르세요. 초기화에는 확인이 필요합니다.|En reposo profundo, la petición del Mac puede no llegar; pulsa una tecla física. El restablecimiento requiere confirmación.|Im tiefen Funk-Ruhezustand erreicht die Mac-Anfrage die Tastatur eventuell nicht. Drücke eine echte Taste. Das Zurücksetzen muss bestätigt werden.
+Настройки|Settings|设置|設定|설정|Ajustes|Einstellungen
+Тема|Theme|主题|テーマ|테마|Tema|Design
+Оформление приложения.|App appearance.|应用外观。|アプリの外観。|앱 모양.|Aspecto de la aplicación.|Darstellung der App.
+Тёмная|Dark|深色|ダーク|어둡게|Oscuro|Dunkel
+Светлая|Light|浅色|ライト|밝게|Claro|Hell
+В строке меню|Menu bar|菜单栏|メニューバー|메뉴 막대|Barra de menús|Menüleiste
+Общие настройки строки меню. При подключённом питании появляется контурная молния.|Global menu bar settings. An outline lightning bolt appears when power is connected.|全局菜单栏设置。连接电源时会显示空心闪电图标。|共通のメニューバー設定。電源接続時に輪郭の稲妻アイコンを表示します。|공통 메뉴 막대 설정입니다. 전원 연결 시 윤곽선 번개 아이콘이 표시됩니다.|Ajustes globales de la barra de menús. Al conectar alimentación aparece un rayo de contorno.|Globale Einstellungen für die Menüleiste. Bei Stromversorgung erscheint ein Blitzsymbol mit Kontur.
+Варианты строки меню|Menu bar styles|菜单栏样式|メニューバーの表示形式|메뉴 막대 스타일|Estilos de la barra de menús|Menüleistenstile
+Клавиатура + проценты|Keyboard + percentage|键盘 + 百分比|キーボード＋パーセント|키보드 + 백분율|Teclado + porcentaje|Tastatur + Prozent
+Компактный знак Flow|Compact Flow logo|简洁 Flow 标志|コンパクトな Flow ロゴ|작은 Flow 로고|Logotipo Flow compacto|Kompaktes Flow-Logo
+Связь во время настройки по 2,4 ГГц|Connection while configuring over 2.4 GHz|通过 2.4 GHz 设置时保持连接|2.4 GHz で設定中の接続|2.4 GHz 설정 중 연결|Conexión al configurar por 2,4 GHz|Verbindung beim Einrichten über 2,4 GHz
+Связь во время настройки|Keep connected while configuring|设置时保持连接|設定中の接続を維持|설정 중 연결 유지|Mantener conexión al configurar|Beim Einrichten verbunden bleiben
+Автообновление заряда|Automatic battery updates|自动更新电量|バッテリー情報を自動更新|배터리 자동 업데이트|Actualizar batería automáticamente|Akkustand automatisch aktualisieren
+← Назад к устройствам|← Back to devices|← 返回设备|← デバイスに戻る|← 기기로 돌아가기|← Volver a dispositivos|← Zurück zu den Geräten
+Flow2Studio — приложение для настройки Lofree Flow 2. Подсветка, индикатор, время сна, назначения клавиш и макросы — в одном месте.|Flow2Studio customizes your Lofree Flow 2. Lighting, indicator, sleep timeout, key assignments and macros — all in one place.|Flow2Studio 用于自定义 Lofree Flow 2。背光、指示灯、休眠时间、按键分配与宏，尽在一处。|Flow2Studio は Lofree Flow 2 の設定アプリです。ライト、ランプ、スリープ時間、キー割り当て、マクロをひとつに。|Flow2Studio로 Lofree Flow 2를 설정하세요. 조명, 표시등, 절전 시간, 키 할당과 매크로를 한곳에서 관리합니다.|Flow2Studio configura tu Lofree Flow 2: iluminación, indicador, reposo, teclas y macros en un solo lugar.|Flow2Studio passt deine Lofree Flow 2 an: Beleuchtung, Anzeige, Ruhezeit, Tasten und Makros an einem Ort.
+Поддержать разработку|Support development|支持开发|開発を支援|개발 후원|Apoyar el desarrollo|Entwicklung unterstützen
+Буду благодарен за поддержку — она поможет уделять больше времени развитию Flow2Studio.|Your support helps me dedicate more time to developing Flow2Studio. Thank you.|感谢你的支持，它将帮助我投入更多时间开发 Flow2Studio。|ご支援は Flow2Studio の開発時間を増やす力になります。ありがとうございます。|후원해 주시면 Flow2Studio 개발에 더 많은 시간을 쓸 수 있습니다. 감사합니다.|Tu apoyo me permite dedicar más tiempo a Flow2Studio. Gracias.|Deine Unterstützung hilft mir, mehr Zeit in Flow2Studio zu investieren. Vielen Dank.
+Поддержать BagaT2K на Ko-fi|Support BagaT2K on Ko-fi|在 Ko-fi 支持 BagaT2K|Ko-fi で BagaT2K を支援|Ko-fi에서 BagaT2K 후원|Apoyar a BagaT2K en Ko-fi|BagaT2K auf Ko-fi unterstützen
+Открыть поддержку на Ko-fi|Open Ko-fi support page|打开 Ko-fi 支持页面|Ko-fi の支援ページを開く|Ko-fi 후원 페이지 열기|Abrir página de Ko-fi|Ko-fi-Unterstützungsseite öffnen
+Отсканируйте QR-код|Scan the QR code|扫描二维码|QR コードを読み取る|QR 코드 스캔|Escanea el código QR|QR-Code scannen
+Автор —|Author —|作者 —|作者 —|제작 —|Autor —|Autor —
+Я понимаю риск и хочу продолжить|I understand the risk and want to continue|我了解风险并希望继续|リスクを理解したうえで続行します|위험을 이해했으며 계속하겠습니다|Entiendo el riesgo y quiero continuar|Ich verstehe das Risiko und möchte fortfahren
+Отмена|Cancel|取消|キャンセル|취소|Cancelar|Abbrechen
+Обновить прошивку|Update firmware|更新固件|ファームウェアを更新|펌웨어 업데이트|Actualizar firmware|Firmware aktualisieren
+Применяем…|Applying…|正在应用…|適用中…|적용 중…|Aplicando…|Wird angewendet…
+Сохранено в Studio · применим после ответа клавиатуры.|Saved in Studio · will apply when the keyboard responds.|已保存到 Studio · 键盘响应后应用。|Studio に保存済み · キーボードの応答後に適用します。|Studio에 저장됨 · 키보드가 응답하면 적용합니다.|Guardado en Studio · se aplicará cuando responda el teclado.|In Studio gespeichert · wird angewendet, sobald die Tastatur antwortet.
+Применено, проверено и сохранено.|Applied, verified and saved.|已应用、验证并保存。|適用・検証・保存が完了しました。|적용, 검증 및 저장 완료.|Aplicado, verificado y guardado.|Angewendet, geprüft und gespeichert.
+Применено к клавиатуре…|Applied to keyboard…|已应用到键盘…|キーボードに適用済み…|키보드에 적용됨…|Aplicado al teclado…|Auf der Tastatur angewendet…
+Ожидавшие настройки применены и проверены.|Pending settings applied and verified.|待应用的设置已应用并验证。|保留中の設定を適用し、検証しました。|대기 중인 설정 적용 및 검증 완료.|Ajustes pendientes aplicados y verificados.|Ausstehende Einstellungen angewendet und geprüft.
+Операция не завершилась. Обновите устройство.|The operation timed out. Refresh the device.|操作超时。请刷新设备。|操作がタイムアウトしました。デバイスを更新してください。|작업 시간이 초과되었습니다. 기기를 새로 고침하세요.|La operación ha caducado. Actualiza el dispositivo.|Zeitüberschreitung. Aktualisiere das Gerät.
+Откройте интерфейс через приложение Flow 2 Studio.|Open this interface in Flow2Studio.|请在 Flow2Studio 中打开此界面。|Flow2Studio からこの画面を開いてください。|Flow2Studio에서 이 화면을 여세요.|Abre esta interfaz desde Flow2Studio.|Öffne diese Oberfläche in Flow2Studio.
+Применение приостановлено.|Applying paused.|应用已暂停。|適用を一時停止しました。|적용 일시 중지.|Aplicación pausada.|Anwendung angehalten.
+Автоматическое применение приостановлено:|Automatic application paused:|自动应用已暂停：|自動適用を一時停止：|자동 적용 일시 중지:|Aplicación automática pausada:|Automatische Anwendung angehalten:
+Пока ничего не подключено|No devices connected|尚未连接设备|デバイス未接続|연결된 기기 없음|No hay dispositivos conectados|Keine Geräte verbunden
+Восстановление USB|USB recovery|USB 恢复|USB 復旧|USB 복구|Recuperación USB|USB-Wiederherstellung
+просмотр|view only|仅查看|表示のみ|보기 전용|solo lectura|nur Anzeige
+Запись остановлена: устройство отключено.|Recording stopped: device disconnected.|录制已停止：设备已断开。|記録停止：デバイスが切断されました。|녹화 중지: 기기가 연결 해제되었습니다.|Grabación detenida: dispositivo desconectado.|Aufzeichnung gestoppt: Gerät getrennt.
+клавиш|keys|键|キー|키|teclas|Tasten
+Модель не определена|Unknown model|未知型号|モデル不明|모델 알 수 없음|Modelo desconocido|Modell unbekannt
+СЛОЙ 1|LAYER 1|层 1|レイヤー 1|레이어 1|CAPA 1|EBENE 1
+ЗАВОДСКАЯ СХЕМА|FACTORY LAYOUT|出厂布局|標準配列|기본 배열|DISTRIBUCIÓN DE FÁBRICA|WERKSBELEGUNG
+СХЕМА|LAYOUT|布局|配列|배열|DISTRIBUCIÓN|BELEGUNG
+Подключение|Connection|连接|接続|연결|Conexión|Verbindung
+Модель|Model|型号|モデル|모델|Modelo|Modell
+Не определена|Unknown|未知|不明|알 수 없음|Desconocido|Unbekannt
+Управление|Control|控制|操作|제어|Control|Steuerung
+Последние настройки · ожидаем связь|Last settings · waiting for connection|上次设置 · 等待连接|前回の設定 · 接続待ち|이전 설정 · 연결 대기 중|Últimos ajustes · esperando conexión|Letzte Einstellungen · warte auf Verbindung
+Доступно|Available|可用|利用可能|사용 가능|Disponible|Verfügbar
+Просмотр · нет канала настроек|View only · settings channel unavailable|仅查看 · 设置通道不可用|表示のみ · 設定用の接続なし|보기 전용 · 설정 연결 없음|Solo lectura · sin canal de ajustes|Nur Anzeige · kein Einstellungskanal
+Ожидаем проверку|Waiting for verification|等待验证|検証待ち|검증 대기 중|Esperando verificación|Warte auf Prüfung
+Протокол|Protocol|协议|プロトコル|프로토콜|Protocolo|Protokoll
+Читаем текущие настройки…|Reading current settings…|正在读取当前设置…|現在の設定を読み取り中…|현재 설정 읽는 중…|Leyendo ajustes actuales…|Aktuelle Einstellungen werden gelesen…
+Читаем заряд и проверяем канал настроек Bluetooth…|Reading battery and checking Bluetooth settings…|正在读取电量并检查蓝牙设置通道…|バッテリーと Bluetooth の設定接続を確認中…|배터리와 Bluetooth 설정 연결 확인 중…|Leyendo batería y comprobando ajustes Bluetooth…|Akku und Bluetooth-Einstellungskanal werden geprüft…
+Читаем текущую яркость и эффект…|Reading brightness and effect…|正在读取亮度和效果…|明るさとエフェクトを読み取り中…|밝기와 효과 읽는 중…|Leyendo brillo y efecto…|Helligkeit und Effekt werden gelesen…
+Выберите слой и прочитайте его.|Choose a layer and read it.|请选择并读取层。|レイヤーを選択して読み取ってください。|레이어를 선택하고 읽으세요.|Elige una capa y léela.|Wähle eine Ebene und lies sie ein.
+Канал настроек недоступен · подключите USB или 2.4 ГГц.|Settings unavailable · connect via USB or 2.4 GHz.|设置不可用 · 请通过 USB 或 2.4 GHz 连接。|設定不可 · USB または 2.4 GHz で接続してください。|설정 사용 불가 · USB 또는 2.4 GHz로 연결하세요.|Ajustes no disponibles · conecta por USB o 2,4 GHz.|Einstellungen nicht verfügbar · verbinde per USB oder 2,4 GHz.
+Настройки этой модели по Bluetooth пока недоступны. Заряд читается отдельно; для настроек подключите USB или приёмник 2.4 ГГц.|Settings for this model are not available over Bluetooth. Battery is read separately; use USB or the 2.4 GHz receiver for settings.|此型号暂不支持蓝牙设置。电量单独读取；请使用 USB 或 2.4 GHz 接收器进行设置。|このモデルの Bluetooth 設定は未対応です。電池残量は別途取得します。設定は USB または 2.4 GHz を使ってください。|이 모델은 Bluetooth 설정을 지원하지 않습니다. 배터리는 별도로 읽습니다. USB 또는 2.4 GHz 수신기로 설정하세요.|Este modelo no admite ajustes por Bluetooth. La batería se lee aparte; usa USB o el receptor de 2,4 GHz.|Dieses Modell unterstützt Einstellungen noch nicht per Bluetooth. Der Akku wird separat gelesen; nutze USB oder den 2,4-GHz-Empfänger.
+Не удалось подготовить исходные слои:|Could not initialize layers:|无法初始化层：|レイヤーの初期化に失敗：|레이어 초기화 실패:|No se pudieron iniciar las capas:|Ebenen konnten nicht initialisiert werden:
+Настройки прочитаны из клавиатуры.|Settings read from keyboard.|已从键盘读取设置。|キーボードから設定を読み取りました。|키보드에서 설정을 읽었습니다.|Ajustes leídos del teclado.|Einstellungen von der Tastatur gelesen.
+Не удалось прочитать подписи схемы:|Could not read layout labels:|无法读取布局标签：|配列ラベルの読み取りに失敗：|배열 레이블 읽기 실패:|No se pudieron leer las etiquetas:|Beschriftungen konnten nicht gelesen werden:
+Последние прочитанные настройки. Изменения сохранятся до восстановления связи.|Last read settings. Changes will be saved until connection resumes.|显示上次读取的设置。更改会保存到连接恢复时应用。|前回取得した設定です。変更は再接続まで保存されます。|마지막으로 읽은 설정입니다. 변경 사항은 다시 연결될 때까지 저장됩니다.|Últimos ajustes leídos. Los cambios se guardan hasta reconectar.|Zuletzt gelesene Einstellungen. Änderungen bleiben bis zur erneuten Verbindung gespeichert.
+Не удалось прочитать настройки.|Could not read settings.|无法读取设置。|設定を読み取れませんでした。|설정을 읽지 못했습니다.|No se pudieron leer los ajustes.|Einstellungen konnten nicht gelesen werden.
+Заряд батареи|Battery level|电池电量|バッテリー残量|배터리 잔량|Nivel de batería|Akkustand
+Питание подключено · заряд полный|Power connected · fully charged|已接通电源 · 已充满|電源接続中 · 満充電|전원 연결됨 · 완충|Alimentación conectada · carga completa|Stromversorgung angeschlossen · voll geladen
+Заряжается|Charging|充电中|充電中|충전 중|Cargando|Wird geladen
+Заряжается · обновите расширение для чтения заряда по USB|Charging · update the extension for USB battery readings|充电中 · 请更新扩展以通过 USB 读取电量|充電中 · USB 残量表示には拡張機能の更新が必要|충전 중 · USB 배터리 확인을 위해 확장을 업데이트하세요|Cargando · actualiza la extensión para leer batería por USB|Wird geladen · Erweiterung für USB-Akkustand aktualisieren
+Заряжается · ожидаем данные о проценте|Charging · waiting for battery percentage|充电中 · 等待电量百分比|充電中 · 残量データ待ち|충전 중 · 배터리 잔량 대기|Cargando · esperando porcentaje|Wird geladen · warte auf Akkustand
+Получено по Bluetooth|Read over Bluetooth|通过蓝牙读取|Bluetooth で取得|Bluetooth로 읽음|Leído por Bluetooth|Über Bluetooth gelesen
+Последний ответ клавиатуры|Last keyboard response|键盘的上次响应|キーボードの前回の応答|키보드의 마지막 응답|Última respuesta del teclado|Letzte Antwort der Tastatur
+Заряд пока недоступен|Battery level unavailable|电量暂不可用|残量を取得できません|배터리 잔량 확인 불가|Nivel de batería no disponible|Akkustand nicht verfügbar
+Применение приостановлено. Проверьте сообщение ниже или отмените ожидающие изменения.|Application paused. Check the message below or cancel pending changes.|应用已暂停。请查看下方信息或取消待应用的更改。|適用を一時停止しました。下のメッセージを確認するか、保留中の変更を取り消してください。|적용이 중지되었습니다. 아래 메시지를 확인하거나 대기 중인 변경을 취소하세요.|Aplicación pausada. Revisa el mensaje o cancela los cambios pendientes.|Anwendung angehalten. Prüfe die Meldung unten oder verwirf ausstehende Änderungen.
+Ожидающие изменения отменены|Pending changes cancelled|已取消待应用的更改|保留中の変更を取り消しました|대기 중인 변경 취소됨|Cambios pendientes cancelados|Ausstehende Änderungen verworfen
+Отключено|Disabled|已禁用|無効|비활성화|Desactivado|Deaktiviert
+Основной слой|Base layer|主层|基本レイヤー|기본 레이어|Capa base|Basisebene
+Слой|Layer|层|レイヤー|레이어|Capa|Ebene
+Экран −|Screen −|屏幕 −|画面 −|화면 −|Pantalla −|Bildschirm −
+Экран +|Screen +|屏幕 +|画面 +|화면 +|Pantalla +|Bildschirm +
+Поиск|Search|搜索|検索|검색|Buscar|Suchen
+Пред. трек|Previous track|上一曲|前の曲|이전 곡|Pista anterior|Vorheriger Titel
+Пуск/пауза|Play/pause|播放/暂停|再生/一時停止|재생/일시 중지|Reproducir/pausar|Wiedergabe/Pause
+След. трек|Next track|下一曲|次の曲|다음 곡|Pista siguiente|Nächster Titel
+Без звука|Mute|静音|ミュート|음소거|Silenciar|Stumm
+Громк. −|Volume −|音量 −|音量 −|음량 −|Volumen −|Lautstärke −
+Громк. +|Volume +|音量 +|音量 +|음량 +|Volumen +|Lautstärke +
+Меню|Menu|菜单|メニュー|메뉴|Menú|Menü
+2.4 ГГц|2.4 GHz|2.4 GHz|2.4 GHz|2.4 GHz|2,4 GHz|2,4 GHz
+Свет −|Light −|灯光 −|ライト −|조명 −|Luz −|Licht −
+Свет +|Light +|灯光 +|ライト +|조명 +|Luz +|Licht +
+Загрузчик|Bootloader|引导程序|ブートローダー|부트로더|Cargador de arranque|Bootloader
+Сброс|Reset|重置|リセット|초기화|Restablecer|Zurücksetzen
+Обзор окон|Window overview|窗口概览|ウィンドウ一覧|창 개요|Vista de ventanas|Fensterübersicht
+Блокировка|Lock|锁定|ロック|잠금|Bloquear|Sperren
+Эффект +|Effect +|效果 +|エフェクト +|효과 +|Efecto +|Effekt +
+Панель|Touch panel|触控面板|タッチパネル|터치 패널|Panel táctil|Touchpanel
+Эффект −|Effect −|效果 −|エフェクト −|효과 −|Efecto −|Effekt −
+Обзор окон: Ctrl + ↑ в Mac, Win + Tab в Windows; при переключении числового ряда может отправлять F3|Window overview: Ctrl + ↑ on Mac, Win + Tab on Windows; may send F3 when the number row is switched|窗口概览：Mac 为 Ctrl + ↑，Windows 为 Win + Tab；切换数字行时可能发送 F3|ウィンドウ一覧：Mac は Ctrl + ↑、Windows は Win + Tab。数字行切替時は F3 を送信する場合があります|창 개요: Mac은 Ctrl + ↑, Windows는 Win + Tab. 숫자 행 전환 시 F3를 보낼 수 있습니다|Vista de ventanas: Ctrl + ↑ en Mac, Win + Tab en Windows; puede enviar F3 al cambiar la fila numérica|Fensterübersicht: Ctrl + ↑ am Mac, Win + Tab unter Windows; bei umgeschalteter Zahlenreihe eventuell F3
+Заблокировать экран: Ctrl + Cmd + Q в Mac, Win + L в Windows|Lock screen: Ctrl + Cmd + Q on Mac, Win + L on Windows|锁屏：Mac 为 Ctrl + Cmd + Q，Windows 为 Win + L|画面ロック：Mac は Ctrl + Cmd + Q、Windows は Win + L|화면 잠금: Mac은 Ctrl + Cmd + Q, Windows는 Win + L|Bloquear pantalla: Ctrl + Cmd + Q en Mac, Win + L en Windows|Bildschirm sperren: Ctrl + Cmd + Q am Mac, Win + L unter Windows
+Следующий режим подсветки|Next lighting effect|下一个背光效果|次のライト効果|다음 백라이트 효과|Siguiente efecto de luz|Nächster Lichteffekt
+Включить или выключить боковую сенсорную панель · удерживайте сочетание|Toggle side touch panel · hold the shortcut|切换侧边触控面板 · 按住组合键|側面パネルのオン/オフ · 組み合わせを長押し|측면 패널 켜기/끄기 · 단축키 길게 누르기|Activar/desactivar panel lateral · mantén el atajo|Seitliches Touchpanel umschalten · Kombination halten
+Предыдущий режим подсветки|Previous lighting effect|上一个背光效果|前のライト効果|이전 백라이트 효과|Efecto de luz anterior|Vorheriger Lichteffekt
+Переключить верхний ряд между цифрами и F1–F12|Switch top row between numbers and F1–F12|切换顶行为数字或 F1–F12|最上段を数字と F1–F12 で切り替え|맨 윗줄을 숫자와 F1–F12로 전환|Alternar fila superior entre números y F1–F12|Oberste Reihe zwischen Zahlen und F1–F12 umschalten
+Переключить NKRO: одновременная регистрация большого числа клавиш|Toggle NKRO: register many keys at once|切换 NKRO：同时识别多个按键|NKRO を切り替え：多数のキーを同時認識|NKRO 전환: 여러 키를 동시에 인식|Alternar NKRO: registrar muchas teclas a la vez|NKRO umschalten: viele Tasten gleichzeitig erkennen
+служебная функция Lofree, точное назначение ещё не подтверждено|Lofree service function; exact behavior not yet verified|Lofree 服务功能，具体用途尚未验证|Lofree 専用機能。正確な動作は未確認|Lofree 서비스 기능, 정확한 동작은 미확인|Función de servicio Lofree; comportamiento sin verificar|Lofree-Servicefunktion; genaue Wirkung noch unbestätigt
+код 0x|code 0x|代码 0x|コード 0x|코드 0x|código 0x|Code 0x
+Назначение ещё не прочитано|Assignment not read yet|尚未读取分配|割り当ては未取得|할당을 아직 읽지 않음|Asignación aún no leída|Zuweisung noch nicht gelesen
+Наследует:|Inherits:|继承：|継承：|상속:|Hereda:|Übernimmt:
+Отключить|Disable|禁用|無効にする|비활성화|Desactivar|Deaktivieren
+Наследовать основную раскладку|Inherit base layout|继承主布局|基本配列を継承|기본 배열 상속|Heredar distribución base|Basisbelegung übernehmen
+Удерживать|Hold|按住|長押し|길게 누르기|Mantener|Halten
+Текущее:|Current:|当前：|現在：|현재:|Actual:|Aktuell:
+Mac · основной|Mac · base|Mac · 主层|Mac · 基本|Mac · 기본|Mac · base|Mac · Basis
+Windows · основной|Windows · base|Windows · 主层|Windows · 基本|Windows · 기본|Windows · base|Windows · Basis
+Дополнительный 1|Extra 1|附加 1|追加 1|추가 1|Adicional 1|Zusatz 1
+Дополнительный 2|Extra 2|附加 2|追加 2|추가 2|Adicional 2|Zusatz 2
+Устройство вернуло другой слой|Device returned a different layer|设备返回了不同的层|別のレイヤーが返されました|기기가 다른 레이어를 반환했습니다|El dispositivo devolvió otra capa|Das Gerät hat eine andere Ebene zurückgegeben
+выберите клавишу на схеме.|select a key on the layout.|在布局中选择按键。|配列上のキーを選択してください。|배열에서 키를 선택하세요.|selecciona una tecla en el esquema.|wähle eine Taste in der Darstellung.
+Fn на основном слое переназначена. Чтобы использовать этот Fn-слой, назначьте клавише «Удерживать|Fn was remapped on the base layer. To use this Fn layer, assign a key to “Hold|主层的 Fn 已被重新分配。要使用此 Fn 层，请将按键设为“按住|基本レイヤーの Fn は変更されています。この Fn レイヤーを使うには「長押し|기본 레이어의 Fn이 변경되었습니다. 이 Fn 레이어를 쓰려면 키에 “길게 누르기|Fn se reasignó en la capa base. Para usar esta capa, asigna una tecla a «Mantener|Fn wurde auf der Basisebene neu belegt. Weise einer Taste „Halten
+Выберите клавишу на схеме для изменения Fn-сочетания.|Select a key on the layout to change its Fn shortcut.|在布局中选择按键以更改 Fn 组合键。|配列上のキーを選択して Fn の割り当てを変更します。|배열에서 키를 선택해 Fn 단축키를 변경하세요.|Selecciona una tecla para cambiar su atajo Fn.|Wähle eine Taste, um ihre Fn-Kombination zu ändern.
+Последние прочитанные назначения · изменения сохранятся до связи.|Last read assignments · changes saved until reconnection.|上次读取的分配 · 更改将在重连后应用。|前回の割り当て · 変更は再接続まで保存されます。|마지막 할당 · 다시 연결될 때까지 변경 저장.|Últimas asignaciones · cambios guardados hasta reconectar.|Zuletzt gelesene Belegung · Änderungen bis zur Verbindung gespeichert.
+Не удалось подтвердить изменение.|Could not verify the change.|无法验证更改。|変更を検証できませんでした。|변경을 확인하지 못했습니다.|No se pudo verificar el cambio.|Änderung konnte nicht bestätigt werden.
+Назначение сохранено в Studio · ожидаем связь|Assignment saved in Studio · waiting for connection|分配已保存到 Studio · 等待连接|割り当てを Studio に保存 · 接続待ち|Studio에 할당 저장 · 연결 대기|Asignación guardada en Studio · esperando conexión|Zuweisung in Studio gespeichert · warte auf Verbindung
+Назначение сохранено и проверено|Assignment saved and verified|分配已保存并验证|割り当てを保存・検証済み|할당 저장 및 검증 완료|Asignación guardada y verificada|Zuweisung gespeichert und geprüft
+История относится к другому слою|History belongs to a different layer|历史记录属于其他层|履歴は別のレイヤーのものです|다른 레이어의 기록입니다|El historial pertenece a otra capa|Verlauf gehört zu einer anderen Ebene
+Изменение сохранено в Studio · ожидаем связь|Change saved in Studio · waiting for connection|更改已保存到 Studio · 等待连接|変更を Studio に保存 · 接続待ち|Studio에 변경 저장 · 연결 대기|Cambio guardado en Studio · esperando conexión|Änderung in Studio gespeichert · warte auf Verbindung
+Изменение отменено|Change undone|已撤销更改|変更を元に戻しました|변경 실행 취소됨|Cambio deshecho|Änderung rückgängig gemacht
+Изменение повторено|Change redone|已重做更改|変更をやり直しました|변경 다시 실행됨|Cambio rehecho|Änderung wiederholt
+Отменить:|Undo:|撤销：|元に戻す：|실행 취소:|Deshacer:|Rückgängig:
+Нет изменений этого слоя для отмены|Nothing to undo on this layer|此层没有可撤销的更改|このレイヤーに戻せる変更はありません|이 레이어에서 취소할 변경 없음|Nada que deshacer en esta capa|Auf dieser Ebene nichts rückgängig zu machen
+Повторить:|Redo:|重做：|やり直す：|다시 실행:|Rehacer:|Wiederholen:
+Нет изменений этого слоя для повтора|Nothing to redo on this layer|此层没有可重做的更改|このレイヤーにやり直す変更はありません|이 레이어에서 다시 실행할 변경 없음|Nada que rehacer en esta capa|Auf dieser Ebene nichts zu wiederholen
+Заводские назначения|Factory assignments|默认分配|標準の割り当て|기본 할당|Asignaciones de fábrica|Werksbelegungen
+Выбранный слой сброшен и проверен|Selected layer reset and verified|所选层已重置并验证|選択したレイヤーをリセット・検証済み|선택한 레이어 초기화 및 검증 완료|Capa seleccionada restablecida y verificada|Gewählte Ebene zurückgesetzt und geprüft
+Шаблон сохранён в Studio · ожидаем связь|Template saved in Studio · waiting for connection|模板已保存到 Studio · 等待连接|テンプレートを Studio に保存 · 接続待ち|Studio에 템플릿 저장 · 연결 대기|Plantilla guardada en Studio · esperando conexión|Vorlage in Studio gespeichert · warte auf Verbindung
+Fn-шаблон применён и проверен|Fn template applied and verified|Fn 模板已应用并验证|Fn テンプレートを適用・検証済み|Fn 템플릿 적용 및 검증 완료|Plantilla Fn aplicada y verificada|Fn-Vorlage angewendet und geprüft
+Настройки работают в клавиатуре и при закрытом Studio.|Settings work on the keyboard even with Studio closed.|关闭 Studio 后，设置仍在键盘上生效。|Studio を閉じても設定はキーボードで動作します。|Studio를 닫아도 키보드 설정이 유지됩니다.|Los ajustes funcionan incluso con Studio cerrado.|Die Einstellungen wirken auch bei geschlossenem Studio.
+Для порога красного индикатора и синхронизации яркости обновите расширение по USB.|Update the extension over USB for the red indicator threshold and brightness sync.|请通过 USB 更新扩展以设置红灯阈值和亮度同步。|赤色ランプのしきい値と明るさ連動には USB で拡張機能を更新してください。|빨간 표시등 기준과 밝기 동기화를 위해 USB로 확장을 업데이트하세요.|Actualiza la extensión por USB para el umbral rojo y la sincronización del brillo.|Für die rote Warnschwelle und Helligkeitsabgleich die Erweiterung per USB aktualisieren.
+Последние прочитанные настройки · ожидаем связь.|Last read settings · waiting for connection.|上次读取的设置 · 等待连接。|前回の設定 · 接続待ち。|마지막 설정 · 연결 대기.|Últimos ajustes · esperando conexión.|Zuletzt gelesene Einstellungen · warte auf Verbindung.
+Настройки пока не прочитаны.|Settings not read yet.|尚未读取设置。|設定は未取得です。|설정을 아직 읽지 않았습니다.|Ajustes aún no leídos.|Einstellungen noch nicht gelesen.
+Неизвестная клавиша:|Unknown key:|未知按键：|不明なキー：|알 수 없는 키:|Tecla desconocida:|Unbekannte Taste:
+Строка|Line|行|行|줄|Línea|Zeile
+неизвестное действие|unknown action|未知操作|不明な操作|알 수 없는 동작|acción desconocida|unbekannte Aktion
+text поддерживает только печатные ASCII-символы|text supports printable ASCII characters only|text 仅支持可打印 ASCII 字符|text は表示可能な ASCII 文字のみ対応|text는 출력 가능한 ASCII 문자만 지원|text solo admite caracteres ASCII imprimibles|text unterstützt nur druckbare ASCII-Zeichen
+raw: нужны байты hex через пробел|raw: enter space-separated hex bytes|raw：请输入空格分隔的十六进制字节|raw：16 進バイトをスペース区切りで入力|raw: 공백으로 구분한 16진수 바이트 입력|raw: introduce bytes hex separados por espacios|raw: Hex-Bytes durch Leerzeichen trennen
+raw не может содержать нулевой разделитель|raw cannot contain a zero delimiter|raw 不能包含零分隔符|raw にゼロ区切りは使用できません|raw에는 0 구분자를 넣을 수 없습니다|raw no puede contener un separador cero|raw darf kein Null-Trennzeichen enthalten
+Задержка: 1–60000 мс|Delay: 1–60000 ms|延迟：1–60000 毫秒|待ち時間：1～60000 ミリ秒|지연: 1~60000ms|Pausa: 1–60000 ms|Verzögerung: 1–60000 ms
+Клавиша уже удерживается:|Key is already held:|按键已按住：|キーはすでに押されています：|이미 누른 키:|La tecla ya está pulsada:|Taste wird bereits gehalten:
+Нет соответствующего down:|No matching down:|没有对应的 down：|対応する down がありません：|대응하는 down 없음:|No hay down correspondiente:|Kein passendes down:
+Добавьте up для удерживаемых клавиш|Add up for held keys|为按住的按键添加 up|押したキーに up を追加してください|누른 키에 up을 추가하세요|Añade up para las teclas mantenidas|Für gehaltene Tasten up hinzufügen
+Неизвестный формат памяти макросов. Запись отключена.|Unknown macro memory format. Writing disabled.|未知宏内存格式。已禁用写入。|マクロ形式が不明です。書き込みは無効です。|매크로 메모리 형식 알 수 없음. 쓰기 비활성화.|Formato de macros desconocido. Escritura desactivada.|Unbekanntes Makroformat. Schreiben deaktiviert.
+байт. Изменения появятся после сохранения.|bytes. Changes take effect after saving.|字节。更改将在保存后生效。|バイト。変更は保存後に反映されます。|바이트. 저장 후 변경이 적용됩니다.|bytes. Los cambios se aplican al guardar.|Bytes. Änderungen wirken nach dem Speichern.
+Перечитать макросы и убрать несохранённые изменения?|Reload macros and discard unsaved changes?|重新读取宏并丢弃未保存的更改？|マクロを再読込し、未保存の変更を破棄しますか？|매크로를 다시 읽고 저장하지 않은 변경을 버릴까요?|¿Volver a leer los macros y descartar los cambios?|Makros neu lesen und ungespeicherte Änderungen verwerfen?
+Заводские назначения всех слоёв восстановлены и проверены.|Factory assignments restored and verified on all layers.|所有层的默认分配已恢复并验证。|全レイヤーの標準割り当てを復元・検証済み。|모든 레이어의 기본 할당 복원 및 검증 완료.|Asignaciones de fábrica restauradas y verificadas en todas las capas.|Werksbelegungen aller Ebenen wiederhergestellt und geprüft.
+Макросы очищены. Прочитайте память для редактирования.|Macros cleared. Read memory to edit.|宏已清除。编辑前请读取内存。|マクロを消去しました。編集するには読み取ってください。|매크로 삭제됨. 편집하려면 메모리를 읽으세요.|Macros borrados. Lee la memoria para editar.|Makros gelöscht. Zum Bearbeiten Speicher einlesen.
+Макросы сохранены.|Macros saved.|宏已保存。|マクロを保存しました。|매크로 저장됨.|Macros guardados.|Makros gespeichert.
+Настройки сброшены и проверены|Settings reset and verified|设置已重置并验证|設定をリセット・検証済み|설정 초기화 및 검증 완료|Ajustes restablecidos y verificados|Einstellungen zurückgesetzt und geprüft
+Назначения восстановлены|Assignments restored|分配已恢复|割り当てを復元しました|할당 복원됨|Asignaciones restauradas|Zuweisungen wiederhergestellt
+Сохранено в Studio · ожидаем связь.|Saved in Studio · waiting for connection.|已保存到 Studio · 等待连接。|Studio に保存済み · 接続待ち。|Studio에 저장됨 · 연결 대기.|Guardado en Studio · esperando conexión.|In Studio gespeichert · warte auf Verbindung.
+Сохранено в клавиатуре.|Saved to keyboard.|已保存到键盘。|キーボードに保存済み。|키보드에 저장됨.|Guardado en el teclado.|In der Tastatur gespeichert.
+Есть несохранённое изменение времени.|Timeout has unsaved changes.|时间有未保存的更改。|時間に未保存の変更があります。|저장하지 않은 시간 변경이 있습니다.|Hay un cambio de tiempo sin guardar.|Ungespeicherte Änderung der Zeit.
+Время сохранено в Studio · ожидаем связь.|Timeout saved in Studio · waiting for connection.|时间已保存到 Studio · 等待连接。|時間を Studio に保存 · 接続待ち。|Studio에 시간 저장 · 연결 대기.|Tiempo guardado en Studio · esperando conexión.|Zeit in Studio gespeichert · warte auf Verbindung.
+Укажите 1–3600 секунд или «Никогда».|Enter 1–3600 seconds or choose “Never”.|请输入 1–3600 秒，或选择“永不”。|1～3600 秒、または「しない」を選択してください。|1~3600초를 입력하거나 “사용 안 함”을 선택하세요.|Indica 1–3600 segundos o elige «Nunca».|Gib 1–3600 Sekunden ein oder wähle „Nie“.
+Сохраняем время…|Saving timeout…|正在保存时间…|時間を保存中…|시간 저장 중…|Guardando tiempo…|Zeit wird gespeichert…
+Изменения макроса не сохранены. Перейти к другому?|Macro changes are unsaved. Switch anyway?|宏更改尚未保存。仍要切换吗？|マクロに未保存の変更があります。切り替えますか？|매크로 변경이 저장되지 않았습니다. 전환할까요?|El macro tiene cambios sin guardar. ¿Cambiar?|Makroänderungen nicht gespeichert. Trotzdem wechseln?
+Редактор очищен. Для удаления макроса в клавиатуре нажмите «Сохранить».|Editor cleared. Save to delete the macro from the keyboard.|编辑器已清空。点击保存以从键盘删除宏。|エディターを空にしました。キーボードから削除するには保存してください。|편집기를 비웠습니다. 키보드에서 매크로를 삭제하려면 저장하세요.|Editor vacío. Guarda para borrar el macro del teclado.|Editor geleert. Zum Löschen des Makros auf der Tastatur speichern.
+Макросы не помещаются в память:|Macros exceed available memory:|宏超出可用内存：|マクロがメモリ容量を超えています：|매크로가 메모리 용량 초과:|Los macros superan la memoria:|Makros überschreiten den verfügbaren Speicher:
+байт|bytes|字节|バイト|바이트|bytes|Bytes
+Макрос сохранён в Studio · применим после ответа клавиатуры.|Macro saved in Studio · will apply when the keyboard responds.|宏已保存到 Studio · 键盘响应后应用。|マクロを Studio に保存 · 応答後に適用します。|Studio에 매크로 저장 · 키보드 응답 후 적용합니다.|Macro guardado en Studio · se aplicará al responder el teclado.|Makro in Studio gespeichert · wird nach Antwort der Tastatur angewendet.
+Сохранено и проверено. Назначьте «Макрос|Saved and verified. Assign “Macro|已保存并验证。请将“宏|保存・検証済み。「マクロ|저장 및 검증 완료. “매크로|Guardado y verificado. Asigna «Macro|Gespeichert und geprüft. Weise „Makro
+» клавише.|” to a key.|”分配给按键。|」をキーに割り当ててください。|”를 키에 할당하세요.|» a una tecla.|“ einer Taste zu.
+Клавиатура ответила. Настройки можно применять.|Keyboard responded. Settings can be applied.|键盘已响应。可以应用设置。|キーボードが応答しました。設定を適用できます。|키보드가 응답했습니다. 설정을 적용할 수 있습니다.|El teclado respondió. Ya puedes aplicar ajustes.|Die Tastatur hat geantwortet. Einstellungen können angewendet werden.
+Подключаемся для подготовки…|Connecting for setup…|正在连接以进行设置…|設定のため接続中…|설정을 위해 연결 중…|Conectando para preparar…|Verbindung zum Einrichten…
+Читаем прошивку клавиатуры|Reading keyboard firmware|正在读取键盘固件|ファームウェアを読み取り中|키보드 펌웨어 읽는 중|Leyendo firmware del teclado|Tastatur-Firmware wird gelesen
+Проверяем вторую копию|Verifying second read|正在验证第二次读取|2 回目の読み取りを検証中|두 번째 읽기 검증 중|Verificando segunda lectura|Zweiter Lesevorgang wird geprüft
+Резервная копия сохранена|Backup saved|备份已保存|バックアップを保存しました|백업 저장됨|Copia guardada|Sicherung gespeichert
+Подготавливаем клавиатуру|Preparing keyboard|正在准备键盘|キーボードを準備中|키보드 준비 중|Preparando teclado|Tastatur wird vorbereitet
+Проверяем результат|Verifying result|正在验证结果|結果を検証中|결과 검증 중|Verificando resultado|Ergebnis wird geprüft
+Восстанавливаем прежнюю прошивку|Restoring previous firmware|正在恢复原固件|以前のファームウェアを復元中|이전 펌웨어 복원 중|Restaurando firmware anterior|Vorherige Firmware wird wiederhergestellt
+Проверяем восстановление|Verifying recovery|正在验证恢复|復元を検証中|복원 검증 중|Verificando restauración|Wiederherstellung wird geprüft
+Ожидаем возвращения клавиатуры|Waiting for keyboard to reconnect|等待键盘重新连接|キーボードの再接続待ち|키보드 재연결 대기|Esperando que reconecte el teclado|Warte auf erneute Tastaturverbindung
+Дождитесь завершения подготовки клавиатуры|Wait for keyboard setup to finish|请等待键盘设置完成|キーボードの設定完了までお待ちください|키보드 설정이 끝날 때까지 기다리세요|Espera a que termine la preparación|Warte, bis die Einrichtung abgeschlossen ist
+Ранее подтверждена Studio|Previously verified Studio|此前已验证 Studio|以前に確認済みの Studio|이전에 확인한 Studio|Studio verificado previamente|Zuvor bestätigte Studio-Version
+ожидаем связь|waiting for connection|等待连接|接続待ち|연결 대기|esperando conexión|warte auf Verbindung
+Прошивка Studio|Studio firmware|Studio 固件|Studio ファームウェア|Studio 펌웨어|Firmware Studio|Studio-Firmware
+подтверждена клавиатурой|verified by keyboard|已由键盘确认|キーボードが確認済み|키보드에서 확인됨|verificado por el teclado|von der Tastatur bestätigt
+Заводская Lofree 0.14 · расширения Studio отключены|Stock Lofree 0.14 · Studio extensions disabled|原厂 Lofree 0.14 · Studio 扩展已禁用|純正 Lofree 0.14 · Studio 拡張機能は無効|순정 Lofree 0.14 · Studio 확장 비활성화|Lofree 0.14 de fábrica · extensiones Studio desactivadas|Original Lofree 0.14 · Studio-Erweiterungen deaktiviert
+Клавиатура готова к работе|Keyboard ready|键盘已就绪|キーボードの準備完了|키보드 준비 완료|Teclado listo|Tastatur bereit
+Заводская Lofree 0.14 установлена|Stock Lofree 0.14 installed|已安装原厂 Lofree 0.14|純正 Lofree 0.14 をインストールしました|순정 Lofree 0.14 설치됨|Lofree 0.14 de fábrica instalado|Original Lofree 0.14 installiert
+Оригинальная прошивка восстановлена|Stock firmware restored|原厂固件已恢复|純正ファームウェアを復元しました|순정 펌웨어 복원됨|Firmware de fábrica restaurado|Original-Firmware wiederhergestellt
+Прежняя прошивка восстановлена|Previous firmware restored|原固件已恢复|以前のファームウェアを復元しました|이전 펌웨어 복원됨|Firmware anterior restaurado|Vorherige Firmware wiederhergestellt
+Подготовка остановлена|Setup stopped|设置已停止|設定を停止しました|설정 중지됨|Preparación detenida|Einrichtung angehalten
+Восстановление клавиатуры|Keyboard recovery|键盘恢复|キーボードの復旧|키보드 복구|Recuperación del teclado|Tastatur wiederherstellen
+Расширенные настройки доступны|Advanced settings available|高级设置可用|詳細設定を利用できます|고급 설정 사용 가능|Ajustes avanzados disponibles|Erweiterte Einstellungen verfügbar
+Настраивайте её по USB, Bluetooth или через приёмник 2.4 ГГц. Вы можете оставить кабель подключённым или перейти на беспроводное соединение.|Configure over USB, Bluetooth or the 2.4 GHz receiver. Keep the cable connected or switch to wireless.|通过 USB、蓝牙或 2.4 GHz 接收器进行设置。可以保持有线连接或切换为无线。|USB、Bluetooth、2.4 GHz で設定できます。ケーブル接続のままでも、無線に切り替えても使えます。|USB, Bluetooth 또는 2.4 GHz 수신기로 설정하세요. 케이블을 유지하거나 무선으로 전환할 수 있습니다.|Configura por USB, Bluetooth o receptor de 2,4 GHz. Puedes mantener el cable o usar conexión inalámbrica.|Konfiguriere per USB, Bluetooth oder 2,4-GHz-Empfänger. Lass das Kabel angeschlossen oder wechsle zu Funk.
+Установлена заводская Lofree 0.14. Для возврата прежней версии выберите сохранённую копию.|Stock Lofree 0.14 installed. Choose a saved backup to restore your previous version.|已安装原厂 Lofree 0.14。要返回原版本，请选择已保存的备份。|純正 Lofree 0.14 をインストールしました。以前の版に戻すには保存済みバックアップを選んでください。|순정 Lofree 0.14가 설치되었습니다. 이전 버전으로 돌아가려면 저장된 백업을 선택하세요.|Lofree 0.14 de fábrica instalado. Para volver a tu versión, elige una copia guardada.|Original Lofree 0.14 installiert. Wähle eine Sicherung, um zur vorherigen Version zurückzukehren.
+Оригинальная прошивка возвращена и проверена. Расширенные настройки Studio отключены.|Stock firmware restored and verified. Advanced Studio settings are disabled.|原厂固件已恢复并验证。Studio 高级设置已禁用。|純正ファームウェアを復元・検証しました。Studio の詳細設定は無効です。|순정 펌웨어 복원 및 검증 완료. Studio 고급 설정은 비활성화됩니다.|Firmware de fábrica restaurado y verificado. Ajustes avanzados Studio desactivados.|Original-Firmware wiederhergestellt und geprüft. Erweiterte Studio-Einstellungen sind deaktiviert.
+Сохранённая прошивка возвращена и проверена. Назначения и функции зависят от этой версии прошивки.|Backup firmware restored and verified. Assignments and features depend on that firmware version.|备份固件已恢复并验证。按键分配和功能取决于该固件版本。|保存済みファームウェアを復元・検証しました。割り当てと機能はその版に依存します。|백업 펌웨어 복원 및 검증 완료. 키 할당과 기능은 해당 버전에 따라 다릅니다.|Firmware de copia restaurado y verificado. Las funciones dependen de esa versión.|Gesicherte Firmware wiederhergestellt und geprüft. Belegungen und Funktionen hängen von dieser Version ab.
+Клавиатура уже подготовлена. Настройки доступны через текущее подключение.|Keyboard already set up. Settings are available over the current connection.|键盘已完成设置。可以通过当前连接进行设置。|キーボードは設定済みです。現在の接続で設定できます。|키보드 설정이 완료되었습니다. 현재 연결로 설정할 수 있습니다.|El teclado ya está preparado. Puedes configurarlo con la conexión actual.|Die Tastatur ist eingerichtet. Einstellungen sind über die aktuelle Verbindung verfügbar.
+Проверяем доступные способы подключения…|Checking available connections…|正在检查可用连接…|利用可能な接続を確認中…|사용 가능한 연결 확인 중…|Comprobando conexiones disponibles…|Verfügbare Verbindungen werden geprüft…
+Доступно расширение 0.9: новые анимации и чтение процента заряда по USB. Обновление сохраняет настройки и резервную копию.|Extension 0.9 adds animations and USB battery readings. Updating keeps settings and creates a backup.|扩展 0.9 提供新动画和 USB 电量读取。更新会保留设置并创建备份。|拡張機能 0.9 では新しいアニメーションと USB 残量取得に対応。設定を保持し、バックアップを作成します。|확장 0.9에서 새 애니메이션과 USB 배터리 확인을 지원합니다. 업데이트 시 설정을 유지하고 백업합니다.|La extensión 0.9 añade animaciones y batería por USB. Se conservan ajustes y se crea una copia.|Erweiterung 0.9 bietet Animationen und USB-Akkustand. Einstellungen bleiben erhalten, eine Sicherung wird erstellt.
+Доступно расширение 0.9: волны сверху вниз, снизу вверх, туда-обратно и плавный перелив. Для обновления подключите USB в проводном режиме.|Extension 0.9 adds waves in both directions, back-and-forth waves and smooth flow. Update in wired USB mode.|扩展 0.9 提供双向波浪、往返波浪和平滑渐变。请在有线 USB 模式下更新。|拡張機能 0.9 では上下・往復ウェーブとなめらかな流れに対応。有線 USB モードで更新してください。|확장 0.9에서 양방향 및 왕복 물결과 부드러운 흐름을 지원합니다. 유선 USB 모드로 업데이트하세요.|La extensión 0.9 añade ondas y transición suave. Actualiza en modo USB por cable.|Erweiterung 0.9 bietet Wellen und sanfte Verläufe. Aktualisiere im kabelgebundenen USB-Modus.
+Доступно расширение 0.9: независимый индикатор работает и при выключенной подсветке клавиш.|Extension 0.9 keeps the independent indicator working when key lighting is off.|扩展 0.9 支持在按键背光关闭时独立使用指示灯。|拡張機能 0.9 ではキーライトを消してもランプが独立して動作します。|확장 0.9에서는 키 조명이 꺼져도 표시등을 독립적으로 사용합니다.|La extensión 0.9 permite usar el indicador con las teclas apagadas.|Mit Erweiterung 0.9 funktioniert die Anzeige unabhängig vom Tastenlicht.
+Доступно исправление 0.9 для входа в загрузчик. Для уже установленного 3.9/3.10 удерживайте Fn, затем левый Shift и нажмите Esc. После появления устройства восстановления можно обновить расширение или вернуть оригинал.|Version 0.9 fixes bootloader entry. On 3.9/3.10, hold Fn, then left Shift and press Esc. Select the recovery device to update or restore stock firmware.|0.9 修复了引导程序入口。使用 3.9/3.10 时，请按住 Fn、左 Shift，再按 Esc。出现恢复设备后可更新或恢复原厂固件。|0.9 でブートローダー起動を修正。3.9/3.10 では Fn、左 Shift を押しながら Esc を押し、復旧デバイスを選んで更新・復元してください。|0.9에서 부트로더 진입을 수정했습니다. 3.9/3.10은 Fn, 왼쪽 Shift를 누른 채 Esc를 누르세요. 복구 기기를 선택해 업데이트하거나 순정으로 복원하세요.|0.9 corrige el acceso al cargador. En 3.9/3.10 mantén Fn, Mayús izquierda y pulsa Esc. Selecciona el dispositivo de recuperación para actualizar o restaurar.|0.9 behebt den Bootloader-Einstieg. Halte unter 3.9/3.10 Fn und linke Umschalttaste, drücke Esc. Wähle das Wiederherstellungsgerät zum Aktualisieren oder Wiederherstellen.
+Переход на Studio 0.9 на официальной базе Lofree 0.14. Перед записью сохраним и проверим текущую прошивку для отката.|Upgrade to Studio 0.9 based on official Lofree 0.14. Current firmware is backed up and verified before writing.|升级到基于官方 Lofree 0.14 的 Studio 0.9。写入前会备份并验证当前固件。|公式 Lofree 0.14 ベースの Studio 0.9 に移行します。書き込み前に現在のファームウェアをバックアップ・検証します。|공식 Lofree 0.14 기반 Studio 0.9로 업데이트합니다. 쓰기 전에 현재 펌웨어를 백업하고 검증합니다.|Actualización a Studio 0.9 sobre Lofree 0.14 oficial. Antes se guarda y verifica el firmware actual.|Wechsel zu Studio 0.9 auf Basis von Lofree 0.14. Die aktuelle Firmware wird vorher gesichert und geprüft.
+Обновить расширение|Update extension|更新扩展|拡張機能を更新|확장 업데이트|Actualizar extensión|Erweiterung aktualisieren
+Продолжить подготовку|Continue setup|继续设置|設定を続行|설정 계속|Continuar preparación|Einrichtung fortsetzen
+В расширении|Extension|扩展|拡張機能|확장|La extensión|Erweiterung
+нарушен программный вход в загрузчик. Удерживайте Fn, затем левый Shift, затем нажмите Esc. Выберите появившееся устройство восстановления и повторите нужную операцию.|has broken software bootloader entry. Hold Fn, then left Shift and press Esc. Select the recovery device and retry.|的软件引导程序入口存在问题。请按住 Fn、左 Shift，再按 Esc，选择恢复设备后重试。|ではソフト起動が壊れています。Fn と左 Shift を押しながら Esc を押し、復旧デバイスを選んで再試行してください。|의 소프트웨어 부트로더 진입에 문제가 있습니다. Fn, 왼쪽 Shift를 누르고 Esc를 누르세요. 복구 기기를 선택해 다시 시도하세요.|tiene un fallo de acceso al cargador. Mantén Fn, Mayús izquierda y pulsa Esc. Selecciona el dispositivo de recuperación y reintenta.|hat einen fehlerhaften Bootloader-Einstieg. Halte Fn und linke Umschalttaste und drücke Esc. Wähle das Wiederherstellungsgerät und versuche es erneut.
+Клавиатура пока не вернулась. Оставьте USB подключённым и обновите список устройств.|Keyboard has not reconnected. Keep USB connected and refresh devices.|键盘尚未重新连接。请保持 USB 连接并刷新设备列表。|キーボードが戻っていません。USB を接続したまま一覧を更新してください。|키보드가 아직 재연결되지 않았습니다. USB를 연결한 채 기기 목록을 새로 고침하세요.|El teclado no ha reconectado. Mantén el USB conectado y actualiza la lista.|Die Tastatur ist noch nicht zurück. Lass USB angeschlossen und aktualisiere die Geräteliste.
+Образ прошивки проверен, но клавиатура ещё не подтвердила расширенные настройки. Оставьте USB подключённым и повторите проверку связи.|Firmware image verified, but the keyboard has not confirmed advanced settings. Keep USB connected and check connection again.|固件镜像已验证，但键盘尚未确认高级设置。请保持 USB 连接并再次检查连接。|イメージは検証済みですが詳細設定は未確認です。USB を接続したまま接続確認を再実行してください。|펌웨어 이미지는 검증됐지만 고급 설정은 미확인입니다. USB를 유지하고 연결을 다시 확인하세요.|Imagen verificada, pero los ajustes avanzados aún no se confirman. Mantén USB conectado y comprueba la conexión.|Firmware-Abbild geprüft, erweiterte Einstellungen noch unbestätigt. Lass USB angeschlossen und prüfe die Verbindung erneut.
+Выберите|Choose|选择|選択|선택|Elegir|Wählen
+Заряд в строке меню|Battery in menu bar|菜单栏电量|メニューバーのバッテリー|메뉴 막대 배터리|Batería en barra de menús|Akku in der Menüleiste
+Выбор|Selection|选择|選択|선택|Selección|Auswahl
+Нажатий пока нет. Начните запись или добавьте паузу.|No keystrokes yet. Start recording or add a delay.|尚无按键记录。开始录制或添加延迟。|キー入力はまだありません。記録を開始するか待ち時間を追加してください。|기록된 키가 없습니다. 녹화를 시작하거나 지연을 추가하세요.|Aún no hay pulsaciones. Inicia una grabación o añade una pausa.|Noch keine Tastenanschläge. Starte eine Aufzeichnung oder füge eine Pause hinzu.
+Пауза|Delay|延迟|待ち時間|지연|Pausa|Pause
+Пауза в миллисекундах|Delay in milliseconds|延迟（毫秒）|待ち時間（ミリ秒）|지연 시간(밀리초)|Pausa en milisegundos|Pause in Millisekunden
+Пауза: 1–60000 мс|Delay: 1–60000 ms|延迟：1–60000 毫秒|待ち時間：1～60000 ミリ秒|지연: 1~60000ms|Pausa: 1–60000 ms|Pause: 1–60000 ms
+мс|ms|毫秒|ミリ秒|ms|ms|ms
+Нажать|Press|按下|押す|누르기|Pulsar|Drücken
+Удалить действие|Delete action|删除操作|操作を削除|동작 삭제|Eliminar acción|Aktion löschen
+Запись не началась.|Recording did not start.|录制未开始。|記録を開始できませんでした。|녹화가 시작되지 않았습니다.|No se inició la grabación.|Aufzeichnung nicht gestartet.
+Идёт запись. Нажимайте клавиши и сочетания; завершите кнопкой «Остановить запись». Fn обрабатывается самой клавиатурой.|Recording. Press keys and shortcuts, then stop recording. Fn is handled by the keyboard.|正在录制。按下按键与组合键，然后停止录制。Fn 由键盘自身处理。|記録中です。キーや組み合わせを押し、記録を停止してください。Fn はキーボードが処理します。|녹화 중입니다. 키와 단축키를 누른 뒤 녹화를 중지하세요. Fn은 키보드가 처리합니다.|Grabando. Pulsa teclas y atajos y detén la grabación. Fn lo gestiona el teclado.|Aufzeichnung läuft. Drücke Tasten und Kombinationen und stoppe dann. Fn wird von der Tastatur verarbeitet.
+Запись остановлена через 5 минут.|Recording stopped after 5 minutes.|录制在 5 分钟后停止。|5 分後に記録を停止しました。|5분 후 녹화가 중지되었습니다.|Grabación detenida a los 5 minutos.|Aufzeichnung nach 5 Minuten gestoppt.
+Запись остановлена: доступная память макроса заполнена.|Recording stopped: macro memory full.|录制已停止：宏内存已满。|記録停止：マクロメモリがいっぱいです。|녹화 중지: 매크로 메모리가 가득 찼습니다.|Grabación detenida: memoria de macro llena.|Aufzeichnung gestoppt: Makrospeicher voll.
+Запись готова. Проверьте действия и нажмите «Сохранить макрос».|Recording ready. Review actions and save the macro.|录制完成。检查操作并保存宏。|記録完了。操作を確認してマクロを保存してください。|녹화 완료. 동작을 확인하고 매크로를 저장하세요.|Grabación lista. Revisa las acciones y guarda el macro.|Aufzeichnung bereit. Prüfe die Aktionen und speichere das Makro.
+Запись отменена. Прежний черновик восстановлен.|Recording cancelled. Previous draft restored.|录制已取消。已恢复原草稿。|記録を取り消し、前の下書きを復元しました。|녹화 취소. 이전 초안을 복원했습니다.|Grabación cancelada. Borrador anterior restaurado.|Aufzeichnung verworfen. Vorheriger Entwurf wiederhergestellt.
+Запись остановлена: окно Studio потеряло фокус.|Recording stopped: Studio lost focus.|录制已停止：Studio 窗口失去焦点。|記録停止：Studio ウィンドウが非アクティブになりました。|녹화 중지: Studio 창이 포커스를 잃었습니다.|Grabación detenida: Studio perdió el foco.|Aufzeichnung gestoppt: Studio-Fenster nicht mehr aktiv.
+Сохранено в Studio:|Saved in Studio:|已保存到 Studio：|Studio に保存済み：|Studio에 저장됨:|Guardado en Studio:|In Studio gespeichert:
+. Применим после ответа клавиатуры. При глубоком сне нажмите любую её клавишу.|. Will apply when the keyboard responds. In deep sleep, press a physical key.|。键盘响应后应用。深度休眠时请按下实体按键。|。キーボードの応答後に適用します。深いスリープ中は実際のキーを押してください。|. 키보드 응답 후 적용됩니다. 깊은 절전 중에는 실제 키를 누르세요.|. Se aplicará cuando responda el teclado. En reposo profundo, pulsa una tecla.|. Wird angewendet, sobald die Tastatur antwortet. Bei tiefem Schlaf eine Taste drücken.
+Клавиатура|Keyboard|键盘|キーボード|키보드|Teclado|Tastatur
