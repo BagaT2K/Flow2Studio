@@ -342,7 +342,7 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
     if([action isEqual:@"checkUpdates"]){FlowCheckUpdates([args[@"force"]boolValue],^(NSDictionary *result,NSString *error){[self reply:identifier result:result error:error?FlowLocalized(error):nil];});return;}
     if([action isEqual:@"openUpdate"]){BOOL opened=!self.firmwareBusy&&FlowOpenUpdate();[self reply:identifier result:opened?@{@"opened":@YES}:nil error:opened?nil:FlowLocalized(@"Не удалось открыть ссылку в браузере.")];return;}
     if([action isEqual:@"openExternal"]){
-        NSDictionary *links=@{@"github":@"https://github.com/BagaT2K",@"kofi":@"https://ko-fi.com/bagat2k/tip"};
+        NSDictionary *links=@{@"github":@"https://github.com/BagaT2K/Flow2Studio",@"kofi":@"https://ko-fi.com/bagat2k/tip"};
         NSString *key=[args[@"link"]isKindOfClass:NSString.class]?args[@"link"]:nil;
         NSString *destination=key?links[key]:nil;
         BOOL opened=destination&&[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:destination]];

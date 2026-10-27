@@ -30,7 +30,7 @@ assert 'app.flow2studio</string>' in (root/'scripts/build-app.sh').read_text()
 for name in ['Build-DMG.command','Build-and-Run.command','scripts/build-app.sh','scripts/check.sh']:
  assert (root/name).is_file()
 source=(root/'scripts/build-app.sh').read_text()
-assert '<string>0.9.6</string>' in source and 'FlowUpdates.m' in source
+assert '<string>0.9.7</string>' in source and 'FlowUpdates.m' in source
 # Every local C/Objective-C include must survive cleanup.
 for folder in ['mac','tests']:
  for path in (root/folder).iterdir():

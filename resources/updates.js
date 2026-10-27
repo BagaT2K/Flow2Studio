@@ -11,7 +11,7 @@
    banner.hidden=!(preview||value.available);
    document.getElementById('updatePreview').hidden=!preview;
    document.getElementById('updateDetails').hidden=true;
-   document.getElementById('updateVersion').textContent='Flow2Studio '+(preview?'0.9.6':value.version||'0.9.6');
+   document.getElementById('updateVersion').textContent='Flow2Studio '+(preview?'0.9.7':value.version||'0.9.7');
   }catch{}
   finally{button.disabled=false;}
  }

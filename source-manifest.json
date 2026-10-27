@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "applicationVersion": "0.9.6",
+  "applicationVersion": "0.9.7",
   "license": "MIT for original project code; third-party components retain their own terms",
   "purpose": "Build input inventory; not a signature or proof of executable equivalence",
   "files": [
@@ -12,7 +12,7 @@
     {
       "path": "Build-DMG.command",
       "bytes": 3307,
-      "sha256": "d0727d238e22d95ac379916261749f8d2e63213aa91e5f199e5effba26ae09c9"
+      "sha256": "0c281205d1165ecbe97b09e9a11c7b9e5dbfb1c3eb592af24bcc09f109149048"
     },
     {
       "path": "Build-and-Run.command",
@@ -331,8 +331,8 @@
     },
     {
       "path": "mac/FlowUpdates.m",
-      "bytes": 5324,
-      "sha256": "d364c2bf840d028a0f29bc26c7087cc60d9af09e8a451d5d94d6b7f5b512d925"
+      "bytes": 5318,
+      "sha256": "ff4434f85a9c7be73a15033eb7f8dfab37ba58cc49cda6385132f6753bb40407"
     },
     {
       "path": "mac/FlowV14Registry.h",
@@ -351,8 +351,8 @@
     },
     {
       "path": "mac/Studio.m",
-      "bytes": 49098,
-      "sha256": "e577f82e575c3a6dc7b7643d2b9f810818c807ab00786bacfbd0826a37b50f1d"
+      "bytes": 49110,
+      "sha256": "127931a51fba65bf24f7b8dfcbdd45179a2a4eee943ec51c78376b4041773d0c"
     },
     {
       "path": "resources/app.js",
@@ -386,8 +386,8 @@
     },
     {
       "path": "resources/index.html",
-      "bytes": 25817,
-      "sha256": "89b4fc6a86dc05bcfb427f5631847dce66d40c85c0bef165ce806ebe50179b23"
+      "bytes": 25833,
+      "sha256": "2423276917261a273048df5f1d4f7c8ee9badcf358c528d0e0b59f14e435aaf0"
     },
     {
       "path": "resources/layout68.js",
@@ -431,18 +431,18 @@
     },
     {
       "path": "resources/update-config.json",
-      "bytes": 70,
-      "sha256": "8bbb2e2ed8f281a937b6bc8fdaa53efb8033e29d6c0959bc0070ec0e0db30a7c"
+      "bytes": 89,
+      "sha256": "cc862a0d7f0b0276661f320d524526b7c5b4608a41dada18a3fea1d44b503d15"
     },
     {
       "path": "resources/updates.js",
       "bytes": 1039,
-      "sha256": "da4a0a5bc64bef58a731ceae8a29d429e937b007a8065d2a9ba9d74c600b3096"
+      "sha256": "35bab2c47f59cfa7000e6e25b352a3cb9c03cc4adcbfe201eb4f4cc0bc18ea2f"
     },
     {
       "path": "scripts/build-app.sh",
       "bytes": 3709,
-      "sha256": "2e2f082270c58a97eac047fbd00894ff6fe205620da1dadfcfdb2f2395ce184e"
+      "sha256": "1ed6f237d5db2954d33890c818d25c4fc584feb47ffc3ea6048b6033ef2d4005"
     },
     {
       "path": "scripts/check.sh",
@@ -547,7 +547,7 @@
     {
       "path": "tests/dmg-layout.py",
       "bytes": 2106,
-      "sha256": "f222b0c4f0bcde088018467b4f7d2d9361c7b52b391d3aa984b0c3ae6d903bd8"
+      "sha256": "32b30725c3d9060748277e9e375714f033fc33d370726359bcc569a405a2478a"
     },
     {
       "path": "tests/editing-policy.c",
@@ -612,7 +612,7 @@
     {
       "path": "tests/native-updates.m",
       "bytes": 730,
-      "sha256": "0c61002e37f5fe307f21823f7ccb1922b627e2d369271dcd921ddca4216709a6"
+      "sha256": "8fe34b43f8d64e9974df19ffcebc50febc8c5023ee0b5fbcd47d82cbce3ebb68"
     },
     {
       "path": "tests/native-window.m",
@@ -622,7 +622,7 @@
     {
       "path": "tests/package.py",
       "bytes": 2497,
-      "sha256": "1c07ccc24f39c6f01c34346916bcf10bb75095ced28d0b1f2467930b3b111047"
+      "sha256": "76db3c13fa3a54ad5527a60946ef970415475db162e4d84b7a819117bd3f5f70"
     },
     {
       "path": "tests/setup.cjs",
@@ -632,12 +632,12 @@
     {
       "path": "tests/source-snapshot.py",
       "bytes": 2209,
-      "sha256": "e62d023cf3a40e7a116c3e877cf959496f0e15e7cddbd1733f989e0e43326a56"
+      "sha256": "3b30a2715cfb2af6ce322752e94ed7832b6427496fbbd2bc4932c51f27ec41fc"
     },
     {
       "path": "tests/ui.cjs",
-      "bytes": 22866,
-      "sha256": "59abb1beb7b4434635e0b0768a4956a045d552c9ec3e8945a0f46cac526019af"
+      "bytes": 22878,
+      "sha256": "83f01720307f003662ff3a1e45867540650fb97e9ec57e73eb1e16b1919ea75e"
     },
     {
       "path": "tests/updates-ui.cjs",

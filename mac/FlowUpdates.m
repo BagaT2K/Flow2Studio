@@ -29,7 +29,7 @@ static void finish(NSDictionary *result,NSString *error){
  });
 }
 void FlowCheckUpdates(BOOL force,void (^completion)(NSDictionary *,NSString *)){
- // Called on the main queue. Repository stays empty until the release repository is chosen.
+ // Called on the main queue. Release checks use the bundled repository configuration.
  if(!force&&cachedResult&&-[lastCheck timeIntervalSinceNow]<21600){completion(cachedResult,nil);return;}
  if(!waiters)waiters=[NSMutableArray array];[waiters addObject:[completion copy]];
  if(checking)return;checking=YES;
@@ -54,7 +54,7 @@ void FlowCheckUpdates(BOOL force,void (^completion)(NSDictionary *,NSString *)){
   if(error||!data||data.length>2*1024*1024||![response isKindOfClass:NSHTTPURLResponse.class]||[(NSHTTPURLResponse *)response statusCode]!=200){finish(nil,@"Не удалось проверить обновления. Попробуйте позже.");return;}
   id payload=[NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
   if(![payload isKindOfClass:NSArray.class]){finish(nil,@"Не удалось проверить обновления. Попробуйте позже.");return;}
-  NSString *current=[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]?:@"0.9.6",*latest=current,*tag=nil;
+  NSString *current=[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]?:@"0.9.7",*latest=current,*tag=nil;
   for(id item in payload){
    if(![item isKindOfClass:NSDictionary.class]||![item[@"draft"]isKindOfClass:NSNumber.class]||![item[@"prerelease"]isKindOfClass:NSNumber.class])continue;
    if([item[@"draft"]boolValue]||([item[@"prerelease"]boolValue]&&![config[@"channel"]isEqual:@"prerelease"]))continue;
