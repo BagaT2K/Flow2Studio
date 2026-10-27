@@ -18,7 +18,7 @@ with tempfile.TemporaryDirectory(prefix="Flow2 DMG с пробелами ") as t
     (volume / "Flow2Studio.app").mkdir()
     (volume / "Applications").symlink_to("/Applications")
     now = datetime(2026, 10, 27, tzinfo=timezone.utc)
-    alias = Alias(volume=VolumeInfo("Flow2Studio 0.9.7", now, b"H+", 0, 0, b"\0\0"),
+    alias = Alias(volume=VolumeInfo("Flow2Studio 1.0.2", now, b"H+", 0, 0, b"\0\0"),
                   target=TargetInfo(0, "installer.png", 16, 17, now, b"\0"*4, b"\0"*4,
                                     posix_path="/.background/installer.png"))
     layout.write_layout(volume, alias)

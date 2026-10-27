@@ -27,10 +27,10 @@ assert 'MIT' in (root/'README.md').read_text()
 for name in ['PRIVACY.md','SECURITY.md','DISTRIBUTION.md','THIRD-PARTY-NOTICES.txt']:
  assert not (root/name).exists()
 assert 'app.flow2studio</string>' in (root/'scripts/build-app.sh').read_text()
-for name in ['Build-DMG.command','Build-and-Run.command','scripts/build-app.sh','scripts/check.sh']:
+for name in ['scripts/build-dmg.sh','scripts/build-app.sh','scripts/check.sh']:
  assert (root/name).is_file()
 source=(root/'scripts/build-app.sh').read_text()
-assert '<string>0.9.7</string>' in source and 'FlowUpdates.m' in source
+assert '<string>1.0.2</string>' in source and 'FlowUpdates.m' in source
 # Every local C/Objective-C include must survive cleanup.
 for folder in ['mac','tests']:
  for path in (root/folder).iterdir():

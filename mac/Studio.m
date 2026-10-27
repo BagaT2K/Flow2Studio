@@ -2,6 +2,7 @@
 #import <AppKit/AppKit.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import <WebKit/WebKit.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "FlowTransport.h"
 #import "FlowLocalization.h"
 #import "FlowDeferredStore.h"
@@ -67,6 +68,8 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
 @property(nonatomic) BOOL editingBlocked;
 @property(nonatomic) NSUInteger editingGeneration;
 @property(nonatomic) double editingActivity;
+@property(nonatomic) uint32_t editingKeyCount;
+@property(nonatomic) BOOL editingKeyBaseline;
 @property(nonatomic) FlowEditingPresence editingPresence;
 @property(nonatomic) BOOL windowClosed;
 @property(nonatomic) BOOL chargeForeground;
@@ -191,6 +194,7 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
 - (void)stopEditing {
     self.editingPresence=(FlowEditingPresence){0};
     self.editingWanted=NO;self.editingBlocked=NO;self.editingTimeout=0;self.editingLastAttempt=0;self.editingGeneration++;
+    self.editingKeyBaseline=NO;
     FlowHIDEnqueue(self.worker,^{FlowEditingEnd();});
 }
 - (void)editingActivityOccurred {
@@ -204,7 +208,8 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
     double now=NSProcessInfo.processInfo.systemUptime;
     BOOL visible=self.window.visible&&(self.window.occlusionState&NSWindowOcclusionStateVisible)!=0;
     BOOL foreground=!self.sleeping&&!self.terminating&&flow_window_foreground(NSApp.active,self.window.keyWindow,visible,self.window.miniaturized);
-    BOOL activated=foreground&&!self.chargeForeground;self.chargeForeground=foreground;
+    BOOL activated=foreground&&!self.chargeForeground;
+    BOOL departed=!foreground&&self.chargeForeground;self.chargeForeground=foreground;
     if(activated){
         self.editingBlocked=NO;
         if(self.selected&&!self.firmwareBusy)[self readCharge:self.selected request:@0 forcePercent:YES];
@@ -213,6 +218,13 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
     BOOL wanted=flow_editing_presence_tick(&_editingPresence,now,[[self preferences][@"editingConnection"]boolValue],foreground,!self.windowClosed,self.sleeping,self.firmwareBusy||self.terminating,rf);
     if(!wanted){if(self.editingWanted)[self stopEditing];return;}
     self.editingWanted=YES;
+    // Typing in another app is keyboard activity too. No global event tap,
+    // key codes, characters or typing history are collected.
+    uint32_t keyCount=CGEventSourceCounterForEventType(kCGEventSourceStateHIDSystemState,kCGEventKeyDown);
+    BOOL keyChanged=self.editingKeyBaseline&&keyCount!=self.editingKeyCount;
+    self.editingKeyCount=keyCount;self.editingKeyBaseline=YES;
+    double keyboardIdle=keyChanged?CGEventSourceSecondsSinceLastEventType(kCGEventSourceStateHIDSystemState,kCGEventKeyDown):0;
+    self.editingActivity=flow_editing_keyboard_activity(now,self.editingActivity,keyChanged,departed,keyboardIdle);
     if(self.editingPending||self.editingBlocked)return;
     BOOL dark=flow_editing_dark(now,self.editingActivity,self.editingTimeout);
     if(self.editingLastAttempt>0&&now-self.editingLastAttempt<4&&dark==self.editingDark)return;

@@ -27,8 +27,8 @@ cat > "$studio_app/Contents/Info.plist" <<'PLIST'
 <key>CFBundleExecutable</key><string>Flow2Studio</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleIconFile</key><string>Flow2Studio</string>
-<key>CFBundleShortVersionString</key><string>0.9.7</string>
-<key>CFBundleVersion</key><string>64</string>
+<key>CFBundleShortVersionString</key><string>1.0.2</string>
+<key>CFBundleVersion</key><string>66</string>
 <key>NSHumanReadableCopyright</key><string>Copyright © 2026 BagaT2K. MIT; see LICENSE.</string>
 <key>LSMinimumSystemVersion</key><string>12.0</string>
 <key>NSHighResolutionCapable</key><true/>
@@ -43,7 +43,7 @@ for studio_notice in LICENSE README.md; do
 done
 "$studio_python" "$studio_dir/scripts/source-manifest.py" "$studio_dir" \
  "$studio_app/Contents/Resources/Legal/source-manifest.json" \
- --archive "$studio_dir/dist/Flow2Studio-0.9.7-source.zip"
+ --archive "$studio_dir/dist/Flow2Studio-1.0.2-source.zip"
 if [[ "${FLOW2_SIGN_IDENTITY:--}" == - ]]; then
  /usr/bin/codesign --force --sign - "$studio_app"
 else

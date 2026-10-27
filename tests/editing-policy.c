@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
+#include <math.h>
 #include "../mac/FlowEditingPolicy.h"
 static bool tick(FlowEditingPresence *p,double now,bool foreground){return flow_editing_presence_tick(p,now,true,foreground,true,false,false,true);}
 int main(void){
@@ -40,6 +41,26 @@ int main(void){
   assert(!flow_editing_dark(99,100,timeout));
  }
  assert(!flow_editing_dark(999999,100,0));
+ // Typing outside Studio resets only the light timer, including while dark.
+ double activity=100;
+ assert(flow_editing_dark(170,activity,60));
+ activity=flow_editing_keyboard_activity(170,activity,true,false,.2);
+ assert(activity==169.8&&!flow_editing_dark(170,activity,60));
+ assert(flow_editing_dark(230,activity,60));
+ assert(flow_editing_keyboard_activity(230,activity,false,false,0)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,true,0)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,false,-1)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,false,INFINITY)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,false,NAN)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,false,231)==activity);
+ assert(flow_editing_keyboard_activity(230,activity,true,false,100)==activity);
+ // Background typing must not extend the independent ten-minute radio grace.
+ p=(FlowEditingPresence){0};assert(tick(&p,100,true));assert(tick(&p,101,false));
+ for(unsigned now=102;now<701;now++){
+  activity=flow_editing_keyboard_activity(now,activity,true,false,0);
+  assert(tick(&p,now,false));assert(p.deadline==701);
+ }
+ assert(!tick(&p,701,false));assert(!tick(&p,702,false));
  assert(!flow_editing_event_activity(true,false,false,false,0));
  assert(!flow_editing_event_activity(false,true,false,false,0));
  assert(flow_editing_event_activity(true,true,false,false,0));
@@ -48,5 +69,5 @@ int main(void){
   bool system=key==12||key==13||key==4||key==46||key==48;
   assert(flow_editing_event_activity(true,false,true,true,key)==!system);
  }
- puts("Passed: unlimited foreground lease; one 600-second grace per departure, return/cancel/restart, expiry without restart, immediate safety release; independent light timer; 300-second background battery polling never renews the grace.");
+ puts("Passed: unlimited foreground lease; independent 600-second grace and 300-second battery polling; typing outside Studio resets light timeout and wakes dark light; departure shortcuts, invalid idle samples and background typing cannot extend the radio grace.");
 }

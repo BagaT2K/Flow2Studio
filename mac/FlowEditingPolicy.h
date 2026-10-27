@@ -15,6 +15,13 @@ static inline bool flow_editing_presence_tick(FlowEditingPresence *p,double now,
 static inline unsigned flow_battery_poll_interval(bool foreground,bool automatic){return foreground?(automatic?2:5):300;}
 static inline bool flow_battery_poll_due(double now,double last,bool foreground,bool automatic,bool changed){return changed||(now>=last&&now-last>=flow_battery_poll_interval(foreground,automatic));}
 static inline bool flow_editing_dark(double now,double activity,unsigned timeout){return timeout>0&&now>=activity&&now-activity>=timeout;}
+/* Use only an aggregate keyboard-event count and age, never event contents.
+   Ignore the departure event itself so Cmd-Tab/H/M does not flash the light. */
+static inline double flow_editing_keyboard_activity(double now,double activity,bool changed,bool departed,double keyboardIdle){
+ if(!changed||departed||!(keyboardIdle>=0&&keyboardIdle<=now))return activity;
+ double latest=now-keyboardIdle;
+ return latest>activity?latest:activity;
+}
 /* macOS virtual key codes: Q=12, W=13, H=4, M=46, Tab=48.
    Window/app actions should not wake light just before losing focus. */
 static inline bool flow_editing_event_activity(bool mainWindow,bool content,bool keyDown,bool command,unsigned keyCode){

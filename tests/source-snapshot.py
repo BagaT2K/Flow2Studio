@@ -13,18 +13,18 @@ with tempfile.TemporaryDirectory(prefix="flow2 source ") as directory:
     directory = Path(directory)
     manifest_path, archive_path = directory / "manifest.json", directory / "source.zip"
     manifest = module.snapshot(root, manifest_path, archive_path)
-    assert manifest["applicationVersion"] == "0.9.7"
+    assert manifest["applicationVersion"] == "1.0.2"
     with zipfile.ZipFile(archive_path) as archive:
         assert archive.testzip() is None
-        assert json.loads(archive.read("Flow2-Studio-0.9.7/source-manifest.json")) == manifest
+        assert json.loads(archive.read("Flow2-Studio-1.0.2/source-manifest.json")) == manifest
         for entry in manifest["files"]:
-            data = archive.read("Flow2-Studio-0.9.7/" + entry["path"])
+            data = archive.read("Flow2-Studio-1.0.2/" + entry["path"])
             assert len(data) == entry["bytes"] and hashlib.sha256(data).hexdigest() == entry["sha256"]
         names = {entry["path"] for entry in manifest["files"]}
         assert {"LICENSE", "README.md", "firmware-bundle/NOTICE", "mac/Studio.m"} <= names
         assert not {"PRIVACY.md", "SECURITY.md", "DISTRIBUTION.md", "THIRD-PARTY-NOTICES.txt"} & names
         assert not any("__pycache__" in name or name.startswith("dist/") for name in names)
-        mode = archive.getinfo("Flow2-Studio-0.9.7/Build-DMG.command").external_attr >> 16
+        mode = archive.getinfo("Flow2-Studio-1.0.2/scripts/build-dmg.sh").external_attr >> 16
         assert mode & 0o111
     fixture = directory / "fixture"
     (fixture / "mac").mkdir(parents=True)

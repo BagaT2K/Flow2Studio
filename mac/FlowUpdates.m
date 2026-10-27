@@ -54,7 +54,7 @@ void FlowCheckUpdates(BOOL force,void (^completion)(NSDictionary *,NSString *)){
   if(error||!data||data.length>2*1024*1024||![response isKindOfClass:NSHTTPURLResponse.class]||[(NSHTTPURLResponse *)response statusCode]!=200){finish(nil,@"Не удалось проверить обновления. Попробуйте позже.");return;}
   id payload=[NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
   if(![payload isKindOfClass:NSArray.class]){finish(nil,@"Не удалось проверить обновления. Попробуйте позже.");return;}
-  NSString *current=[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]?:@"0.9.7",*latest=current,*tag=nil;
+  NSString *current=[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"]?:@"1.0.2",*latest=current,*tag=nil;
   for(id item in payload){
    if(![item isKindOfClass:NSDictionary.class]||![item[@"draft"]isKindOfClass:NSNumber.class]||![item[@"prerelease"]isKindOfClass:NSNumber.class])continue;
    if([item[@"draft"]boolValue]||([item[@"prerelease"]boolValue]&&![config[@"channel"]isEqual:@"prerelease"]))continue;
