@@ -6,9 +6,14 @@ Configuration app for Lofree Flow 2 keyboards.
 
 Build targets macOS 12 and later on Apple Silicon and Intel. Windows support is planned.
 
-Designed for standard Flow 2 **68, 84 and 100** models. Flow 2 for Mac models are not supported.
+Designed for standard Flow 2 **68, 84 and 100** models.
 
-> **Hardware testing has been performed only on Flow 2 68.** Flow 2 84 and 100 have not been tested on physical devices. Firmware flashing is at your own risk. A failed or interrupted update may leave the keyboard unusable.
+> [!CAUTION]
+> **TESTED ONLY ON FLOW 2 68**
+>
+> Flow 2 84 and 100 have not been tested on physical devices.
+>
+> **Flash firmware at your own risk.** A failed or interrupted update may leave the keyboard unusable.
 
 ## Installation
 
