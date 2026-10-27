@@ -1,5 +1,7 @@
 # Flow2Studio
 
+![intro](images/intro.png)
+
 Configuration app for Lofree Flow 2 keyboards.
 
 [Releases](https://github.com/BagaT2K/Flow2Studio/releases) · [Support development](https://ko-fi.com/bagat2k/tip)
