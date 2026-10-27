@@ -87,6 +87,18 @@ Record key presses and shortcuts with delays. Edit the sequence, save it and ass
 
 English, Chinese, Japanese, Korean, Spanish, German and Russian. English is the default; the app remembers your selection.
 
+## Bug reports
+
+Found a bug? [Open an issue](https://github.com/BagaT2K/Flow2Studio/issues).
+
+Please include:
+- App and firmware versions.
+- Keyboard model: 68, 84 or 100.
+- Connection: USB, Bluetooth or 2.4 GHz.
+- macOS version.
+- Steps to reproduce, expected behavior and what happened.
+- Screenshots or error messages, if available.
+
 ## License
 
 Original project code is licensed under the [MIT License](LICENSE). Third-party components and assets retain their own terms.
