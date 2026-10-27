@@ -21,6 +21,18 @@ Designed for standard Flow 2 **68, 84 and 100** models.
 2. Open it and drag Flow2Studio into Applications.
 3. Launch Flow2Studio.
 
+> [!IMPORTANT]
+> **First launch on macOS**
+>
+> Flow2Studio is not signed with an Apple Developer ID or notarized, so macOS may block the first launch.
+>
+> 1. Move Flow2Studio to Applications and try opening it.
+> 2. Open **System Settings → Privacy & Security**.
+> 3. Scroll to **Security** and click **Open Anyway** next to Flow2Studio.
+> 4. Confirm with your password or Touch ID if prompted, then click **Open**.
+>
+> Only approve a copy downloaded from this repository's Releases. Disabling Gatekeeper is not required.
+
 ## First connection
 
 The firmware panel appears when you first connect the keyboard. Studio firmware enables the app's additional controls.
