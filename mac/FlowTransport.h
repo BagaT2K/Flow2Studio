@@ -4,3 +4,6 @@ NSDictionary *FlowPerform(NSDictionary *device, NSString *action, NSDictionary *
 // Call only from the same serial worker as FlowPerform.
 NSDictionary *FlowEditingTick(NSDictionary *device, double idleSeconds, NSError **error);
 void FlowEditingEnd(void);
+BOOL FlowTouchLiveStart(NSDictionary *device,void (^point)(unsigned),NSError **error);
+void FlowTouchLiveEnd(void);
+BOOL FlowTouchTestStop(NSError **error);

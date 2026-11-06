@@ -97,10 +97,6 @@ NSArray<NSDictionary *> *FlowDevices(void) {
     return [[connections allValues] sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *a,NSDictionary *b){return [a[@"key"] compare:b[@"key"]];}];
 }
 
-static void callback(void *context,IOReturn result,void *sender,IOHIDReportType type,uint32_t reportID,uint8_t *bytes,CFIndex length) {
-    (void)sender;if(length<0)return;
-    flow_hid_response_accept(context,result==kIOReturnSuccess,type==kIOHIDReportTypeInput,reportID,bytes,(size_t)length);
-}
 @class Session;
 typedef struct { __unsafe_unretained Session *session; NSError *__autoreleasing *error; } WakeContext;
 static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
@@ -112,6 +108,11 @@ static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
 @property(nonatomic) BOOL windowLease;
 @property(nonatomic) BOOL editingDark;
 @property(nonatomic) BOOL profileBase14;
+@property(nonatomic) uint32_t touchToken;
+@property(nonatomic) BOOL touchClosing;
+@property(nonatomic,copy) void (^touchPoint)(unsigned);
+- (void)acceptReport:(const uint8_t *)bytes length:(size_t)length reportID:(uint32_t)reportID;
+- (void)acceptTouchPacket:(const uint8_t *)bytes length:(size_t)length;
 @property(nonatomic,strong) NSDictionary *device;
 - (BOOL)packet:(const uint8_t *)request response:(uint8_t *)response error:(NSError **)error;
 - (BOOL)rawPacket:(const uint8_t *)request response:(uint8_t *)response error:(NSError **)error;
@@ -120,7 +121,25 @@ static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
 - (void)attachInput;
 - (void)releaseEditing;
 @end
+static void callback(void *context,IOReturn result,void *sender,IOHIDReportType type,uint32_t reportID,uint8_t *bytes,CFIndex length) {
+    (void)sender;
+    if(result==kIOReturnSuccess&&type==kIOHIDReportTypeInput&&length>=0)
+        [(__bridge Session *)context acceptReport:bytes length:(size_t)length reportID:reportID];
+}
 @implementation Session
+- (void)acceptTouchPacket:(const uint8_t *)bytes length:(size_t)length {
+    unsigned position=flow_touch_live_position(bytes,length,[self.device[@"model"]intValue],self.touchToken);
+    if(position&&self.touchPoint)self.touchPoint(position);
+}
+- (void)acceptReport:(const uint8_t *)bytes length:(size_t)length reportID:(uint32_t)reportID {
+    if(!self.ble){
+        const uint8_t *payload=bytes;
+        size_t size=length;
+        if(size==33&&payload[0]==0){payload++;size--;}
+        [self acceptTouchPacket:payload length:size];
+    }
+    flow_hid_response_accept(&_response,true,true,reportID,bytes,length);
+}
 - (BOOL)packet:(const uint8_t *)request response:(uint8_t *)response error:(NSError **)error {
     double now=NSProcessInfo.processInfo.systemUptime;
     if(flow_wake_due(&_wake,now)){
@@ -139,7 +158,8 @@ static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
 }
 - (BOOL)rawPacket:(const uint8_t *)request response:(uint8_t *)response error:(NSError **)error {
     if(self.serial){
-        NSData *data=FlowBLEExchange(self.device,[NSData dataWithBytes:request length:32],error);
+        NSData *packet=[NSData dataWithBytes:request length:32];
+        NSData *data=self.touchClosing?FlowBLEExchangeConnected(self.device,packet,error):FlowBLEExchange(self.device,packet,error);
         if(data.length!=32)return NO;memcpy(response,data.bytes,32);return YES;
     }
     // One callback registration and one stable context per open device.
@@ -168,7 +188,7 @@ static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
 - (void)attachInput {
     NSCAssert(!_inputRunLoop,@"Input already attached");
     _inputRunLoop=(CFRunLoopRef)CFRetain(CFRunLoopGetCurrent());
-    IOHIDDeviceRegisterInputReportCallback(self.handle,self.input,512,callback,&_response);
+    IOHIDDeviceRegisterInputReportCallback(self.handle,self.input,512,callback,(__bridge void *)self);
     IOHIDDeviceScheduleWithRunLoop(self.handle,_inputRunLoop,kCFRunLoopDefaultMode);
 }
 
@@ -193,6 +213,7 @@ static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply);
     free(_input);
 }
 @end
+#include "FlowTouchTransport.inc"
 static bool wakeExchange(void *context,const uint8_t *request,uint8_t *reply){
     WakeContext *c=context;return [c->session rawPacket:request response:reply error:c->error];
 }
@@ -297,6 +318,14 @@ static NSDictionary *performAction(Session *s,NSDictionary *device,NSString *act
         }
         return @{@"valid":@((r[5]&1)&&r[6]<=100),@"percent":@(r[6]),@"power":@((r[5]&2)!=0),@"full":@((r[5]&6)==6),@"usbBatteryRequested":@(queried),@"batteryReason":reason};
     }
+    if([action isEqual:@"syncTouchProfile"]){
+        FlowModel shape=flow_model([device[@"model"]intValue]);
+        NSNumber *known=arguments[@"known"];int count=[known isKindOfClass:NSNumber.class]?known.intValue:0;
+        if(!shape.model||(!s.ble&&[device[@"pid"]unsignedIntValue]!=shape.pid)||count<1||count>3){
+            fail(error,@"Touch Bar: invalid zones or assignments.");return nil;
+        }
+        return touchReadConfig(s,0,(unsigned)count,error);
+    }
     // A USB receiver alone is not proof that the keyboard is online.
     // Require the nonce-correlated keyboard response before enabling configuration.
     uint8_t alive[32],nonce[4];arc4random_buf(nonce,4);flow_request(alive,nonce);
@@ -311,6 +340,18 @@ static NSDictionary *performAction(Session *s,NSDictionary *device,NSString *act
     unsigned protocol=(r[1]<<8)|r[2];
     FlowModel shape=flow_model([device[@"model"]intValue]);
     if(!shape.model||(!s.ble&&[device[@"pid"]unsignedIntValue]!=shape.pid)||protocol!=12){fail(error,@"Настройка этой модели ещё не проверена. Доступен просмотр устройства.");return nil;}
+    if([action isEqual:@"importTouchProfile"]){
+        if(!touchArguments(arguments)){fail(error,@"Touch Bar: invalid zones or assignments.");return nil;}
+        unsigned slot=[arguments[@"count"]unsignedIntValue];
+        NSDictionary *current=touchReadProfile(s,slot,error);
+        if(!current||!current[@"savedProfiles"]||([current[@"savedProfiles"]unsignedIntValue]&(1u<<(slot-1))))return current;
+        NSMutableDictionary *config=[arguments mutableCopy];config[@"keepActive"]=@YES;
+        return touchSet(s,config,error);
+    }
+    if([action isEqual:@"selectTouchProfile"])return touchSelect(s,arguments,error);
+    if([action isEqual:@"readTouch"]||[action isEqual:@"setTouch"]){
+        return [action isEqual:@"setTouch"]?touchSet(s,arguments,error):touchRead(s,error);
+    }
     if([action isEqual:@"capabilities"]){
         NSMutableDictionary *result=[@{@"protocol":@(protocol),@"rows":@(shape.rows),@"cols":@(shape.cols),@"positions":@(shape.positions)}mutableCopy];
         if(!query(s,0x11,r,error))return nil;if(!r[1]||r[1]>16){fail(error,@"Неизвестная структура слоёв");return nil;}result[@"layers"]=@(r[1]);
@@ -320,6 +361,12 @@ static NSDictionary *performAction(Session *s,NSDictionary *device,NSString *act
         p[2]=2;if(![s packet:p response:r error:error])return nil;result[@"effect"]=@(r[3]!=0);
         NSError *profileError=nil;NSDictionary *profile=control(s,1,0,0,0,&profileError);
         result[@"profileSupported"]=@(profile!=nil);if(profile){result[@"profile"]=profile;result[@"brightness"]=profile[@"mainBrightness"];result[@"waveSpeed"]=profile[@"animationSpeed"];result[@"effectFamily"]=@"zones-v1";if([result[@"effect"]boolValue]&&[profile[@"animationMode"]unsignedIntValue])result[@"effect"]=@([profile[@"animationMode"]unsignedIntValue]+1);}
+        if(profile){
+            if([profile[@"firmwareVersion"] isEqual:@"0.10"]){
+                NSDictionary *current=touchRead(s,NULL);
+                if(current)result[@"touch"]=current;
+            }
+        }
         return result;
     }
     // The native boundary rechecks a fresh nonce-correlated feature reply before every mutation.
@@ -462,6 +509,7 @@ static NSDictionary *performAction(Session *s,NSDictionary *device,NSString *act
 
 // Accessed only on Studio's serial HID worker. No packet-level parallelism.
 static Session *editingSession;
+static Session *touchLiveSession;
 void FlowEditingEnd(void) {
     Session *s=editingSession;editingSession=nil;
     if(!s)return;
@@ -478,6 +526,43 @@ static Session *openSession(NSDictionary *device,NSError **error) {
         [s attachInput];
     }
     return s;
+}
+static BOOL endTouchTest(BOOL discardOnFailure,NSError **error) {
+    Session *s=touchLiveSession;
+    if(!s)return YES;
+    s.touchClosing=YES;
+    uint8_t r[32];
+    BOOL stopped=touchExchange(s,8,0,0,nil,s.touchToken,r,error);
+    if(stopped||discardOnFailure){
+        touchLiveSession=nil;
+        s.touchPoint=nil;
+        if(s.serial)FlowBLESetTouchObserver(nil);
+    }
+    return stopped;
+}
+void FlowTouchLiveEnd(void){endTouchTest(YES,NULL);}
+BOOL FlowTouchTestStop(NSError **error){return endTouchTest(NO,error);}
+BOOL FlowTouchLiveStart(NSDictionary *device,void (^point)(unsigned),NSError **error) {
+    FlowModel model=flow_model([device[@"model"]intValue]);
+    if(![device[@"vendor"]boolValue]||!model.model)return NO;
+    FlowTouchLiveEnd();
+    Session *s=openSession(device,error);if(!s)return NO;
+    s.touchPoint=point;
+    s.touchToken=arc4random_uniform(UINT32_MAX)+1;
+    uint8_t reply[32];
+    touchLiveSession=s;
+    if(!touchExchange(s,9,0,0,nil,s.touchToken,reply,error)){
+        FlowTouchLiveEnd();
+        return NO;
+    }
+    if(s.serial){
+        unsigned sku=model.model;uint32_t token=s.touchToken;
+        FlowBLESetTouchObserver(^(NSData *packet){
+            unsigned position=flow_touch_live_position(packet.bytes,packet.length,sku,token);
+            if(position)point(position);
+        });
+    }
+    return YES;
 }
 NSDictionary *FlowEditingTick(NSDictionary *device,double idleSeconds,NSError **error) {
     if(![device[@"connection"]isEqual:@"2.4 ГГц"]||!flow_model([device[@"model"]intValue]).model||![device[@"vendor"]boolValue]){
@@ -512,13 +597,15 @@ NSDictionary *FlowPerform(NSDictionary *device,NSString *action,NSDictionary *ar
         fail(error,@"Bluetooth подключён, но служебный HID-канал настроек не найден. Для настройки используйте USB или 2.4 ГГц.");return nil;
     }
     BOOL retained=editingSession&&[editingSession.device[@"id"]isEqual:device[@"id"]];
-    Session *s=retained?editingSession:openSession(device,error);if(!s)return nil;
+    Session *s=retained?editingSession:openSession(device,error);
+    if(!s)return nil;
     BOOL bluetooth=s.ble;
-    if(retained&&![action isEqual:@"status"]){
+    BOOL passive=[action isEqual:@"status"]||[action isEqual:@"syncTouchProfile"];
+    if(retained&&!passive){
         s.editingDark=NO;
         if(!control(s,8,1,0,0,error)){offline(error);return nil;}
     }
-    FlowModel operationModel=flow_model([device[@"model"]intValue]);BOOL eligible=operationModel.model&&(bluetooth||[device[@"pid"]unsignedIntValue]==operationModel.pid)&&![action isEqual:@"status"];
+    FlowModel operationModel=flow_model([device[@"model"]intValue]);BOOL eligible=operationModel.model&&(bluetooth||[device[@"pid"]unsignedIntValue]==operationModel.pid)&&!passive;
     if(eligible&&!retained){
         // Send the wake request BEFORE ordinary liveness reads, including after sleep.
         // This is volatile: firmware limits it to 15 seconds if the app/link fails.

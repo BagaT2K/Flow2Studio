@@ -10,7 +10,7 @@ static NSDictionary *normalizedLighting(NSDictionary *args){
 }
 @implementation FlowDeferredStore
 - (instancetype)initWithDefaults:(NSUserDefaults *)defaults {if((self=[super init]))_defaults=defaults;return self;}
-+ (BOOL)accepts:(NSString *)action {return [@[@"lighting",@"profile",@"advanced",@"setKey",@"setLayer",@"saveMacros"]containsObject:action];}
++ (BOOL)accepts:(NSString *)action {return [@[@"lighting",@"profile",@"advanced",@"setTouch",@"setKey",@"setLayer",@"saveMacros"]containsObject:action];}
 - (NSArray<NSDictionary *> *)jobs:(NSString *)key {
  id v=[self.defaults dictionaryForKey:@"deferredSettings.v1"][key];if(![v isKindOfClass:NSArray.class])return @[];
  NSMutableArray *jobs=[v mutableCopy];BOOL changed=NO;
@@ -23,6 +23,7 @@ static NSDictionary *normalizedLighting(NSDictionary *args){
     NSMutableDictionary *args=[([action isEqual:@"lighting"]?normalizedLighting(arguments):arguments) mutableCopy];if([@[@"lighting",@"profile",@"advanced"]containsObject:action])args[@"persist"]=@YES;
     NSMutableArray *jobs=[[self jobs:key]mutableCopy];
     NSString *slot=[action isEqual:@"setKey"]?[NSString stringWithFormat:@"key:%@:%@:%@",args[@"layer"],args[@"row"],args[@"col"]]:[action isEqual:@"setLayer"]?[NSString stringWithFormat:@"layer:%@",args[@"layer"]]:action;
+    if([action isEqual:@"setTouch"]&&[args[@"keepActive"] isEqual:@YES])slot=[NSString stringWithFormat:@"touch-profile:%@",args[@"count"]];
     if([action isEqual:@"setKey"]){
         for(NSDictionary *old in jobs)if(!old[@"error"]&&[old[@"action"]isEqual:@"setLayer"]&&[old[@"args"][@"layer"]isEqual:args[@"layer"]]){
             NSMutableDictionary *merged=[old[@"args"]mutableCopy];NSMutableArray *keys=[merged[@"keys"]mutableCopy];unsigned cols=keys.count==108?18:15;unsigned rows=(unsigned)keys.count/cols;

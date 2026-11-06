@@ -7,6 +7,7 @@
 #include "FlowBluetooth.h"
 #include "FlowProtocol.h"
 #include "FlowControl.h"
+#include "FlowTouchProtocol.h"
 /* Owned by Session for its entire lifetime, never a request's stack frame. */
 typedef struct {
  uint8_t request[32],reply[32];int done;bool active,battery,ble;
@@ -27,6 +28,7 @@ static inline void flow_hid_response_accept(FlowHIDResponse *r,bool success,bool
  }
  if(length==33&&bytes[0]==0){bytes++;length--;}
  if(length!=32)return;
+ if(r->request[0]==0x18){if(flow_touch_match(r->request,bytes)){memcpy(r->reply,bytes,32);r->done=1;}else if(bytes[0]==0xff&&!memcmp(bytes+1,r->request+1,3))r->done=-1;return;}
  if(r->request[0]==0x16){
   if(flow_control_match(r->request,bytes)){memcpy(r->reply,bytes,32);r->done=1;}
   else if(bytes[0]==0xff)r->done=-1;

@@ -27,17 +27,17 @@
  function translateAttributes(element){
   if(excluded(element))return;
   let records=attributeRecords.get(element);if(!records){records={};attributeRecords.set(element,records);}
-  for(const name of ['title','aria-label','placeholder'])if(element.hasAttribute(name)){
+  for(const name of ['title','aria-label','placeholder','label'])if(element.hasAttribute(name)){
    const value=element.getAttribute(name),old=records[name],source=old&&old.rendered===value?old.source:value,rendered=translate(source);records[name]={source,rendered};if(rendered!==value)element.setAttribute(name,rendered);
   }
  }
  const observer=new MutationObserver(()=>{if(!scheduled&&!refreshing){scheduled=true;queueMicrotask(()=>{scheduled=false;refresh();});}});
- function observe(){observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['title','aria-label','placeholder']});}
+ function observe(){observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['title','aria-label','placeholder','label']});}
  function refresh(){
   if(disposed||refreshing||!document.body)return;refreshing=true;observer.disconnect();
-  try{const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode())translateNode(walker.currentNode);document.body.querySelectorAll('[title],[aria-label],[placeholder]').forEach(translateAttributes);document.documentElement.lang=language;const picker=document.getElementById('appLanguage');if(picker){picker.value=language;const label=translate('Language');if(picker.getAttribute('aria-label')!==label)picker.setAttribute('aria-label',label);}window.syncSelects?.();}finally{refreshing=false;observe();}
+  try{const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode())translateNode(walker.currentNode);document.body.querySelectorAll('[title],[aria-label],[placeholder],optgroup[label]').forEach(translateAttributes);document.documentElement.lang=language;const picker=document.getElementById('appLanguage');if(picker){picker.value=language;const label=translate('Language');if(picker.getAttribute('aria-label')!==label)picker.setAttribute('aria-label',label);}window.syncSelects?.();}finally{refreshing=false;observe();}
  }
- function setLanguage(value){if(!names[value])value='en';if(value!==language||!initialized){language=value;try{localStorage.setItem('flow.language',value);}catch{}refresh();initialized=true;}return language;}
+ function setLanguage(value){if(!names[value])value='en';if(value!==language||!initialized){language=value;try{localStorage.setItem('flow.language',value);}catch{}refresh();initialized=true;window.dispatchEvent(new Event('flow-language'));}return language;}
  function dispose(){disposed=true;observer.disconnect();}
  window.addEventListener('pagehide',dispose);
  function sourceText(element){if(!element)return '';const walker=document.createTreeWalker(element,NodeFilter.SHOW_TEXT);let text='';while(walker.nextNode()){const node=walker.currentNode,record=textRecords.get(node);text+=record&&record.rendered===node.nodeValue?record.source:node.nodeValue;}return text;}

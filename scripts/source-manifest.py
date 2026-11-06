@@ -6,8 +6,8 @@ import json
 import re
 import zipfile
 
-SOURCE_DIRS = ("mac", "resources", "firmware", "firmware-bundle", "localization", "scripts", "tests")
-ROOT_FILES = ("LICENSE", "README.md", "Build-DMG.command", "Build-and-Run.command", "Flow2Studio.icns", ".gitignore")
+SOURCE_DIRS = ("mac", "resources", "firmware", "firmware-bundle", "localization", "scripts", "images")
+ROOT_FILES = ("LICENSE", "README.md", "Build-DMG.command", "Flow2Studio.icns", ".gitignore")
 
 
 def collect_sources(root):

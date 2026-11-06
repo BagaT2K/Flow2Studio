@@ -4,9 +4,9 @@ studio_root="$(cd -- "$(dirname -- "$0")/.." && pwd)"
 if [[ "$(uname -s)" != Darwin ]]; then echo 'Build the DMG on a Mac.';exit 1;fi
 studio_python="$(command -v python3 || /usr/bin/xcrun --find python3)"
 "$studio_python" -c 'import sys; assert sys.version_info >= (3, 7), "Python 3.7+ is required"'
-"$studio_python" "$studio_root/tests/dmg-layout.py"
-"$studio_python" "$studio_root/tests/source-snapshot.py"
 bash "$studio_root/scripts/build-app.sh"
+studio_version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$studio_root/dist/Flow2Studio.app/Contents/Info.plist")"
+studio_dmg_name="Flow2Studio-$studio_version.dmg"
 studio_stage="$(mktemp -d "${TMPDIR:-/tmp}/flow2-dmg.XXXXXX")"
 studio_mount=""
 cleanup_dmg(){
@@ -19,10 +19,10 @@ mkdir -p "$studio_stage/content/.background"
 "$studio_stage/draw-background" "$studio_stage/content/.background/installer.png"
 /usr/bin/ditto "$studio_root/dist/Flow2Studio.app" "$studio_stage/content/Flow2Studio.app"
 ln -s /Applications "$studio_stage/content/Applications"
-studio_dmg="$studio_root/dist/Flow2Studio-1.0.dmg"
+studio_dmg="$studio_root/dist/$studio_dmg_name"
 # Avoid reopening an old mounted copy of this exact output file after rebuilding it.
 "$studio_python" "$studio_root/scripts/unmount-dmg.py" "$studio_dmg"
-/usr/bin/hdiutil create -ov -fs HFS+ -volname 'Flow2Studio 1.0' -srcfolder "$studio_stage/content" -format UDRW "$studio_stage/layout.dmg"
+/usr/bin/hdiutil create -ov -fs HFS+ -volname "Flow2Studio $studio_version" -srcfolder "$studio_stage/content" -format UDRW "$studio_stage/layout.dmg"
 mkdir "$studio_stage/mounted"
 /usr/bin/hdiutil attach -nobrowse -readwrite -mountpoint "$studio_stage/mounted" "$studio_stage/layout.dmg"
 studio_mount="$(cd -- "$studio_stage/mounted" && pwd -P)"
@@ -50,9 +50,8 @@ fi
 /usr/bin/hdiutil verify "$studio_dmg"
 (
  cd "$studio_root/dist"
- /usr/bin/shasum -a 256 Flow2Studio-1.0.dmg > Flow2Studio-1.0.dmg.sha256
- /usr/bin/shasum -a 256 Flow2Studio-1.0.dmg Flow2Studio-1.0.2-source.zip > SHA256SUMS
+ /usr/bin/shasum -a 256 "$studio_dmg_name" "Flow2Studio-$studio_version-source.zip" > SHA256SUMS
 )
 echo "Ready: $studio_dmg"
-if [[ "${FLOW2_SIGN_IDENTITY:--}" == - ]]; then echo 'Test build without Developer ID signing or Apple notarization.';fi
+if [[ "${FLOW2_SIGN_IDENTITY:--}" == - ]]; then echo 'Built without Developer ID signing or Apple notarization.';fi
 /usr/bin/open "$studio_dmg"

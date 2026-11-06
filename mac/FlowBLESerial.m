@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger,FlowSerialStage){FlowSerialIdle,FlowSerialWake,FlowSe
 @property(nonatomic,strong) NSData *pendingReply;
 @property(nonatomic) BOOL started;
 @property(nonatomic) BOOL ready;
+@property(nonatomic,copy) void (^touchObserver)(NSData *);
 @property(nonatomic) FlowSerialStage stage;
 - (void)exchange:(NSDictionary *)device request:(NSData *)request completion:(void (^)(NSData *,NSError *))completion;
 - (void)finish:(NSData *)data error:(NSError *)error;
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSUInteger,FlowSerialStage){FlowSerialIdle,FlowSerialWake,FlowSe
 - (void)closeConnection{
     self.central.delegate=nil;self.peripheral.delegate=nil;
     if(self.peripheral)[self.central cancelPeripheralConnection:self.peripheral];
-    self.central=nil;self.peripheral=nil;self.ready=NO;self.started=NO;
+    self.central=nil;self.peripheral=nil;self.ready=NO;self.touchObserver=nil;self.started=NO;
     self.output=nil;self.inputs=nil;self.subscribed=nil;self.jobs=nil;self.currentJob=nil;
     self.manufacturer=nil;self.revision=nil;self.deviceID=nil;self.name=nil;
 }
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSUInteger,FlowSerialStage){FlowSerialIdle,FlowSerialWake,FlowSe
     else{
         NSUInteger generation=self.generation;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,60*NSEC_PER_SEC),dispatch_get_main_queue(),^{
-            if(generation==self.generation&&!self.completion)[self reset];
+            if(generation==self.generation&&!self.completion&&!self.touchObserver)[self reset];
         });
     }
     if(complete)complete(data,error);
@@ -153,8 +154,12 @@ typedef NS_ENUM(NSUInteger,FlowSerialStage){FlowSerialIdle,FlowSerialWake,FlowSe
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)c error:(NSError *)error{
     if(peripheral!=self.peripheral)return;
     if([self.inputs containsObject:c]){
-        if(!self.request||!self.completion||self.stage!=FlowSerialPayload)return;if(error){[self finish:nil error:error];return;}
+        if(error){if(self.completion)[self finish:nil error:error];return;}
         NSData *v=c.value;uint8_t reply[32];if(!flow_serial_unwrap(v.bytes,v.length,reply))return;
+        if(self.touchObserver&&reply[0]==0x18&&reply[4]==0x82){
+            self.touchObserver([NSData dataWithBytes:reply length:sizeof reply]);return;
+        }
+        if(!self.request||!self.completion||self.stage!=FlowSerialPayload)return;
         int matched=flow_serial_match(self.request.bytes,reply);
         if(matched<0)[self finish:nil error:serialError(@"Эта команда не поддерживается прошивкой клавиатуры.")];
         else if(matched==1){self.pendingReply=[NSData dataWithBytes:reply length:32];if(self.writeAcked)[self finish:self.pendingReply error:nil];}
@@ -168,11 +173,18 @@ typedef NS_ENUM(NSUInteger,FlowSerialStage){FlowSerialIdle,FlowSerialWake,FlowSe
 }
 @end
 static FlowSerialClient *client;
+void FlowBLESetTouchObserver(void (^observer)(NSData *)){
+    NSCAssert(!NSThread.isMainThread,@"Touch subscription belongs to the worker");
+    dispatch_sync(dispatch_get_main_queue(),^{client.touchObserver=observer;});
+}
 void FlowBLESerialReset(void){NSCAssert(NSThread.isMainThread,@"Reset on main queue");[client reset];}
-NSData *FlowBLEExchange(NSDictionary *device,NSData *request,NSError **error){
+static NSData *exchange(NSDictionary *device,NSData *request,BOOL connectedOnly,NSError **error){
     if(NSThread.isMainThread){if(error)*error=serialError(@"Bluetooth-обмен должен выполняться в рабочей очереди.");return nil;}
     dispatch_semaphore_t done=dispatch_semaphore_create(0);__block NSData *result=nil;__block NSError *problem=nil;
     dispatch_async(dispatch_get_main_queue(),^{
+        if(connectedOnly&&(![client.deviceID isEqual:device[@"id"]]||!client.ready||client.peripheral.state!=CBPeripheralStateConnected)){
+            dispatch_semaphore_signal(done);return;
+        }
         if(!client)client=[FlowSerialClient new];
         [client exchange:device request:request completion:^(NSData *data,NSError *e){result=data;problem=e;dispatch_semaphore_signal(done);}];
     });
@@ -180,3 +192,6 @@ NSData *FlowBLEExchange(NSDictionary *device,NSData *request,NSError **error){
     dispatch_semaphore_wait(done,DISPATCH_TIME_FOREVER);
     if(error)*error=problem;return result;
 }
+
+NSData *FlowBLEExchange(NSDictionary *device,NSData *request,NSError **error){return exchange(device,request,NO,error);}
+NSData *FlowBLEExchangeConnected(NSDictionary *device,NSData *request,NSError **error){return exchange(device,request,YES,error);}

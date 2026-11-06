@@ -2,7 +2,7 @@
 Dependencies: keystone-engine, capstone. Version 0.9 uses protocol generation 19.
 """
 from pathlib import Path
-import json,hashlib,re
+import argparse,json,hashlib,re
 from keystone import Ks,KS_ARCH_ARM,KS_MODE_THUMB,KS_MODE_V8
 ROOT=Path(__file__).resolve().parents[1]
 ks=Ks(KS_ARCH_ARM,KS_MODE_THUMB)
@@ -29,6 +29,10 @@ def assemble(text,addr):
  return list(data),count
 
 def digest(data):return hashlib.sha256(data).hexdigest()
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--base-dir',type=Path,help='Also emit the exact Studio 0.9 base images used by build-touch.py.')
+args=parser.parse_args()
+if args.base_dir:args.base_dir.mkdir(parents=True,exist_ok=True)
 pins=json.loads((ROOT/'firmware/source-pins.json').read_text())
 for model in [68,84,100]:
  source=(ROOT/f'firmware-bundle/factory-{model}-usb14.bin').read_bytes()
@@ -41,5 +45,16 @@ for model in [68,84,100]:
   assert len(blob)==patch['size']
   o=patch['offset'];target[o:o+len(blob)]=blob
  assert digest(target)==pins[str(model)]['target']
+ if args.base_dir:(args.base_dir/f'studio-base-{model}.bin').write_bytes(target)
  (ROOT/f'firmware-bundle/studio-v14-{model}.bin').write_bytes(target)
  print(f'Flow 2 {model}: firmware 0.9 verified and rebuilt')
+
+# Reapply independently pinned Touch Bar overlays; no compiler needed here.
+for model in [68,84,100]:
+ meta=json.loads((ROOT/f'firmware/touch-overlay-{model}.json').read_text())
+ for source,expected in meta['sources'].items():assert digest((ROOT/'firmware'/source).read_bytes())==expected
+ path=ROOT/f'firmware-bundle/studio-v14-{model}.bin';image=bytearray(path.read_bytes());assert digest(image)==meta['base']
+ for p in meta['patches']:
+  o=p['offset'];before=bytes.fromhex(p['before']);after=bytes.fromhex(p['after']);assert len(before)==len(after) and image[o:o+len(before)]==before;image[o:o+len(after)]=after
+ assert digest(image)==meta['target'];path.write_bytes(image)
+ print(f'Flow 2 {model}: Touch Bar firmware 0.10 verified')

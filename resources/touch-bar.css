@@ -1,0 +1,60 @@
+#touchPanel .touch-config{display:grid;grid-template-columns:minmax(150px,.65fr) minmax(0,1.6fr);gap:16px}
+#touchPanel .card{min-width:0}
+#touchPanel .touch-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+#touchPanel h2{font-size:20px;margin:0}
+#touchPanel .touch-count,#touchPanel .touch-mode{display:flex;gap:5px;flex-wrap:wrap}
+#touchPanel button[aria-pressed=true]{color:var(--accent);border-color:var(--accent)}
+#touchPanel .touch-fields{display:grid;gap:16px;animation:touch-reveal .22s ease}
+#touchPanel .touch-fields label{display:grid;gap:8px;font-size:13px}
+#touchPanel .touch-fields select{width:100%;min-width:0}
+#touchPanel .touch-advanced-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:13px}
+#touchPanel .touch-advanced-row input{width:auto}
+#touchPanel .touch-range{font-size:12px;color:var(--muted)}
+#touchPanel .touch-auto-hint{font-size:12px;color:var(--muted);margin:10px 0 0}
+#touchPanel .touch-status{display:flex;gap:8px;align-items:center;margin-top:16px;font-size:12px;color:var(--muted)}
+#touchPanel .touch-status:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+#touchPanel .touch-status[data-phase=error]:before{background:#c77e72}
+.touch-picture{position:relative;width:100%;aspect-ratio:1000/244;margin:14px 0 38px}
+.touch-picture>svg{width:100%;height:100%;fill:none;stroke:var(--text);stroke-width:1.35;stroke-linejoin:round;stroke-linecap:round}
+.touch-picture>svg *{vector-effect:non-scaling-stroke}
+.touch-strip{position:absolute;left:20.46%;top:41.15%;width:51.85%;height:19.88%;min-height:20px}
+.touch-zones{position:absolute;inset:0;overflow:hidden;border:1px solid var(--text);border-radius:999px}
+.touch-zone{position:absolute;top:0;height:100%;border:0;border-radius:0;background:transparent;color:var(--text);padding:0;min-height:0;font-size:12px}
+.touch-zone[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent)}
+.touch-divider{position:absolute;top:0;bottom:0;width:1px;background:var(--text);pointer-events:none}
+.touch-boundary{direction:rtl;position:absolute;top:calc(100% + 4px);height:24px;padding:0;margin:0;appearance:none;-webkit-appearance:none;background:transparent;pointer-events:none}
+.touch-picture input.touch-boundary::-webkit-slider-runnable-track{background:transparent;height:1px}
+.touch-picture input.touch-boundary::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;pointer-events:auto;cursor:ew-resize;width:14px;height:18px;margin-top:-8px;border:1px solid var(--accent);border-radius:5px;background:var(--panel)}
+#touchPanel input#touchAdvanced{appearance:none;-webkit-appearance:none;width:35px;min-width:35px;height:21px;min-height:0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--panel2);margin:0;position:relative;box-shadow:none}
+#touchPanel input#touchAdvanced:after{content:none;display:none}
+#touchPanel input#touchAdvanced:before{content:"";position:absolute;left:3px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--muted);box-shadow:none;transition:transform .2s ease}
+#touchPanel input#touchAdvanced:checked{background:var(--accent)}
+#touchPanel input#touchAdvanced:checked:before{transform:translateX(14px);background:var(--ink)}
+#touchPanel .touch-fields .studio-select{max-width:none;width:100%}
+.touch-stage .stage-actions{display:flex;align-items:center;gap:8px}
+.touch-active-profile{font-size:12px;color:var(--muted)}
+.touch-zone-count{display:flex;align-items:center;gap:3px;height:30px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:3px}
+.touch-zone-count button{width:29px;height:23px;padding:0;border-radius:6px;font-size:12px;color:var(--muted)}
+.touch-zone-count button[aria-pressed=true]{background:var(--panel2);color:var(--text)}
+#touchPanel .touch-side{display:grid;grid-template-rows:1fr 1fr;gap:16px;min-width:0}
+#touchPanel .touch-mode-card,#touchPanel .touch-test-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+#touchPanel .touch-side>.card{padding:16px}
+#touchPanel .touch-test-card .micro{margin:0}
+#touchPanel .touch-test-card button{max-width:100%;white-space:normal}
+#touchPanel .touch-config[data-testing] .touch-edit-card{opacity:.55}
+#touchPanel .touch-mode{display:flex;flex-wrap:nowrap;gap:3px;border:1px solid var(--line);border-radius:11px;background:var(--bg);padding:3px;width:100%}
+#touchPanel .touch-mode button{flex:1;min-width:0;padding:8px 9px;border-radius:7px;font-size:13px;white-space:nowrap;color:var(--muted)}
+#touchPanel .touch-mode button[aria-pressed=true]{background:var(--panel2);color:var(--text)}
+#touchPanel .touch-advanced-row{position:relative;min-height:42px}
+.touch-stage .touch-fn-marker{stroke:var(--text);color:var(--text);fill:none}
+#keyboard input.touch-boundary{background:transparent!important;border:0;box-shadow:none;border-radius:0;height:24px;pointer-events:none}
+#keyboard input.touch-boundary::-webkit-slider-thumb{pointer-events:auto;background:var(--panel);box-shadow:none}
+@keyframes touch-reveal{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:850px){#touchPanel .touch-config{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#touchPanel .touch-fields{animation:none}}
+
+.touch-contact[hidden]{display:none!important}
+.touch-contact{position:absolute;z-index:3;top:50%;width:10px;height:10px;border:1px solid var(--bg);border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 32%,transparent);transform:translate(-50%,-50%);pointer-events:none}
+.touch-reset-zones{position:absolute;right:4%;bottom:1%;width:28px;height:28px;padding:5px}
+
+#keyboard input.touch-boundary:disabled::-webkit-slider-thumb{pointer-events:none;cursor:default}

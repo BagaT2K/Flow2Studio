@@ -1,4 +1,5 @@
 #include "FlowControl.h"
+#include "FlowTouchProtocol.h"
 #ifndef FLOW_SERIAL_PROTOCOL_H
 #define FLOW_SERIAL_PROTOCOL_H
 #include "FlowProtocol.h"
@@ -20,6 +21,7 @@ static inline int flow_serial_unwrap(const uint8_t *wire,size_t length,uint8_t r
 }
 /* 1: matching reply; -1: unsupported command; 0: unrelated. No retries. */
 static inline int flow_serial_match(const uint8_t request[32],const uint8_t reply[32]){
+    if(request[0]==0x18)return flow_touch_match(request,reply)?1:(reply[0]==0xff?-1:0);
     if(request[0]==0x16)return flow_control_match(request,reply)?1:(reply[0]==0xff?-1:0);
     if(request[0]==0x15)return flow_validate(reply,32,request+8)==1?1:0;
     if(reply[0]==0xff&&!memcmp(reply+1,request+1,3))return -1;

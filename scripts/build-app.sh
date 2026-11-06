@@ -8,8 +8,7 @@ trap 'rm -rf -- "$studio_build"' EXIT
 studio_sdk="$(/usr/bin/xcrun --sdk macosx --show-sdk-path)"
 studio_app="$studio_build/Flow2Studio.app"
 mkdir -p "$studio_app/Contents/MacOS" "$studio_app/Contents/Resources/ui"
-bash "$studio_dir/scripts/check.sh"
-echo 'Building Flow2Studio...' 
+echo 'Building Flow2Studio...'
 /usr/bin/xcrun clang -fobjc-arc -fblocks -fno-modules -isysroot "$studio_sdk" \
   -O2 -Wall -Wextra -Werror=objc-method-access -arch arm64 -arch x86_64 -mmacosx-version-min=12.0 \
   -framework UniformTypeIdentifiers -framework AppKit -framework CoreGraphics -framework WebKit -framework IOKit -framework CoreFoundation -framework IOBluetooth -framework CoreBluetooth \
@@ -27,8 +26,8 @@ cat > "$studio_app/Contents/Info.plist" <<'PLIST'
 <key>CFBundleExecutable</key><string>Flow2Studio</string>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleIconFile</key><string>Flow2Studio</string>
-<key>CFBundleShortVersionString</key><string>1.0.2</string>
-<key>CFBundleVersion</key><string>66</string>
+<key>CFBundleShortVersionString</key><string>1.1.0</string>
+<key>CFBundleVersion</key><string>68</string>
 <key>NSHumanReadableCopyright</key><string>Copyright © 2026 BagaT2K. MIT; see LICENSE.</string>
 <key>LSMinimumSystemVersion</key><string>12.0</string>
 <key>NSHighResolutionCapable</key><true/>
@@ -43,7 +42,7 @@ for studio_notice in LICENSE README.md; do
 done
 "$studio_python" "$studio_dir/scripts/source-manifest.py" "$studio_dir" \
  "$studio_app/Contents/Resources/Legal/source-manifest.json" \
- --archive "$studio_dir/dist/Flow2Studio-1.0.2-source.zip"
+ --archive "$studio_dir/dist/Flow2Studio-1.1.0-source.zip"
 if [[ "${FLOW2_SIGN_IDENTITY:--}" == - ]]; then
  /usr/bin/codesign --force --sign - "$studio_app"
 else

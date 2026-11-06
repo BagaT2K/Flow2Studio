@@ -52,19 +52,19 @@ static NSDictionary *catalogForModel(unsigned model,NSError **error){
  for(NSDictionary *item in meta[@"images"]){NSData *image=[NSData dataWithContentsOfURL:[folder URLByAppendingPathComponent:item[@"file"]]];NSString *hash=item[@"sha256"];
   if(image.length!=FLOW_FLASH_SIZE||![sha256(image)isEqual:hash]||!flow_firmware_model_matches(image.bytes,image.length,model,[item[@"usbRelease"]unsignedIntValue])){firmwareError(error,@"Образ модели повреждён. Запись запрещена.");return nil;}
   images[hash]=image;releases[hash]=item[@"usbRelease"]?:@9;NSString *label=item[@"description"]?:item[@"id"];
-  if([item[@"id"]isEqual:meta[@"target"]]){target=hash;label=[NSString stringWithFormat:@"Studio 0.9 · Flow 2 %u · база 0.14",model];}
+  if([item[@"id"]isEqual:meta[@"target"]]){target=hash;label=[NSString stringWithFormat:@"Studio %@ · Flow 2 %u · база 0.14",@"0.10",model];}
   if([item[@"id"]isEqual:meta[@"factory"]]){factory=hash;label=[NSString stringWithFormat:@"Заводская Flow 2 %u USB 0.14",model];}
   labels[hash]=label;
  }
  if(!target||!factory||images.count>32){firmwareError(error,@"Неполный каталог модели");return nil;}
- return @{@"model":meta[@"model"],@"enabled":meta[@"enabled"]?:@NO,@"images":images,@"labels":labels,@"releases":releases,@"pages":pages,@"target":target,@"factory":factory,@"oem14":factory};
+ return @{@"model":meta[@"model"],@"enabled":meta[@"enabled"]?:@NO,@"images":images,@"labels":labels,@"releases":releases,@"pages":pages,@"target":target,@"factory":factory,@"oem14":factory,@"previousStudio":meta[@"previousStudio"]?:@[]};
 }
 static NSString *backupRoot(void){return [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/Flow2Studio/FirmwareBackups"];}
 /* A separate immutable source archive, independent of transaction backups.
    Known Studio images are not mislabeled as pre-Studio originals. */
 static BOOL archiveInitial(NSData *data,NSDictionary *package,NSNumber *location,NSError **error){
  NSString *hash=sha256(data);BOOL factory=[package[@"labels"][hash]hasPrefix:@"Заводская"];
- if(package[@"images"][hash]&&!factory)return YES;
+ if((package[@"images"][hash]&&!factory)||[package[@"previousStudio"] containsObject:hash])return YES;
  NSString *device=[NSString stringWithFormat:@"Flow2-%@-USB-%@",package[@"model"],location?:@0];
  NSString *folder=[[[backupRoot()stringByAppendingPathComponent:@"Original"]stringByAppendingPathComponent:device]stringByAppendingPathComponent:hash];
  if(![NSFileManager.defaultManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:error])return NO;

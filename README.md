@@ -4,6 +4,8 @@
 
 Configuration app for Lofree Flow 2 keyboards.
 
+**Flow2Studio 1.1.0** includes **Studio firmware 0.10**, based on Lofree factory firmware 0.14.
+
 [Releases](https://github.com/BagaT2K/Flow2Studio/releases) · [Support development](https://ko-fi.com/bagat2k/tip)
 
 Build targets macOS 12 and later on Apple Silicon and Intel. Windows support is planned.
@@ -44,7 +46,7 @@ The firmware panel appears when you first connect the keyboard. Studio firmware 
 3. Click **Set up keyboard**, review the warning and confirm.
 4. Wait for the operation to finish. Do not disconnect the cable or close the app.
 
-Studio saves and verifies a firmware backup before writing. After setup, the lighting, key, Fn and macro controls become available.
+Studio saves and verifies a firmware backup before writing. After setup, the lighting, key, Fn, macro and Touch Bar controls become available.
 
 - **Install Stock Firmware** installs the factory firmware bundled with the app.
 - **Restore from Backup** lets you select a saved firmware image, including your original backup.
@@ -74,6 +76,14 @@ Customize Fn-layer assignments using the factory layout or the F1–F12 template
 Record key presses and shortcuts with delays. Edit the sequence, save it and assign the macro to a key.
 
 ![Macro editor](images/macros.png)
+
+## Touch Bar
+
+Set up profiles with one, two or three zones. Adjust the zone boundaries and assign actions to taps and swipes, with separate assignments for gestures while holding Fn.
+
+Switch profiles from the **Touch Bar** tab, or assign a specific profile or **Next Touch Bar Profile** to a key, an Fn shortcut or a Touch Bar gesture. The app shows which profile is active.
+
+![Touch Bar zones and profile settings](images/touch-bar.png)
 
 ## Connection and battery
 

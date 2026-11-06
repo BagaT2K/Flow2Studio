@@ -354,3 +354,51 @@ raw не может содержать нулевой разделитель|raw
 Сохранено в Studio:|Saved in Studio:|已保存到 Studio：|Studio に保存済み：|Studio에 저장됨:|Guardado en Studio:|In Studio gespeichert:
 . Применим после ответа клавиатуры. При глубоком сне нажмите любую её клавишу.|. Will apply when the keyboard responds. In deep sleep, press a physical key.|。键盘响应后应用。深度休眠时请按下实体按键。|。キーボードの応答後に適用します。深いスリープ中は実際のキーを押してください。|. 키보드 응답 후 적용됩니다. 깊은 절전 중에는 실제 키를 누르세요.|. Se aplicará cuando responda el teclado. En reposo profundo, pulsa una tecla.|. Wird angewendet, sobald die Tastatur antwortet. Bei tiefem Schlaf eine Taste drücken.
 Клавиатура|Keyboard|键盘|キーボード|키보드|Teclado|Tastatur
+
+# Touch Bar and assignment controls
+Volume|Volume|音量|音量|볼륨|Volumen|Lautstärke|Громкость
+Media|Media|媒体|メディア|미디어|Multimedia|Medien|Мультимедиа
+Display|Display|显示|ディスプレイ|화면|Pantalla|Bildschirm|Экран
+Fn functions|Fn functions|Fn 功能|Fn 機能|Fn 기능|Funciones Fn|Fn-Funktionen|Функции Fn
+Macro %u|Macro %u|宏 %u|マクロ %u|매크로 %u|Macro %u|Makro %u|Макрос %u
+Hold %@|Hold %@|按住 %@|%@ を長押し|%@ 길게 누르기|Mantener %@|%@ halten|Удерживать %@
+Zone|Zone|区域|ゾーン|영역|Zona|Zone|Зона
+Zone boundary|Zone boundary|区域边界|ゾーンの境界|영역 경계|Límite de zona|Zonengrenze|Граница зон
+Zone count|Zone count|区域数量|ゾーン数|영역 수|Número de zonas|Anzahl der Zonen|Количество зон
+Zone function|Zone function|区域功能|ゾーンの機能|영역 기능|Función de zona|Zonenfunktion|Функция зоны
+Advanced settings|Advanced settings|高级设置|詳細設定|고급 설정|Ajustes avanzados|Erweiterte Einstellungen|Продвинутые настройки
+Swipe up|Swipe up|向上滑动|上にスワイプ|위로 스와이프|Deslizar hacia arriba|Nach oben wischen|Свайп вверх
+Swipe down|Swipe down|向下滑动|下にスワイプ|아래로 스와이프|Deslizar hacia abajo|Nach unten wischen|Свайп вниз
+Swipe up / down|Swipe up / down|向上或向下滑动|上下にスワイプ|위 / 아래로 스와이프|Deslizar arriba / abajo|Nach oben / unten wischen|Свайп вверх / вниз
+Tap|Tap|轻触|タップ|탭|Toque|Antippen|Касание
+With Fn|With Fn|按住 Fn|Fn と併用|Fn과 함께|Con Fn|Mit Fn|С Fn
+Normal|Normal|普通|通常|일반|Normal|Normal|Обычный
+Volume up|Volume up|增大音量|音量を上げる|볼륨 높이기|Subir volumen|Lauter|Громкость +
+Volume down|Volume down|减小音量|音量を下げる|볼륨 낮추기|Bajar volumen|Leiser|Громкость −
+Scrolling|Scrolling|滚动|スクロール|스크롤|Desplazamiento|Scrollen|Прокрутка
+Scroll up|Scroll up|向上滚动|上へスクロール|위로 스크롤|Desplazar hacia arriba|Nach oben scrollen|Прокрутка вверх
+Scroll down|Scroll down|向下滚动|下へスクロール|아래로 스크롤|Desplazar hacia abajo|Nach unten scrollen|Прокрутка вниз
+Scroll left|Scroll left|向左滚动|左へスクロール|왼쪽으로 스크롤|Desplazar a la izquierda|Nach links scrollen|Прокрутка влево
+Scroll right|Scroll right|向右滚动|右へスクロール|오른쪽으로 스크롤|Desplazar a la derecha|Nach rechts scrollen|Прокрутка вправо
+Reading settings…|Reading settings…|正在读取设置…|設定を読み込み中…|설정 읽는 중…|Leyendo ajustes…|Einstellungen werden gelesen…|Читаем настройки…
+Settings loaded.|Settings loaded.|已读取设置。|設定を読み込みました。|설정을 불러왔습니다.|Ajustes cargados.|Einstellungen geladen.|Настройки прочитаны.
+Applied and verified.|Applied and verified.|已应用并验证。|適用して確認しました。|적용 및 확인 완료.|Aplicado y verificado.|Angewendet und geprüft.|Применено и проверено.
+Last retrieved settings.|Last retrieved settings.|上次读取的设置。|最後に読み込んだ設定。|마지막으로 읽은 설정.|Últimos ajustes leídos.|Zuletzt gelesene Einstellungen.|Последние прочитанные настройки.
+Mode|Mode|模式|モード|모드|Modo|Modus|Режим
+Screen brightness|Screen brightness|屏幕亮度|画面の明るさ|화면 밝기|Brillo de pantalla|Bildschirmhelligkeit|Яркость экрана
+Reset zone boundaries|Reset zone boundaries|重置区域边界|ゾーンの境界をリセット|영역 경계 초기화|Restablecer límites de zona|Zonengrenzen zurücksetzen|Сбросить границы зон
+Touch position unavailable.|Touch position unavailable.|触点位置不可用。|タッチ位置を取得できません。|터치 위치를 사용할 수 없습니다.|Posición táctil no disponible.|Berührungsposition nicht verfügbar.|Точка касания недоступна.
+Unassigned|Unassigned|未分配|未割り当て|미지정|Sin asignar|Nicht zugewiesen|Не назначено
+Toggle Mute|Toggle Mute|切换静音|ミュート切替|음소거 전환|Activar/desactivar silencio|Ton ein-/ausschalten|Вкл/выкл звук
+Next track|Next track|下一首|次の曲|다음 트랙|Pista siguiente|Nächster Titel|Следующий трек
+Touch Bar Test|Touch Bar Test|触控条测试|タッチバーのテスト|터치 바 테스트|Prueba de la barra táctil|Touchleisten-Test|Тест сенсорной панели
+Start test|Start test|开始测试|テストを開始|테스트 시작|Iniciar prueba|Test starten|Начать тест
+End test|End test|结束测试|テストを終了|테스트 종료|Finalizar prueba|Test beenden|Завершить тест
+The keyboard did not confirm. The test will end automatically.|The keyboard did not confirm. The test will end automatically.|键盘未确认，测试将自动结束。|キーボードが応答しません。テストは自動で終了します。|키보드가 응답하지 않았습니다. 테스트는 자동으로 종료됩니다.|El teclado no ha confirmado. La prueba terminará automáticamente.|Die Tastatur hat nicht bestätigt. Der Test endet automatisch.|Клавиатура не подтвердила завершение. Тест отключится автоматически.
+Touch Bar Profiles|Touch Bar Profiles|触控条配置|タッチバーのプロファイル|터치 바 프로필|Perfiles de la barra táctil|Touchleistenprofile|Профили тачбара
+1-Zone Profile|1-Zone Profile|单区配置|1 ゾーンのプロファイル|1구역 프로필|Perfil de 1 zona|Profil mit 1 Zone|Профиль 1 зона
+2-Zone Profile|2-Zone Profile|双区配置|2 ゾーンのプロファイル|2구역 프로필|Perfil de 2 zonas|Profil mit 2 Zonen|Профиль 2 зоны
+3-Zone Profile|3-Zone Profile|三区配置|3 ゾーンのプロファイル|3구역 프로필|Perfil de 3 zonas|Profil mit 3 Zonen|Профиль 3 зоны
+Studio firmware 0.10 adds Touch Bar profiles. Connect in wired USB mode to update.|Studio firmware 0.10 adds Touch Bar profiles. Connect in wired USB mode to update.|Studio 固件 0.10 新增触控条配置。请通过有线 USB 模式更新。|Studio ファームウェア 0.10 でタッチバーのプロファイルを使えます。有線 USB モードで接続して更新してください。|Studio 펌웨어 0.10에서 터치 바 프로필을 사용할 수 있습니다. 유선 USB 모드로 연결하여 업데이트하세요.|El firmware Studio 0.10 añade perfiles para la barra táctil. Conecta el teclado por USB para actualizarlo.|Studio-Firmware 0.10 ergänzt Profile für die Touchleiste. Zum Aktualisieren per USB-Kabel verbinden.|Доступна прошивка Studio 0.10 с профилями тачбара. Для обновления подключите USB в проводном режиме.
+Next Touch Bar Profile|Next Touch Bar Profile|下一个触控条配置|次のタッチバープロファイル|다음 터치 바 프로필|Siguiente perfil de la barra táctil|Nächstes Touchleistenprofil|Следующий профиль тачбара
+Active profile: %u|Active profile: %u|当前配置：%u|使用中のプロファイル: %u|활성 프로필: %u|Perfil activo: %u|Aktives Profil: %u|Активный профиль: %u

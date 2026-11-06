@@ -145,13 +145,15 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
     self.timer=[NSTimer timerWithTimeInterval:2 repeats:YES block:^(NSTimer *t){(void)t;[weak monitorConnections];[weak processDeferred];}];
     [NSRunLoop.mainRunLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
     NSNotificationCenter *nc=NSWorkspace.sharedWorkspace.notificationCenter;
-    [nc addObserverForName:NSWorkspaceWillSleepNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *n){(void)n;weak.sleeping=YES;weak.chargeForeground=NO;[weak.macroRecorder stopNotifying:YES reason:FlowLocalized(@"Запись остановлена: Mac засыпает.")];[weak stopEditing];weak.selectionGeneration++;[weak.bleBattery cancel];FlowBLESerialReset();weak.battery=nil;[weak renderStatus];}];
-    [nc addObserverForName:NSWorkspaceDidWakeNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *n){(void)n;weak.sleeping=NO;[weak editingActivityOccurred];}];
+    [nc addObserverForName:NSWorkspaceWillSleepNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *n){(void)n;weak.sleeping=YES;[weak reply:@0 result:@{@"touchLiveWindow":@NO} error:nil];weak.chargeForeground=NO;[weak.macroRecorder stopNotifying:YES reason:FlowLocalized(@"Запись остановлена: Mac засыпает.")];[weak stopEditing];weak.selectionGeneration++;[weak.bleBattery cancel];FlowBLESerialReset();weak.battery=nil;[weak renderStatus];}];
+    [nc addObserverForName:NSWorkspaceDidWakeNotification object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *n){(void)n;weak.sleeping=NO;if(weak.window.visible&&!weak.windowClosed&&!weak.window.miniaturized)[weak reply:@0 result:@{@"touchLiveWindow":@YES} error:nil];[weak editingActivityOccurred];}];
     self.editingActivity=NSProcessInfo.processInfo.systemUptime;
     NSNotificationCenter *appNC=NSNotificationCenter.defaultCenter;
     for(NSNotificationName name in @[NSApplicationDidBecomeActiveNotification,NSApplicationDidResignActiveNotification,NSWindowDidBecomeKeyNotification,NSWindowDidResignKeyNotification,NSWindowDidMiniaturizeNotification,NSWindowDidDeminiaturizeNotification,NSWindowDidChangeOcclusionStateNotification,NSWindowWillCloseNotification]){
         [appNC addObserverForName:name object:nil queue:NSOperationQueue.mainQueue usingBlock:^(NSNotification *n){
-            if([n.name isEqual:NSWindowWillCloseNotification]&&n.object==weak.window){weak.windowClosed=YES;weak.chargeForeground=NO;[weak stopEditing];return;}
+            if([n.name isEqual:NSWindowWillCloseNotification]&&n.object==weak.window){weak.windowClosed=YES;weak.chargeForeground=NO;[weak reply:@0 result:@{@"touchLiveWindow":@NO} error:nil];[weak stopEditing];return;}
+            if(n.object==weak.window&&[n.name isEqual:NSWindowDidMiniaturizeNotification])[weak reply:@0 result:@{@"touchLiveWindow":@NO} error:nil];
+            if(n.object==weak.window&&[n.name isEqual:NSWindowDidDeminiaturizeNotification])[weak reply:@0 result:@{@"touchLiveWindow":@YES} error:nil];
             if([n.name isEqual:NSApplicationDidBecomeActiveNotification]||([n.name isEqual:NSWindowDidBecomeKeyNotification]&&n.object==weak.window))[weak editingActivityOccurred];
             else [weak updateEditing];
         }];
@@ -189,13 +191,13 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
 }
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{(void)sender;return NO;}
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)visible{(void)sender;(void)visible;[self showWindow];return YES;}
-- (void)showWindow {self.windowClosed=NO;[self.window makeKeyAndOrderFront:nil];[NSApp activateIgnoringOtherApps:YES];}
+- (void)showWindow {self.windowClosed=NO;[self.window makeKeyAndOrderFront:nil];[NSApp activateIgnoringOtherApps:YES];[self reply:@0 result:@{@"touchLiveWindow":@YES} error:nil];}
 - (void)quit {[NSApp terminate:nil];}
 - (void)stopEditing {
     self.editingPresence=(FlowEditingPresence){0};
     self.editingWanted=NO;self.editingBlocked=NO;self.editingTimeout=0;self.editingLastAttempt=0;self.editingGeneration++;
     self.editingKeyBaseline=NO;
-    FlowHIDEnqueue(self.worker,^{FlowEditingEnd();});
+    FlowHIDEnqueue(self.worker,^{FlowTouchLiveEnd();FlowEditingEnd();});
 }
 - (void)editingActivityOccurred {
     self.editingActivity=NSProcessInfo.processInfo.systemUptime;
@@ -411,7 +413,8 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
         if(!consentToken){
             NSString *title=restoreMode==3?FlowLocalized(@"Установить заводскую Lofree 0.14?"):restoreMode==4?FlowLocalized(@"Вернуть прошивку до обновления?"):restoreMode==1?FlowLocalized(@"Установить заводскую прошивку?"):restoreMode==2?FlowLocalized(@"Восстановить из копии?"):FlowLocalized(@"Подготовить клавиатуру?");
             NSString *model=chosenBackup[@"model"]?:status[@"model"]?:selected[@"model"]?:@"";
-            NSString *details=restoreMode==0?[NSString stringWithFormat:FlowLocalized(@"Flow 2 %@ → Studio 0.9 на официальной базе Lofree 0.14.\n\nПри ошибке записи Studio попытается вернуть прежний образ. Сохранённую копию можно выбрать вручную. Оставьте USB подключённым и закройте VIA."),model]:restoreMode==1?[NSString stringWithFormat:FlowLocalized(@"Будет установлена заводская Lofree 0.14 для Flow 2 %@ без расширений Studio. Текущая прошивка будет сохранена и проверена. Не отключайте USB."),model]:restoreMode==2?[NSString stringWithFormat:FlowLocalized(@"Файл: %@\nПрошивка: %@\nМодель: Flow 2 %@\n\nТекущий образ будет сохранён перед восстановлением. Не отключайте USB."),chosenBackup[@"file"],FlowLocalized(chosenBackup[@"label"]),model]:FlowLocalized(@"Будет восстановлена проверенная прошивка, сохранённая перед обновлением. Используйте тот же USB-порт. Для другого порта выберите before.bin вручную. Не отключайте USB.");
+            NSString *installDetails=[FlowLocalized(@"Flow 2 %@ → Studio 0.9 на официальной базе Lofree 0.14.\n\nПри ошибке записи Studio попытается вернуть прежний образ. Сохранённую копию можно выбрать вручную. Оставьте USB подключённым и закройте VIA.") stringByReplacingOccurrencesOfString:@"Studio 0.9" withString:@"Studio 0.10"];
+            NSString *details=restoreMode==0?[NSString stringWithFormat:installDetails,model]:restoreMode==1?[NSString stringWithFormat:FlowLocalized(@"Будет установлена заводская Lofree 0.14 для Flow 2 %@ без расширений Studio. Текущая прошивка будет сохранена и проверена. Не отключайте USB."),model]:restoreMode==2?[NSString stringWithFormat:FlowLocalized(@"Файл: %@\nПрошивка: %@\nМодель: Flow 2 %@\n\nТекущий образ будет сохранён перед восстановлением. Не отключайте USB."),chosenBackup[@"file"],FlowLocalized(chosenBackup[@"label"]),model]:FlowLocalized(@"Будет восстановлена проверенная прошивка, сохранённая перед обновлением. Используйте тот же USB-порт. Для другого порта выберите before.bin вручную. Не отключайте USB.");
             NSString *token=NSUUID.UUID.UUIDString;
             self.firmwareConfirmation=@{@"token":token,@"action":action,@"device":selected[@"id"],@"generation":@(self.selectionGeneration),@"deadline":@(NSProcessInfo.processInfo.systemUptime+120),@"backup":chosenBackup?:@{}};
             NSString *warning=FlowLocalized(@"Обновление выполняется на ваш страх и риск. При ошибке Studio попытается восстановить прежнюю прошивку из проверенной копии. При отключении питания, потере USB или неисправности устройства откат может потребовать отдельного восстановления и не гарантируется.");
@@ -434,8 +437,8 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
     if([action isEqual:@"cachedState"]){NSDictionary *caps=[NSUserDefaults.standardUserDefaults dictionaryForKey:@"verifiedCapabilities.v1"][selected[@"key"]];if(caps&&![caps[@"profile"][@"zoneAnimationsSupported"]boolValue]&&[caps[@"effect"]unsignedIntValue]>1){NSMutableDictionary *m=[caps mutableCopy];m[@"effect"]=@1;m[@"waveSpeed"]=@1;m[@"effectFamily"]=@"zones-v1";caps=m;}[self reply:identifier result:@{@"caps":caps?:NSNull.null,@"jobs":[self.deferred jobs:selected[@"key"]]} error:nil];return;}
     if([action isEqual:@"clearDeferred"]){[self.deferred clear:selected[@"key"]];[self publishDeferred];[self reply:identifier result:@{@"cleared":@YES} error:nil];return;}
     if([action isEqual:@"initializeLayers"]&&[[NSUserDefaults.standardUserDefaults arrayForKey:@"initializedLayers.v1"]containsObject:selected[@"key"]]){[self reply:identifier result:@{@"initialized":@YES,@"changedLayers":@[]} error:nil];return;}
-    if([action isEqual:@"select"]){[self.macroRecorder stopNotifying:YES reason:FlowLocalized(@"Запись остановлена: выбрано устройство.")];[self stopEditing];self.selectionGeneration++;[self.bleBattery cancel];FlowBLESerialReset();self.firmwareConfirmation=nil;self.selected=selected;[self editingActivityOccurred];self.battery=nil;[self renderStatus];[self reply:identifier result:selected error:nil];return;}
-    if(![@[@"status",@"capabilities",@"lighting",@"readLayer",@"setKey",@"setLayer",@"resetLayer",@"layerTemplate",@"initializeLayers",@"profile",@"advanced",@"wake",@"readMacros",@"saveMacros",@"resetKeys",@"resetAll"]containsObject:action]){[self reply:identifier result:nil error:FlowLocalized(@"Действие недоступно")];return;}
+    if([action isEqual:@"select"]){[self.macroRecorder stopNotifying:YES reason:FlowLocalized(@"Запись остановлена: выбрано устройство.")];[self stopEditing];self.selectionGeneration++;[self.bleBattery cancel];self.firmwareConfirmation=nil;self.selected=selected;[self editingActivityOccurred];self.battery=nil;[self renderStatus];[self reply:identifier result:selected error:nil];return;}
+    if(![@[@"status",@"capabilities",@"readTouch",@"syncTouchProfile",@"setTouch",@"importTouchProfile",@"selectTouchProfile",@"touchLive",@"lighting",@"readLayer",@"setKey",@"setLayer",@"resetLayer",@"layerTemplate",@"initializeLayers",@"profile",@"advanced",@"wake",@"readMacros",@"saveMacros",@"resetKeys",@"resetAll"]containsObject:action]){[self reply:identifier result:nil error:FlowLocalized(@"Действие недоступно")];return;}
     if([action isEqual:@"status"]){
         if(self.sleeping){[self reply:identifier result:nil error:FlowLocalized(@"Mac засыпает.")];return;}
         [self readCharge:selected request:identifier];return;
@@ -451,7 +454,36 @@ static void FlowHIDEnqueue(dispatch_queue_t queue,dispatch_block_t block){
         [self.deferred enqueue:action arguments:args deviceKey:selected[@"key"]];
         NSMutableDictionary *queued=[args mutableCopy];queued[@"queued"]=@YES;[self reply:identifier result:queued error:nil];[self publishDeferred];[self processDeferred];return;
     }
-    self.editingActivity=NSProcessInfo.processInfo.systemUptime;self.editingBlocked=NO;[self updateEditing];
+    if([action isEqual:@"touchLive"]){
+        BOOL enable=[args[@"enabled"]isEqual:@YES];
+        if(enable&&(self.sleeping||self.terminating||self.windowClosed||self.window.miniaturized||self.firmwareBusy)){
+            [self reply:identifier result:nil error:FlowLocalized(@"Действие недоступно")];return;
+        }
+        NSUInteger generation=self.selectionGeneration;
+        __weak Studio *weak=self;
+        FlowHIDEnqueue(self.worker,^{
+            NSError *error=nil;
+            BOOL enabled=NO;
+            if(enable){
+                enabled=FlowTouchLiveStart(selected,^(unsigned position){
+                    dispatch_async(dispatch_get_main_queue(),^{
+                        Studio *studio=weak;
+                        if(studio&&generation==studio.selectionGeneration&&!studio.sleeping&&!studio.windowClosed&&!studio.window.miniaturized)
+                            [studio reply:@0 result:@{@"touchLivePoint":@(position),@"device":selected[@"id"]} error:nil];
+                    });
+                },&error);
+            }
+            BOOL ok=enable?enabled:FlowTouchTestStop(&error);
+            dispatch_async(dispatch_get_main_queue(),^{
+                [weak reply:identifier result:ok?@{@"enabled":@(enabled)}:nil
+                      error:ok?nil:(error.localizedDescription?:FlowLocalized(@"Действие недоступно"))];
+            });
+        });
+        return;
+    }
+    if(![action isEqual:@"syncTouchProfile"]){
+        self.editingActivity=NSProcessInfo.processInfo.systemUptime;self.editingBlocked=NO;[self updateEditing];
+    }
     NSDictionary *requestArgs=args;
     FlowHIDEnqueue(self.worker,^{NSError *error=nil;NSDictionary *result=FlowPerform(selected,action,requestArgs,&error);
       dispatch_async(dispatch_get_main_queue(),^{

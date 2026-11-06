@@ -3,3 +3,6 @@
 NSData *FlowBLEExchange(NSDictionary *device,NSData *request,NSError **error);
 // Called on main queue when selection, connection or sleep state changes.
 void FlowBLESerialReset(void);
+
+NSData *FlowBLEExchangeConnected(NSDictionary *device,NSData *request,NSError **error);
+void FlowBLESetTouchObserver(void (^observer)(NSData *));
