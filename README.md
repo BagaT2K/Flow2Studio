@@ -8,7 +8,7 @@ Configuration app for Lofree Flow 2 keyboards.
 
 [Releases](https://github.com/BagaT2K/Flow2Studio/releases) · [Support development](https://ko-fi.com/bagat2k/tip)
 
-Build targets macOS 12 and later on Apple Silicon and Intel. Windows support is planned.
+Build targets macOS 12 and later on Apple Silicon and Intel, and Windows 10 (2004) / Windows 11 x64 (see [Windows](#windows); tested only on a Flow 2 84).
 
 Designed for standard Flow 2 **68, 84 and 100** models. Flow 2 for Mac models are not supported.
 
@@ -36,6 +36,42 @@ Designed for standard Flow 2 **68, 84 and 100** models. Flow 2 for Mac models ar
 > 4. Confirm with your password or Touch ID if prompted, then click **Open**.
 >
 > Only approve a copy downloaded from this repository's Releases. Disabling Gatekeeper is not required.
+
+### Windows
+
+The Windows host (`windows/`, C# with WebView2) uses the same web UI and firmware bundle as the macOS app.
+
+1. Install the [.NET 10 SDK](https://dotnet.microsoft.com/download). The WebView2 runtime ships with Windows 11.
+2. Build from the repository root:
+
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File scripts\build-windows.ps1
+   ```
+
+3. Run `dist\Flow2Studio-windows\Flow2Studio.exe`. Keep `ui\` and `firmware\` next to the exe.
+
+Closing the window keeps Flow2Studio in the system tray; use **Quit** from the tray menu to exit. Settings and backups are stored in `%APPDATA%\Flow2Studio`.
+
+#### Firmware driver (once per PC)
+
+Installing or restoring firmware on Windows needs the **WinUSB** driver for the keyboard's bootloader. Lighting, keys, Fn, macros and Touch Bar do not need it: they use the standard Windows keyboard driver.
+
+The bootloader is built into the keyboard's WB32 chip and appears as **WB Device in DFU Mode** (USB ID `342D:DFA0`). It does not tell Windows which driver to use, so Windows leaves it without one. Flow2Studio checks for WinUSB before switching the keyboard into the bootloader. If it is missing, the app stops and writes nothing.
+
+Install it once with [Zadig](https://zadig.akeo.ie):
+
+1. Connect the keyboard with a USB cable.
+2. Enter recovery mode: hold **Fn**, then **left Shift**, then press **Esc**. The keyboard stops typing and Windows shows **WB Device in DFU Mode**.
+3. Open Zadig. If the device is not listed, enable **Options → List All Devices**.
+4. Select **WB Device in DFU Mode** and check that **USB ID** shows `342D` `DFA0`.
+5. Select **WinUSB** as the target driver and click **Install Driver**.
+6. Unplug and reconnect the keyboard. It returns to normal mode.
+7. In Flow2Studio, click **↻** and try again.
+
+> [!CAUTION]
+> Only install WinUSB on `342D:DFA0`. Do not change the driver of the keyboard in normal mode (`388D:xxxx`); it would stop typing until the driver is rolled back in Device Manager.
+
+The driver applies to every USB port and every Flow 2 on that PC. Zadig installs a self-generated certificate to sign the driver; this is how Zadig works and is required for WinUSB on devices without built-in driver descriptors.
 
 ## First connection
 
