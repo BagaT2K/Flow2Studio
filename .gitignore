@@ -5,3 +5,5 @@ __pycache__/
 .idea/
 /Build-DMG.command
 /Build-and-Run.command
+# Generated 3D assets (Blender output, renders); the runtime copies live in swift/Assets
+model/out/
