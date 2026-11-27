@@ -12,6 +12,14 @@ Build targets macOS 12 and later on Apple Silicon and Intel. Windows support is 
 
 Designed for standard Flow 2 **68, 84 and 100** models. Flow 2 for Mac models are not supported.
 
+## Flow Operator: a native macOS front end
+
+![Flow Operator](images/flow-operator-touch-bar.png)
+
+**Flow Operator** is a native SwiftUI app built on the same engine as Flow2Studio. It shows your keyboard as an interactive 3D model and puts every setting next to it: click a key to remap it, drag the Touch Bar zones, record a macro.
+
+It currently targets the **Flow 2 84** on macOS 14 and later (Apple Silicon). See [swift/README.md](swift/README.md) for the feature list, the build steps and how to contribute. Ideas, issues and pull requests are welcome.
+
 > [!CAUTION]
 > **TESTED ONLY ON FLOW 2 68**
 >

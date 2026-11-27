@@ -1,0 +1,2 @@
+"NSBluetoothAlwaysUsageDescription" = "Lire le niveau de batterie et configurer votre Lofree Flow 2 en Bluetooth.";
+"NSInputMonitoringUsageDescription" = "Configurer votre Lofree Flow 2 et lire sa batterie via l’interface HID.";

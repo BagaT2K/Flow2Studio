@@ -1,0 +1,2 @@
+"NSBluetoothAlwaysUsageDescription" = "배터리 잔량을 확인하고 Lofree Flow 2를 Bluetooth로 구성합니다.";
+"NSInputMonitoringUsageDescription" = "HID 인터페이스를 통해 Lofree Flow 2를 구성하고 배터리를 확인합니다.";
